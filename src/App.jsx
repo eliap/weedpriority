@@ -8,6 +8,7 @@ import DifficultyOfControl from './components/DifficultyOfControl';
 import ActionPlan from './components/ActionPlan';
 import BrochureExport from './components/BrochureExport';
 import BrochureFlier from './components/BrochureFlier';
+import About from './components/About';
 import './App.css';
 
 import realWeedData from './data/realGovernmentData.json';
@@ -83,8 +84,7 @@ function App() {
               </div>
 
               <Link to="/" className="text-slate-600 hover:text-teal-700 font-medium transition-colors">Home</Link>
-              <a href="#" className="text-slate-600 hover:text-teal-700 font-medium transition-colors">About</a>
-              <a href="#" className="text-slate-600 hover:text-teal-700 font-medium transition-colors">Contact</a>
+              <Link to="/about" className="text-slate-600 hover:text-teal-700 font-medium transition-colors">About</Link>
             </div>
           </div>
         </div>
@@ -94,6 +94,7 @@ function App() {
       <div className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/step-1" element={<ValuesAssessment selectedValues={selectedValues} setSelectedValues={setSelectedValues} />} />
           <Route path="/step-2" element={<LocalExpertise weeds={weeds} setWeeds={setWeeds} />} />
           <Route path="/step-3" element={<ScientificReview weeds={weeds} setWeeds={setWeeds} selectedValues={selectedValues} />} />

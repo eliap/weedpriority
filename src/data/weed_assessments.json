@@ -1,0 +1,3063 @@
+{
+  "Abrojo (chain link cactus)": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "Although the literature reports that C. tunicata reproduces primarily vegetatively, information is lacking on the specifics of germination. ‘New plants can grow from any segment or fruit that comes into contact with the ground. Growth only occurs if conditions are suitable.’ (J. Hosking 2006. pers. comm., 19 June).  Cultivation from seed is recommended to occur by sowing after the last frost (Dave’s Garden, 2005).  This would indicate a seasonal component to the propagules requirements.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "C. tunicata will grow in shade – not dense shade. (J. Hosking 2006. pers. comm., 19 June).\nCan establish under moderate canopy.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "Found in grasslands, very open woodlands and pastures (FNA 2005). Can establish in minor disturbed natural ecosystem.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Perennial shrub (Benson 1982). Life form – other.",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "None described.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "‘Their spines readily penetrate the flesh of domestic grazing animals’ (WSC 2004).\nCurrently ‘no effective biological controls available’ (Laity 2005). The similar species C. imbricata along with other Opuntia species are reported to eaten by rabbits and rodents particularly in times of drought (Bunting & Wright 1976).  The species is damaged by the cochineal insect (a form of Dactylopius tomentosus) but appears to recover from the damage (Hosking, Conn & Lepschi 2006).  Therefore the species may be consumed but is probably not preferred and is even able to recover form damage caused by the cochineal insect.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "‘If conditions are warm and wet plants grow rapidly. Segment number may double in a few months under suitable conditions.’ (J. Hosking 2006. pers. comm., 19 June). Moderately rapid growth rate that will equal competitive species of the same life form.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "Drought-tolerant (Dave’s Garden 2005).  Can withstand temperatures to -9.4�C (Dave’s Garden 2005).",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "Able to vegetatively reproduce (Laity 2005).  C. tunicata ‘fruits usually sterile’ (FNA 2005).  The primary mode of reproduction is vegetative, however, the species is capable of sexual reproduction if only in a limited capacity.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "Unknown.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "The primary mode of reproduction is seen as vegetative.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "No specific data for this species.  However, the majority of other Cactaceae sp. live longer than 10 years, and can reproduce vegetatively during this time (Bowers, Webb & Rondeau 1995).",
+        "rating": "H",
+        "confidence": "M"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "Through vegetative reproduction, plant can reach reproductive maturity in a few weeks (J. Hosking 2006. pers. comm., 19 June). Under a year.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "‘Seed and vegetative propagules can be spread by water, animals and vehicles (Laity 2005).  Joints easily detached (Britton & Rose 1919). Spread by water, animals and light vehicular traffic.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "‘Abrojo is able to easily spread via seed or break into segments and be carried by water, vehicle tyres and animals” (Laity 2005). Possible that many propagules will disperse 200 – 1000 metres via attachment to vehicles or mobile animals.",
+        "rating": "MH",
+        "confidence": "M"
+      }
+    },
+    "impact": {
+      "social_access": {
+        "question": "1. Restrict human access?",
+        "comments": "‘If uncontrolled the plant can also form relatively dense infestations that are unsafe for an animal to walk through’ (WSC 2004). Has ‘numerous, long, tough, sharp, sheathed spines, which can penetrate leather boots, vehicle tyres and animals’ and is difficult to control (Laity 2005). Grows to 60 cm (Britton & Rose 1919).  Therefore would be of high nuisance value to people and due to the potential of puncturing tyres a major impediment to vehicles.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "social_tourism": {
+        "question": "2. Reduce tourism?",
+        "comments": "The species is mat forming cactus recorded in Eucalypt woodland (Hosking, Conn & Lepschi 2006).  Spines can penetrate boots and vehicle tyres (Laity 2005).  The species could therefore affect some recreational activities such as bush walking of 4W Driving.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "social_injurious": {
+        "question": "3. Injurious to people?",
+        "comments": "The species has spines that can be from 3-6 cm long (FNA 2007).\nSpines can penetrate boots and vehicle tyres (Laity 2005).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "social_cultural": {
+        "question": "4. Damage to cultural sites?",
+        "comments": "Unlikely to cause structural damage the species could have some impact on the aesthetics of an area. This has not however been reported.",
+        "rating": "ML",
+        "confidence": "L"
+      },
+      "env_flow": {
+        "question": "5. Impact flow?",
+        "comments": "Terrestrial species.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_water": {
+        "question": "6. Impact water quality?",
+        "comments": "Terrestrial species.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_erosion": {
+        "question": "7. Increase soil erosion?",
+        "comments": "Many of the Cylindropuntia spp. have fibrous root systems (Britton & Rose 1919). Unlikely to contribute to large scale soil movement.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_biomass": {
+        "question": "8. Reduce biomass?",
+        "comments": "The species is a mat forming cactus which if left uncontrolled can form relatively dense infestations (Hosking, Conn & Lepschi 2006; WSC 2004). Therefore if the species invades a relatively open habitat as it is reported to do it is likely to cause an increase in biomass.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_fire": {
+        "question": "9. Change fire regime?",
+        "comments": "Due to the higher moisture content of succulents and therefore the decreases flammability of the plant tissue Invasion by Opuntia spp. may decrease fire frequency and intensity, however this has not been fully proven (Brooks et al 2004).",
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "hab_high": {
+        "question": "10. Impact on composition \n(a) high value EVC",
+        "comments": "EVC= semi-arid woodland (V); CMA=Mallee; Bioregion= Murray Mallee; CLIMATE potential=VH. ‘Bushy or mat-forming and creeping’ (Benson 1982). ‘If uncontrolled the plant can also form relatively dense infestations’ (WSC 2004). Minor displacement of some dominant species within the lower layer.",
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "hab_med": {
+        "question": "(b) medium value EVC",
+        "comments": "EVC= semi-arid woodland (D); CMA=Mallee; Bioregion= Lowan Mallee; CLIMATE potential=VH. ‘Bushy or mat-forming and creeping’ (Benson 1982). ‘If uncontrolled the plant can also form relatively dense infestations’ (WSC 2004). Minor displacement of some dominant species within the lower layer.",
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "hab_low": {
+        "question": "(c) low value EVC",
+        "comments": "EVC= lowan sands mallee (LC); CMA=Mallee; Bioregion= Lowan Mallee; CLIMATE potential=VH. ‘Bushy or mat-forming and creeping’ (Benson 1982). ‘If uncontrolled the plant can also form relatively dense infestations’ (WSC 2004). Minor displacement of some dominant species within the lower layer.",
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "hab_structure": {
+        "question": "11. Impact on structure?",
+        "comments": "Tends to be found in grasslands or very open woodlands. ‘Bushy or mat-forming and creeping’ (Benson 1982). ‘If uncontrolled the plant can also form relatively dense infestations’ (WSC 2004). Minor effect on lower 20 – 60% of ground layer.",
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "hab_flora": {
+        "question": "12. Effect on threatened flora?",
+        "comments": "This species is not documented as posing an additional risk to threatened flora.",
+        "rating": "MH",
+        "confidence": "L"
+      },
+      "fauna_threatened": {
+        "question": "14. Effect on non-threatened fauna?",
+        "comments": "Unknown.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "fauna_no_benefit": {
+        "question": "15. Benefits fauna?",
+        "comments": "Weed not documented to provide benefits to desirable species.",
+        "rating": "H",
+        "confidence": "M"
+      },
+      "fauna_injurious": {
+        "question": "16. Injurious to fauna?",
+        "comments": "‘Their spines readily penetrate the flesh of domestic grazing animals, thereby harming the animal’ (WSC 2004).  Likely that the weed could also affect indigenous fauna. Large spines dangerous to fauna.",
+        "rating": "H",
+        "confidence": "M"
+      },
+      "pest_food": {
+        "question": "17. Food source to pests?",
+        "comments": "The similar species C. imbracata is reported to be eaten by rabbits and rodents in the US especially during times of drought (Bunting & Wright 1976). Therefore C. tunicata may provide some food to pest species.",
+        "rating": "M",
+        "confidence": "M"
+      },
+      "pest_harbor": {
+        "question": "18. Provides harbor?",
+        "comments": "The species is not reported to provide shelter to pest species, as it is a mat forming cactus with large spines it could have the potential to do so (Hosking, Conn & Lepschi 2006).",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_yield": {
+        "question": "19. Impact yield?",
+        "comments": "Unknown; due to the species spines and matt forming nature, like other Opuntia species it may restrict grazing animals and therefore reduce the effective area of production (Hosking, Conn & Lepschi 2006; Pierper 1971).",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_quality": {
+        "question": "20. Impact quality?",
+        "comments": "Unknown; However, other similar Cylindropuntia species have been reported to reduce the quality of wool (Pierper 1971).",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_land_value": {
+        "question": "21. Affect land value?",
+        "comments": "O. aurantiaca infestations ‘seriously inhibit pastoral activities and result in a marked devaluation in the price of infested land’ ‘Control can be very costly’ (Stirton 1978). Possible that C. tunicata could have a similar impact but no documented evidence.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_land_use": {
+        "question": "22. Change land use?",
+        "comments": "O. aurantiaca infestations ‘seriously inhibit pastoral activities and result in a marked devaluation in the price of infested land’ ‘Control can be very costly’ (Stirton 1978). Possible that C. tunicata could cause a change in priority of land use but no documented evidence.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_harvest_costs": {
+        "question": "23. Increase harvest costs?",
+        "comments": "Their spines readily penetrate the flesh of domestic grazing animals, thereby harming the animal’ (WSC 2004).  The species spines can penetrate tyres (Laity 2005).  \nTherefore extra care would need to be taken with stock near populations increasing time or labour and the damage the species could cause to tyres may increase maintenance costs..",
+        "rating": "M",
+        "confidence": "M"
+      },
+      "ag_disease": {
+        "question": "24. Disease host/vector?",
+        "comments": "Other Opunita species are reported as a host of Fruit fly (Blood 2001).",
+        "rating": "M",
+        "confidence": "L"
+      }
+    }
+  },
+  "Asparagus fern": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "Germinates from March to August. Indicating that germination requires conducive environmental conditions. It follows a pattern of seasonal variation for germination to occur. (DWLBC, 2006).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "Seedlings were growing in a range of conditions (Timmins and Reid, 2000). Mostly shady and damp sites in woodlands but is known to also grow in areas of closed forests to dappled shade in moist areas in its native South Africa (Timmins and Reid, 2000). Found in shady areas and appears to need moisture all year round (Scott and Batchelor, 2006). Can establish under moderate cover.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "Invaded disturbed, secondary native forests and scrub patches near urban areas (Timmins and Reid, 2000). It also occurs in open coastal forests (Timmins and Reid, 2000). Can invade intact as well as disturbed native forests (Timmins and Reid, 2000). In Australia it establishes in heathland, woodland, riparian vegetation and dry as well as damp sclerophyll forest (Timmins and Reid, 2000). Habitat comprises of forest remnants, regenerating forests,\ngrassy places, rock wall and hedges (Roy et al, 2004). Known to establish in relatively undisturbed heathland areas.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "It is a slender, scrambling or climbing perennial (Timmins and Reid, 2000).",
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "This plant has been described in high quality papers but there has been no mention of allelopathy.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "Noted that birds consume and disperse fruit but has not effect on plant reproduction and growth. In a study conducted by Timmins and Reid (2000) in New Zealand herbivory was not recorded. .",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "The growth rate of climbing asparagus appears to be much slower than that of other invasive vines (Timmins and Reid, 2000). A weak growing, climbing shrublet (Batten and Bokelmann, 1966). Conversely Landcare NZ (1997) states that this species is fast growing.",
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "Most coastal distribution could reflect a susceptibility to frost but might tolerate occasional frosts (Timmins and Reid, 2000). Tolerant to heavy shade, but matures and fruits in moderate shade to full light. It exhibits a wide range of moisture tolerance. Due to underground tuberous roots plants are fire, drought and shade tolerant. \nTolerates salt, shade, sun, dry or moist conditions, and most soils including sand (Blood, 2001). The plant is particularly tolerant to fire and drought and in certain areas tolerant to frost but generally it is susceptible to frost and possibly waterlogging.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "Flowers from September to December and fruits occur in October (Timmins and Reid, 2000).\nRoot sections do not resprout but active meristems can produce new foliage if left in ground after control (Timmins and Reid, 2000). Reproduces from seed and vegetative by the transport of tuberous roots. (NZ Plant Conservation Network, 2005). Male and female flowers on separate plants (Blood, 2001). Reproductive system is both vegetative and sexual.",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "An average of 64 fruit was found on 1 m lengths of fruiting stems (Timmins and Reid, 2000). \nRound berry, 8 mm diameter, green turning orange-red, Oct-Feb, with 1-2 seeds.(NZ Plant Conservation Network, 2005). These develop into orange-red berries, each containing 1 to 9 seeds (Landcare NZ, 1997). Therefore even with up to 9 seeds per fruit each 1 m fruiting stem will produce less than 1000 seeds but each flowering event will produce between 1000-2000 propagules.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "There is no data available on seed longevity.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "There is no information available on length of reproductive period.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "Several years needed to reach maturity (Blood, 2001).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Birds take the fruit and seed are dispersed intact (Timmins and Reid, 2000). Spread locally by roots and tubers spread by soil movement, garden dumping and human activity. (NZ plant Conservation network, 2005)",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "Fruits of the closely related A. asparagoides are eaten by birds and dispersed up to 100 m (DWLBC, 2006).\nFruits and seeds of A. scandens are similar in size (Roy et al, 1998). Hence assume similar dispersal distance.",
+        "rating": "ML",
+        "confidence": "MH"
+      }
+    },
+    "impact": {}
+  },
+  "Athel pine": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "Germinates all year round so long as moisture is available (ARMCANZ, 2000). Opportunistic germinator.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "Requires extended periods of soil saturation for establishment (PAC, 2005). Thrives in full sun conditions (Parsons & Cuthbertson, 2001). No evidence to support that the tree can establish under moderate canopy.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "Generally restricted to watercourses and commonly occurs on salt flats, springs and along streams and rivers (ARMCANZ, 2000; Forest Service, 2003).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Evergreen tree (PAC, 2005). \n\nOther.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "None described.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "Foliage has few leaf-eating insects with no known pests in Australia but does have natural pests in native habitat (Beckmann, 1990). Leaves unpalatable to livestock and wildlife (PAC, 2005).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "Can out compete native vegetation. Seedlings establish readily and growth is also rapid.  Displaces Eucalypts and other native vegetation (ARMCANZ, 2000).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "Can tolerate saline water. Highly fire resistant and drought resistant (ARMCANZ, 2000).  Flooding can be used to control it if root crowns stay submerged for at least three months (PAC, 2005).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "Capable of both sexual and vegetative (roots or stems) production although vegetative production from broken branches is more common [than from seeds] as it is believed the  seeds are only viable for a very short period of time (ARMCANZ, 2000).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "‘A single [tree] may produce hundreds of thousands of seeds’ (WSDE 2004).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "Seeds remain viable for a few weeks only (Beckmann, 1990).",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "Aggressive coloniser often forming monotypic stands (WSDE, 2004).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "Start producing seeds after 2 to 3 years in reasonably good conditions (Beckmann, 1990).",
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Light seeds well adapted to wind dispersal (ARMCANZ, 2000). Dispersed by water (especially floodwaters). May be dispersed by animals and birds (Parsons & Cuthbertson, 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "Thought to spread long distances in floodwaters and as also spread by birds (Parsons & Cuthbertson, 2001) it is very likely that some propagules will disperse greater than 1 km.",
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "impact": {}
+  },
+  "Bridal creeper": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "“Seedlings usually emerge in autumn” … initial growth is not dependent on any seasonal rainfall triggers. (Muyt , 2001) “Seeds germinate in autumn or early winter” (Ibid.).\nInitial vegetative growth from tubers is rapid, independent of external stimulation, and is dependent only on the stored reserves of moisture and energy (Cooke and Robertson, ’90)\nSeeds germinated at various temperatures (100 – 230C) (Ibid.).  Opportunistic germinator, can germinate at any time whenever water is available.",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "“Tolerates shade or part shade” (Blood, ’01).  Bridal creeper occurs primarily in dappled shade, or at the edges of dense shade … in [full] shade situations long prostrate stems are produced [that] produce little, or no, fruit (Kleinjan & Edwards, ’99).  Can establish under moderate canopy or litter.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "Occurs in undisturbed vegetation e.g. heathland and Mallee shrubland (Carr et al., ‘92).\n“It invades disturbed and undisturbed vegetation across a wide range of habitats” (Raymond, ‘96).  Establishes in healthy AND undisturbed natural ecosystems.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Perennial climber that dominates ground flora, and can form “dense curtains smothering shrubs and the lower canopy of trees” (Muyt, ’01).  Shoots grow upright to twine amongst nearby trees, shrubs, and smother other supports. (NAWMC, ’06) Most reliable way to distinguish between the A. asparagoides (common form) and the WCF is to dig up and compare the tubers of mature plants. (NAWMC, ’06) Climber.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "None found described in literature reviewed.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "“…During … flowering season … large numbers of buds were recorded, but very few flowers or fruits were produced, possibly due to extensive herbivore damage … noted at the time... (Kleinjan & Edwards, ’99).  \nExtensive herbivore damage to the foliage can significantly reduce fruiting (Ibid.). Herbivory by the bridal creeper leafhopper (Zygina spp.) is a permitted means of biocontrol for A. asparagoides (common form), WCF has been observed to be damaged by such herbivory (the extent to the damage is as yet unclear) (NAWMC, ’06).\nBridal creeper is a palatable specimen and is not an agricultural weed due to grazing by stock (Carr, ‘96).\nConsumed and recovers slowly. Reproduction strongly inhibited by herbivory but still capable of vegetative propagules production (tubers); weed may still persist.\nNB. It is noteworthy that the common form of A. asparagoides is currently under a successful\nbiocontrol program with the rust fungus Puccinia myrsiplylli. In current trials WCF has shown itself to be resistant to this biocontrol agent.\nTubers of WCF found growing well on soil surface where previous rust release on common form; when dug down approx. 10 cm below WCF tubers, found recently deceased common form tubers. Whether this indicates WCF out-competing common form, reinfesting areas of dead common form (through biocontrol action, or other means of local eradication) it is too early to assess (Hay, ’07).",
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "Initial shoot growth is rapid to out compete plants of a similar habit (NAWMC, ’06), however, its\ngrowth rate appears slower than the common form of A. asparagoides (Holland Clift, ’05).\nMaximum growth rate less than many species of the same life form.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "Bridal creeper is common in coastal zones … occurs primarily in dappled shade, or at the edges of dense shade (NB in full shade long prostrate stems are produced [that] produce little, or no, fruit. … along the banks of estuaries (Kleinjan & Edwards, ’99).\nAlthough spp. reportedly not found in very saline conditions, it has been found thriving on sand dunes adjacent to South Australian beaches (Hay, ’07).\nGrows in shady, moist conditions. (NAWMC, ’06). \nThe tubers provide and store water, energy, and nutrient that enable the plant to survive over summer [dry periods] (Ibid.).\nBridal creeper tolerates drought conditions via dormant rhizomes and tubers (Muyt, ’01).\nHighly tolerant of salinity, waterlogging, drought; tolerant of shade.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "“Reproduces by seed and rhizomes. (Muyt, ’01).\nBridal creeper can regrow from rhizome fragments (Cooke & Robertson, ’90).\nBridal creeper is self-fertile (NAWMC, ’06).\nBoth vegetative and sexual reproduction.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "“Plants produce hundreds of fruits annually, each containing up to nine seeds. Seed viability\napproaches 90% (Muyt, ’01).\nFruit production may exceed 1,000 berries/m2 (NAWMC, ’06).\nGreater than 2,000.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "Bridal creeper has a relatively short-lived seed bank of several years (NAWMC, ’06).\nBridal creeper can regrow from rhizome fragments (Cooke & Robertson, ’90).\nThe rhizomes remain viable (although they may lie dormant) as long as they contain moisture and with a growing apex (Ibid.), therefore it has viable propagules for the life of the plant.\nVegetative propagules may survive for greater than five years, at present they are known to survive at least five years from experimental work of five years’ duration, this is still on-going, thus the longevity is still unknown.\nVegetative propagules, and > 25% of seeds, may survive 5 – 10 years.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "Unknown from literature reviewed.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "Three years from germination before flowering (NAWMC, ’06).\nSeedlings develop their first tubers within ten weeks (Muyt, ’01).\nProduces vegetative propagules that have the capacity to form separate individuals in under a year.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Viable seeds spread in emu scats (Cooke & Robertson, ’90; NAWMC, ’06) main vectors are birds, foxes and possibly rabbits (Ibid.).\nDumping of garden waste, trading / sharing of plants by gardeners (Ibid.) and road making (Cooke and Robertson, ‘90) are the main sources of vegetative spread.\nEdible fruit dispersed by highly mobile animals (birds, foxes).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "“Most seed dispersal events are restricted to < 100 metres … [but] … rare long distance dispersals, up to several kilometres, have been reported (Stansbury, ’01) …” (NAWMC, ’06).\nLikely that at least one propagule will disperse greater than one kilometre.",
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "impact": {
+      "social_access": {
+        "question": "1. Restrict human access?",
+        "comments": "WCF supposedly not meant to grow in saline conditions, but found thriving on sand dunes adjacent to SA beaches (Hay ’07). Perennial climber that dominates ground flora, and can form “dense curtains smothering shrubs and the lower canopy of trees” (Muyt, ’01).  Whilst the plant does occur in riparian areas, it is most vigorous on lighter well-drained soils.\nIts presence proves a nuisance value to humans, impeding individual access to waterways and walking tracks.",
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "social_tourism": {
+        "question": "2. Reduce tourism?",
+        "comments": "Perennial climber that dominates ground flora, and can form “dense curtains smothering shrubs and the lower canopy of trees” (Muyt, ’01; Holland Clift, ‘05).\nThe smothering curtains that this species creates would present a major negative impact on aesthetics.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "social_injurious": {
+        "question": "3. Injurious to people?",
+        "comments": "This species seemingly presents no harmful or toxic properties to humans.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "social_cultural": {
+        "question": "4. Damage to cultural sites?",
+        "comments": "No specific mention of damage to cultural sites found in literature reviewed. However, as WCF grows prolifically in coastal areas (Hay, ’07; Kleinjan, et al., ‘99) where Aboriginal middens are present, the reviewer has no hesitation in assuming that it has the potential to obscure, if not smother, sites of significance. It has also been mentioned that WCF can grow over and smother trees and small buildings, therefore Aboriginal scar trees, cemetery plots, and other sites of significance MAY be at\nrisk. (NB. Cemeteries were mentioned as ‘at risk’ by smothering by bridal veil and the common form of bridal creeper; the\nextrapolation to WCF seemed quite acceptable.)\nAssumption of potential to cause major structural and/or visual effect to culturally significant sites, that MAY adversely affect the heritage/cultural feature.",
+        "rating": "H",
+        "confidence": "ML"
+      },
+      "env_flow": {
+        "question": "5. Impact flow?",
+        "comments": "WCF is a terrestrial species. It has not been found growing within waterbodies, although it is very vigorous in riparian areas. According to many sources, including Muyt (2001), “… It is usually most vigorous on lighter, well-drained soils.” It MAY reduce the volume of runoff in riparian areas where it is growing rampantly.\nWCF appears to have little, or negligible, effect on water flow within waterbodies.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "env_water": {
+        "question": "6. Impact water quality?",
+        "comments": "WCF is a terrestrial species.\nWCF has no noticeable effect on dissolved O2, or light levels, within waterbodies.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "env_erosion": {
+        "question": "7. Increase soil erosion?",
+        "comments": "WCF is a terrestrial species. It has not been found growing within waterbodies, although it is very vigorous in riparian areas. According to many sources, including Muyt (2001), “… It is usually most vigorous on lighter, well-drained soils.”\nWCF MAY temporarily aid in bank stabilisation whilst it is smothering undergrowth and impeding the access to river banks by visitors; however, as it kills the substrate it MAY leave the bank less stable than prior to its infestation.\nLow probability of large scale soil movement.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "env_biomass": {
+        "question": "8. Reduce biomass?",
+        "comments": "It smothers pre-existing vegetation and prevents other plants from growing. (Holland Clift, ’05).\nBiomass may increase.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "env_fire": {
+        "question": "9. Change fire regime?",
+        "comments": "Dead and dry matter may significantly add to the fuel load, which in turn may increase the intensity of a local fire. NB. “Bridal creeper (inc. WCF) is often the first plant to emerge post-fire, therefore herbicides can be carefully applied before native plants regenerate.” NAWMC (2006).\nMinor change to the intensity of fire risk.",
+        "rating": "ML",
+        "confidence": "ML"
+      },
+      "hab_high": {
+        "question": "10. Impact on composition \n(a) high value EVC",
+        "comments": "EVC = Coastal Headland Scrub (V); CMA = Glenelg Hopkins; Bioregion = Bridgewater; VH CLIMATE potential.\nPredictive mapping shows that it can potentially grow along all Australian coastlines with a Mediterranean climate. It smothers pre-existing vegetation and prevents other plants from growing. (Holland Clift, ’05).\n\nMonoculture within a specific layer; displaces all spp. within a strata/layer.",
+        "rating": "H",
+        "confidence": "M"
+      },
+      "hab_med": {
+        "question": "(b) medium value EVC",
+        "comments": "EVC = Coastal Dune Scrub/Coastal Dune Grassland Mosaic (D); CMA = Corangamite; Bioregion = Victorian Volcanic Plain; \nVH CLIMATE potential.\nPredictive mapping shows that it can potentially grow along all Australian coastlines with a Mediterranean climate. It smothers pre-existing vegetation and prevents other plants from growing. (Holland Clift, ’05).\nMonoculture within a specific layer; displaces all spp. within a strata/layer.",
+        "rating": "H",
+        "confidence": "M"
+      },
+      "hab_low": {
+        "question": "(c) low value EVC",
+        "comments": "EVC = Coastal Alkaline Scrub (LC); CMA = Glenelg Hopkins; Bioregion = Bridgewater; VH CLIMATE potential.\nPredictive mapping shows that it can potentially grow along all Australian coastlines with a Mediterranean climate. It smothers pre-existing vegetation and prevents other plants from growing. (Holland Clift, ’05).\nMonoculture within a specific layer; displaces all spp. within a strata/layer. Monoculture within a specific layer; displaces all spp. within a strata/layer. Monoculture within a specific layer; displaces all spp. within a strata/layer.",
+        "rating": "H",
+        "confidence": "M"
+      },
+      "hab_structure": {
+        "question": "11. Impact on structure?",
+        "comments": "It smothers pre-existing vegetation and prevents other plants from growing. (Holland Clift, ’05) The tubers act as a barrier to impede the root growth of other plants, and often prevents their seedling establishment (NAWMC, ’06).\nMajor effects on all layers. Forms monoculture.",
+        "rating": "H",
+        "confidence": "M"
+      },
+      "hab_flora": {
+        "question": "12. Effect on threatened flora?",
+        "comments": "As WCF’s habit often results in smothering of all flora in its way, any floral VROT species in its way MAY also be smothered, resulting in localised reductions in populations that may be significant. Although no such records could be found by the assessor at this time, this does not exclude it from the realm of probability within any vegetation communities that occur within WCF’s preferred habitats.\nWCF forms monoculture in preferred habitats.",
+        "rating": "H",
+        "confidence": "L"
+      },
+      "fauna_threatened": {
+        "question": "14. Effect on non-threatened fauna?",
+        "comments": "As WCF’s habit often results in smothering of all flora in its way, resulting in localised reductions in populations that may be significant food sources to local fauna. This MAY lead to local extinctions, reduction of local numbers of individuals, or local reduction in habitat for threatened species. Although no such records could be found by the assessor at this time, this does not exclude it from the realm of probability within any bio-communities that occur within WCF’s preferred habitats. \nReduction in habitat for threatened species, leading to reduction in local numbers of individuals, OR maybe local extinctions.",
+        "rating": "MH",
+        "confidence": "L"
+      },
+      "fauna_no_benefit": {
+        "question": "15. Benefits fauna?",
+        "comments": "Some bird species, Zosterops lateralis (Silvereye) and Corvus bennetti (Little Crow) are known to feed on the\nfruit. (Stansbury, ’96).\nWCF provides some food to desirable species.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "fauna_injurious": {
+        "question": "16. Injurious to fauna?",
+        "comments": "No documented adverse effects to fauna found in literature reviewed.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "pest_food": {
+        "question": "17. Food source to pests?",
+        "comments": "Bird species, both native and introduced, are known to feed on the fruit. “… the introduced starling were identified as feeding on bridal creeper fruits in South Australia.” (Stansbury, ’96).\nPotential to supply food to one, or more, minor pest species.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "pest_harbor": {
+        "question": "18. Provides harbor?",
+        "comments": "The dense growth, which occurs in late winter, may provide some temporary harbour, particularly for birds.\nNo documented harbour for pest animals found in literature reviewed.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "ag_yield": {
+        "question": "19. Impact yield?",
+        "comments": "Adversely affects pine plantations (Blood, ’01) and citrus orchards (Ibid, Kwong et al. ’02). In citrus, bridal creeper infestation is known to reduce fruit production (Ibid.). [Amount unknown.]\nMinor impact on quantity of produce (e.g. ~ 10% assumed, if it was significant assume amount stated).",
+        "rating": "M",
+        "confidence": "M"
+      },
+      "ag_quality": {
+        "question": "20. Impact quality?",
+        "comments": "Adversely affects pine plantations (Blood, ’01) and citrus orchards (Ibid, Kwong et al. ’02). In citrus, bridal creeper infestation is known to reduce air movement, increasing local humidity, leading to Septoria spot on fruit (Ibid.). [Amount unknown.]\nImpact on quality of produce (~ 10%).",
+        "rating": "M",
+        "confidence": "M"
+      },
+      "ag_land_value": {
+        "question": "21. Affect land value?",
+        "comments": "Adversely affects pine plantations (Blood, ’01) and citrus orchards (Ibid, Kwong et al. ’02). In citrus, bridal creeper infestation is known to reduce fruit production and quality [amount unknown.], thus reducing the value on land used for citrus orchards (Ibid.).\nDecreases in land value ~ 10%.",
+        "rating": "M",
+        "confidence": "M"
+      },
+      "ag_land_use": {
+        "question": "22. Change land use?",
+        "comments": "Adversely affects pine plantations (Blood, ’01) and citrus orchards (Ibid, Kwong et al. ’02). In citrus, bridal creeper infestation is known to reduce fruit production and quality [amount unknown.], thus reducing the value on land used for citrus orchards leading to a change in land use (Ibid.).\nDowngrading of the priority land use.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "ag_harvest_costs": {
+        "question": "23. Increase harvest costs?",
+        "comments": "Adversely affects pine plantations (Blood, ’01) and citrus orchards (Ibid, Kwong et al. ’02). In citrus, bridal creeper infestation is known to leave a large volume of dead stems reducing the ease of access whilst harvesting fruit (Ibid.). [Amount unknown.]\nMinor increase in cost of harvesting.",
+        "rating": "M",
+        "confidence": "M"
+      },
+      "ag_disease": {
+        "question": "24. Disease host/vector?",
+        "comments": "Adversely affects pine plantations (Blood, ’01) and citrus orchards (Ibid, Kwong et al. ’02). In citrus, bridal creeper infestation is known to leave a large volume of dead stems that serve as a disease reservoir for reinfestation of Septoria spot on fruit (Ibid.). [Amount unknown.]\nHost to severe disease of citrus.",
+        "rating": "H",
+        "confidence": "M"
+      }
+    }
+  },
+  "Broadleaf privet": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "The species fruit ripen in winter and can germinate immediate after passing through a bird or other animal, however if the seed becomes dormant it requires some level of moderate cold stratification (Blood 2001).\nThe optimum temperature for germination of L. lucidum is reported to be 15�C (Burrows & Kohen 1983).\nTherefore the species is most likely to germinate in spring and therefore only requires seasonal conditions for germination.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "The species is reported to be capable of establishing in very low light conditions (Tecco et al 2006).\nThe species is also reported to invade areas such as coastal cliffs (Swarbrick, Timmins & Bullen 1999). Therefore the species is not considered to be limited by light, water or nutrient requirements.",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "The species is highly invasive in moist habitats including rainforest and riparian vegetation (Muyt 2001). As seeds of the species can germinate under closed canopy conditions, the species is seen as capable of establishing in healthy undisturbed natural ecosystems (van Aalst 1992).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "The species is described as a small to medium sized tree (Swarbrick, Timmins & Bullen 1999).",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "The species is suspected of having allelopathic properties (Blood 2001).",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "The species is reported to be browsed by sheep and cattle but due to the plants toxic nature not in any significant amounts (Swarbrick, Timmins & Bullen 1999).\nThe species is able to regenerate rapidly if cut down (Mowatt 1981).",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "Fast growing (Blood 2001).\nThe species is capable of out-competing Australian native species, becoming the dominant species and even forming monospecific stands (Swarbrick, Timmins & Bullen 1999).",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "Reported to not be tolerant of waterlogging (Howell & Benson 2000).\nIndividuals of the species have been reported to resprout post-fire in Argentina and Australia (Gurvich et al 2005; Swarbrick, Timmins & Bullen 1999).\nThere is some conflicting evidence in terms of the plants frost tolerance, Blood (2001) reports the species to be frost sensitive, while in areas of Argentina that commonly receive frosts the species is abundant (Tecco et al 2006).\nThe species reportedly has a low salinity tolerance (Barwick 2004).\nThe species reportedly has a moderate tolerance to drought (Barwick 2004).",
+        "rating": "M",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "The species reproduces by seed and while the species is capable of suckering, this is considered an action of regeneration and not reproduction (Swarbrick, Timmins & Bullen 1999).",
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "An average annual fruit production per stem has been reported as 2300 (Westoby, Dalby & Adams-Acton 1983).\nBerries contain between 1 & 3 seeds (Weber 2003).\nLarge trees have been reported to be capable of producing more than a million seeds a year (Swarbrick, Timmins & Bullen 1999).",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "Seeds are reported to persist for less than five years (Panetta 2000).",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "Individuals can live more than 100 years (Blood 2001).\nCan form self persisting monospecific stands (Swarbrick, Timmins & Bullen 1999).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "Take 4 years to flower (Blood 2001).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Seeds are dispersed by birds and water (Muyt 2001).\nThe species has been traded as a garden plant (Blood 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "The species is spread by pied currawongs (Bass 1996; Panetta 2000).\nPied currawongs have been reported to have a dispersal range considerably greater than 1 km (Spennemann & Allen 2000).",
+        "rating": "H",
+        "confidence": "H"
+      }
+    },
+    "impact": {}
+  },
+  "Freesia": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "‘Propagate from seed in spring or offsets in fall’ (Burnie et al 1998). ‘Foliage emerges in Winter with flowering and seeding occurring in Spring (Muyt 2001)’. Requires natural seasonal disturbances for germination.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "Naturalises in woodland (Carr et al 1992) and described as growing ‘amongst tall trees, medium trees... (Florabase WA 2007)’ and as flowering best in light shade (Van der Spuy 1971). ‘The number of freesia plants per m2 was very high in dappled shade, and thins out in direct sunlight (pers. com M. Walsh)’. Likely able to establish under moderate canopy cover.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "Actively invading intact bushland throughout south eastern Australia (Walsh et al 2007)’. Birds may be responsible for its spread to relatively pristine areas of bushland (EWAN 2006).\nInvades heathland communities (Carr et al 1992, Lloyd 2007). Able to establish in undisturbed ecosystems, e.g. heathland.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Geophyte (Carr et al 1992)",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "Not documented as allelopathic and the ‘horticultural’ literature is relatively extensive.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "Freesia is described as a plant that ‘deer may taste but usually do not destroy (Cox 1986)’ - Consumed but not preferred. As a geophyte (Carr et al 1992), it is also likely to recover quickly in response to herbivory due to the presence of corms.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "‘Foliage emerges in Winter with flowering and seeding occurring in Spring (Muyt 2001)’- As a cormous perennial herb (Flora base 2007), each year it regenerates to its full size. Spreads rapidly by producing abundant corms (Surf Coast 2007).",
+        "rating": "H",
+        "confidence": "M"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "Freesias need some protection from very severe frosts (Van der Spuy 1971). ‘The ability to die back to an underground storage organ during summer enables a plant to avoid fire or drought and tolerate nutrient poor soils (Agric WA 2004)’. Occurs in swamps (Florabase WA 2007). Ability to tolerate drought, fire and moderate frosts and potentially water logging. Tolerance to salinity not found described.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "‘Reproduces by seeds, corms and bulbils (Muyt 2001)’. Both sexual and vegetative reproduction.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "‘Freesias are prolific seeders producing several hundred seeds per plant (EWAN 2006)’ - in range of 50-1000 propagules/ plant.",
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "Propagule longevity not found described.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "Extensive stands can establish (Muyt 2001)’. Species could form self-sustaining monocultures.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "‘Clonal offspring become independent from the parent by the next season (Walsh et al 2007)’. Vegetative propagules become separate individuals in under a year.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Seeds and bulbils are dispersed by water, wind, slashing and in garden refuse, soil and during removal (Muyt 2001).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "Dispersal by machinery and contaminated soil (Muyt 2001, EWAN 2006) could spread propagules greater than 1 km.",
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "impact": {}
+  },
+  "Myrtle-leaf milkwort": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "Seeds germinate in the open or under dense vegetation generally in May to June (Carter et al, 1990) but at any time of the year if sufficient moisture (Blood, 2001). However Arnold (1981) states that the seeds appear to be capable of germinating any time of the year. Seedlings that germinate in autumn tend to have a better survival rate. Germinates prolifically after disturbance such as fire (ESC, 2002) and following soil or canopy disturbance (Muyt, 2001). Seeds are able to germinate throughout the year, whilst there is a seasonal component to survival, this question only deals with germination requirements.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "Occurs in diverse vegetation types and on may different soils (Meerow and Ayala-Silva, 2005). Most growth occurs over the cooler, moist winter period (Muyt, 2001). In South Australia all infestations are coastal, on shallow soils over calcrete or deep calcareous sands (Carter et al, 1990). All sites receive 500-700 mm annual rainfall, predominately in winter (Carter et al, 1990).  Establishes in dune systems, coastal bluffs, shrublands and woodlands (Muyt, 2001). It prefers light, sandy, well-drained soils (DPI, 2007). Germinates readily in both full shade and full sun (Muyt, 2001, Carter et al, 1990). The plant is able to establish in a range of conditions but is dependent on moist periods over winter for growth. .",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "The plant establishes well in disturbed sites (Weber, 2003). Grows in both shade and full sun (Muyt, 2001). Mass germination can occur following soil or canopy disturbance (Muyt, 2001) and fire (ESC, 2002). It is unclear whether this species invades native vegetation or requires disturbed sites. Isolated satellite infestations occur in disturbed areas, extending into relatively undisturbed vegetation as a front (Carter et al, 1990). Can invade dry coastal vegetation, heathland and heathy woodland, mallee shrubland, lowland, grassland and grassy woodland, dry sclerophyll forests and woodland and riparian vegetation (Carr et al, 1992). The plant is able to establish in both disturbed and relatively undisturbed areas.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "This evergreen shrub reaches a height of 1.25 to 2 m, and maintains a tight, spherical canopy (Meerow and Ayala-Silva, 2005). Small, much branched hairless perennial (Roy et al, 1998). Belongs to the polygalaceae family (Harden, 1993).",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "No information found.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "It does not tolerate grazing and can only establish in areas where livestock have been excluded (Carter et al 1990).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "It grows rapidly and flowers when still young (ESC, 2002). It’s competing with coastal wattle Acacia longifolia var. sophorae (Carter et al, 1990). It is able to compete with a similar life form suggesting that its growth rate is fairly rapid.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "Plants tolerate salt-laden winds, exposed positions and seasonally hot, dry spells (Muyt, 2001). Hot fires kill mature plants, but seedling regeneration is rapid (Carter et al, 1990). It is tolerant of poor soils, dry conditions and exposure to salt (ESC, 2002). It prefers light, sandy, well-drained soils (DPI, 2007). Plant is tolerant to salt, drought and poor soils but is susceptible to fire and possibly waterlogging.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "The peak flowering period is from spring to summer (Sept to Oct) in most areas where it is grown, (Meerow and Ayala-Silva, 2005; Carter et al, 1990, Muyt 2001) plant produces an abundance of 2 to 3 cm long purple flowers.\nHowever plant can flower all year round (Roy et al, 1998). Seeds germinate in May to June (Carter et al, 1990).\nThe plant reproduces only by seed (Muyt, 2001).",
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "Two seeded capsules about 10 mm long (Roy et al, 1998). Seedling density may exceed 2,000 m2 (Weber, 2003).",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "Seeds can remain viable in the soil for two to three years (Weber, 2003, Muyt, 2001).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "Can flower and seed when less than 50 cm high (2 years old) (Muyt, 2001; Carter et al, 1990). Older plants are around 15 years old and are still in good condition at this age (van der Walt, 2003). Plant is capable of flowering for more than 10 years.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "Plants are able to set seed at the age of 2 (Muyt, 2001; Carter et al, 1990).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Seed is dispersed by birds, ants, water, in soil and garden refuse (Muyt, 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "Due to bird dispersal it is very likely that at least one propagule will disperse greater than one kilometre.",
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "impact": {}
+  },
+  "Lantana": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "Activities that increase light intensity and soil temperature will stimulate germination (NHT 2004). Seeds need warm temperatures and sufficient moisture to germinate but with these conditions present can germinate throughout the year, peaking after the first summer rains (Swarbrick, Willson & Hannan-Jones 1998).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "Thrives in high rainfall areas of tropical, subtropical and warm temperate climates (NHT 2004). Can tolerate partial, but not complete shading and dominates understoreys (Swarbrick, Willson & Hannan-Jones 1998). Can establish in minor disturbed natural ecosystems.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "Human disturbances such as clearing, construction and inappropriate burning will stimulate germination (NHT 2004). Serious invader of disturbed ecosystems and persists along roadsides, creeks and other open situations. Infests forest edges, coastal zones and riparian areas, penetrates disturbed rainforest and invades open eucalypt woodland. (Swarbrick, Willson & Hannan-Jones 1998).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Much-branched, thicket-forming perennial shrub (Swarbrick, Willson & Hannan-Jones 1998) – Life form other.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "Excludes other species through allelopathic effects (NHT 2004). Shown to be allelopathic to citrus and may be to many endemic Australian plants (Swarbrick, Willson & Hannan-Jones 1998).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "The plant is unpalatable and scarcely eaten but is under a biocontrol program in Queensland and New South Wales (Swarbrick, Willson & Hannan-Jones 1998).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "Mainly an invader of open woodland, however the dense thickets exclude native species through smothering and dominates understoreys (NHT 2004). It often forms mono-specific stands to the exclusion of native herbs, shrubs and tree and climber seedlings (Swarbrick, Willson & Hannan-Jones 1998).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "New shoots are frost sensitive and growth is prevented below 5�C (NHT 2004). Can survive prolonged dry periods but does not tolerate waterlogging. Very low tolerance to soil salinity. \n\nFire as a control measure is insufficient by itself as plant recovers quickly afterwards (Swarbrick, Wilson & Hannan-Jones 1998).  Tolerant to at least two and susceptible to at least two.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "Both self and cross pollination are possible. Can spread via layering whereby horizontal stems take root when in contact with moist soil (Swarbrick, Wilson & Hannan-Jones 1998). Also reshoots vigorously from dormant buds at the base stems (NHT 2004).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "A single plant can produce up to 12000 fruit each year (NHT 2004).",
+        "rating": "H",
+        "confidence": "M"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "Studies show that 50% of seed will remain viable in dry conditions for up to two years (NHT 2004).  Unpublished studies have shown seed viability of four to five years.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "‘Very long-lived under favourable conditions…plants tend to die only under extremely stressful conditions such as extended drought or complete shading through canopy closure’ (NHT 2004). Can form self-sustaining mono-specific stands (Swarbrick, Wilson & Hannan-Jones 1998).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "The first flowers are produced in the field during the second summer but in greenhouse studies have been produced six months after germination (Parsons & Cuthbertson 1992).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Fruit eating birds are the main agents of dispersal (through droppings). Some mammals, especially foxes, also disperse seed (NHT 2004).",
+        "rating": "H",
+        "confidence": "M"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "Most fruits are dispersed by birds, often locally, but can be to distances of up to 1 km or more (Swarbrick, Willson & Hannan-Jones 1998).",
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "impact": {}
+  },
+  "Spotted knapweed": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "‘..germinate whenever moisture and temperature are suitable, and both fall and spring seedling emergence is common (USDS 2004). Requires seasonal temperatures for germination.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "‘Canopy cover had no effect on emergence rate, with spotted knapweed germinating equally well over a range from 0-100% canopy cover’ (USFS 2004). Can establish without additional factors.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "‘. usually found in disturbed areas, once a plant colony is established, it may invade adjacent areas that are relatively undisturbed’ Found on roadsides, foothill prairie habitats (CWMA n.d.). Most often found in disturbed ecosystems but has been found in relatively intact ecosystems also.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Perennial forb (USDS 2004) – other",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "‘ .. displaces native plant species by exuding the phytotoxin (-) –catechin from its roots. .. inhibition of native species’ growth .. [causing] ultimately, death of root system’ (Bais et al 2003).",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "In US, gall flies’ introduction has led to slight decrease in number of seeds that develop (Reebs 2002).  ‘Unlike other grazers, sheep love knapweed, and .. they do a pretty good job of controlling the infestation’  (Alper 2004). Capable of flowering under moderate herbivory pressure.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "‘ smooth brome is capable of suppressing the growth of spotted knapweed .. vigorous grass slow knapweed invasion’ (USFS 2004). Maximum growth rate less than many species of same life-form.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "In Washington, thrives in irrigated land... produces large quantities of seed that can survive fire’ (USFS 2004). Drought tolerant, frost-tolerant. Not documented as to whether susceptible to salinity.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "Reproduces almost entirely by seed. ‘Requires cross-pollination between flowers on different plants’ (USFS 2004).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "Depends on conditions and area but up to 25,260 seeds have been recorded on the one plant (USFS 2004).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "‘Thirty percent of seeds may be viable after eight years of burial’ (TNC 2005).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "‘Form dense monocultures’ (CWMA n.d). ‘Often characterized by dense stands and virtually complete competitive exclusion of native species’ (Callaway 1999). ‘..can live at least 9 years’ (USFS 2004).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "‘Fall and early spring germinating seedlings are capable of maturing into seed-producing adults in 1 yr’ (Sheley et al 1998).",
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "‘Dispersal of achenes over long distances is facilitated by animals and birds…domestic sheep excrete viable seeds of spotted knapweed in their faeces for up to 7 days…can also be transported in rivers and other watercourses, and in crop seed and hay’ (USFS 2004).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "‘Dispersal of achenes over long distances is facilitated by animals and birds…domestic sheep excrete viable seeds of spotted knapweed in their faeces for up to 7 days…can also be transported in rivers and other watercourses, and in crop seed and hay’ (USFS 2004). Very likely that some propagules will disperse greater than 1 km.",
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "impact": {
+      "social_access": {
+        "question": "1. Restrict human access?",
+        "comments": "Weed grows up to 1.5 metres (USFS 2004). Forms monocultures but no evidence to suggest that human access would be restricted.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "social_tourism": {
+        "question": "2. Reduce tourism?",
+        "comments": "Weed has a purple flower and capable of forming monocultures (USFS 2004). Weed would have minor effect on aesthetics of site.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "social_injurious": {
+        "question": "3. Injurious to people?",
+        "comments": "‘The sap of spotted knapweed can cause skin irritation in some people’ (CWMA n.d.).",
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "social_cultural": {
+        "question": "4. Damage to cultural sites?",
+        "comments": "No evidence to suggest weed has more than a negligible effect on aesthetics or structure of cultural sites.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_flow": {
+        "question": "5. Impact flow?",
+        "comments": "‘Surface water runoff and stream sediment yield were 56 and 192% higher respectively for spotted knapweed dominated sites compared to bunchgrass-dominated sites’ (Sheley et al 1998). Minor impact on surface flow.",
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "env_water": {
+        "question": "6. Impact water quality?",
+        "comments": "‘Surface water runoff and stream sediment yield were 56 and 192% higher respectively for spotted knapweed dominated sites compared to bunchgrass-dominated sites ’ (Sheley et al 1998). Noticeable but minor effects.",
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "env_erosion": {
+        "question": "7. Increase soil erosion?",
+        "comments": "‘.. contributes to increased surface run-off and soil erosion’ (MacDonald et al 2003). ‘Surface water runoff and stream sediment yield were 56 and 192% higher respectively for spotted knapweed dominated sites compared to bunchgrass-dominated sites ’ (Sheley et al 1998). High probability of large scale soil movement with minor off-site implications.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "env_biomass": {
+        "question": "8. Reduce biomass?",
+        "comments": "Displaces other plants, especially grasses (MacDonald et al 2003). Likely that the biomass would increase.",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "env_fire": {
+        "question": "9. Change fire regime?",
+        "comments": "‘.. dense knapweed infestations can change the fire regime by changing the fuel characteristics and thus reducing the fire return interval at a given site’ (USFS 2004). Minor change in the frequency of fire risk.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "hab_high": {
+        "question": "10. Impact on composition \n(a) high value EVC",
+        "comments": "EVC= Plains grassy woodland (E); CMA=Corangamite; Bioreg=Victorian Volcanic Plain; CLIMATE potential=VH.\n‘Reduces or displaces desirable plant species’(CWMA n.d.). Major displacement of some dominant species within a vegetation layer.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "hab_med": {
+        "question": "(b) medium value EVC",
+        "comments": "EVC= Grassy dry forest (D); CMA=Goulburn Broken; Bioreg=Central Victorian Uplands; CLIMATE potential=VH.\n‘Reduces or displaces desirable plant species’(CWMA n.d.). Major displacement of some dominant species within a vegetation layer.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "hab_low": {
+        "question": "(c) low value EVC",
+        "comments": "EVC= Heathy dry forest (LC); CMA=Corangamite; Bioreg=Victorian Volcanic Plain; CLIMATE potential=VH.\nReduces or displaces desirable plant species’(CWMA n.d.). Major displacement of some dominant species within a vegetation layer.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "hab_structure": {
+        "question": "11. Impact on structure?",
+        "comments": "‘Reduces or displaces desirable plant species’. Usually found in open, disturbed sites, replacing ground cover and capable of forming monospecific stands (CWMA n.d.). Likely to have a major effect on lower layer of the strata.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "hab_flora": {
+        "question": "12. Effect on threatened flora?",
+        "comments": "No information available.",
+        "rating": "MH",
+        "confidence": "L"
+      },
+      "fauna_threatened": {
+        "question": "14. Effect on non-threatened fauna?",
+        "comments": "‘Large-scale infestations can impede access to more desirable forage for livestock and wildlife’ (MacDonald et al 2003).\n\n‘Large reductions in available forage and wildlife use have been reported on knapweed-infested range’ (USFS 2005). Likely to lead to a displacement of native animals, leading to reduction in number of animals.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "fauna_no_benefit": {
+        "question": "15. Benefits fauna?",
+        "comments": "Although both livestock and wildlife may eat it (USFS 2005), it provides very little support to desirable species.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "fauna_injurious": {
+        "question": "16. Injurious to fauna?",
+        "comments": "Not known to be injurious to fauna.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "pest_food": {
+        "question": "17. Food source to pests?",
+        "comments": "No evidence that plant is food source to pest species (Alper 2004).",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "pest_harbor": {
+        "question": "18. Provides harbor?",
+        "comments": "Not known to provide harbour for pests.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "ag_yield": {
+        "question": "19. Impact yield?",
+        "comments": "Reduces the productivity of desirable forage plants. ‘It invades pastureland and renders huge tracts commercially useless, because cattle, horses and most other animals turn up their noses at it’ (USFS 2005). ‘In Montana alone, it covers some 4.5 million acres and costs ranchers more than $40 million annually in herbicide and lost productivity’ (Alper 2004). Major impact on quantity.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "ag_quality": {
+        "question": "20. Impact quality?",
+        "comments": "No evidence to suggest the weed would impact upon quality.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "ag_land_value": {
+        "question": "21. Affect land value?",
+        "comments": "In America it ‘invades pastureland and renders huge tracts commercially useless, because cattle, horses and most other animals turn up their noses at it’. ‘Tough for native plants to grow back when spotted knapweed has been eliminated’ (Alper 2004). Potential to also invade pastureland in Australia.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "ag_land_use": {
+        "question": "22. Change land use?",
+        "comments": "In America ‘it invades pastureland and renders huge tracts commercially useless, because cattle, horses and most other animals turn up their noses at it’, although sheep may eat it. ‘Tough for native plants to grow back when spotted knapweed has been eliminated’ (Alper 2004). Potential to have same effect in Australia and lead to a major detrimental change and significant loss for agricultural usage.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "ag_harvest_costs": {
+        "question": "23. Increase harvest costs?",
+        "comments": "‘In Montana alone, it covers some 4.5 million acres and costs ranchers more than $40 million annually in herbicide and lost productivity’ (Alper 2004). Increase in time and labour.",
+        "rating": "M",
+        "confidence": "H"
+      },
+      "ag_disease": {
+        "question": "24. Disease host/vector?",
+        "comments": "Not a known host / vector of disease.",
+        "rating": "L",
+        "confidence": "MH"
+      }
+    }
+  },
+  "Spotted thistle": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "Germinate in autumn or early winter (Parsons & Cuthbertson, 1992). Natural seasonal disturbance required.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "“Can grow in semi-shade (light woodland) or no shade (PFAF, 2000). Can establish without access to direct light.",
+        "rating": "H",
+        "confidence": "M"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "“Weed of disturbed sites, mainly in arable fields and waste places” (Parsons & Cuthbertson, 1992).  “Uncultivated land, in abandoned fields and ditches and along paths and waysides” (Neuz & Bermejo, 1994). Waysides and cornfields (PFAF, 2000). Establishes in highly disturbed sites.",
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Annual herb to 50-100 cm (Parsons & Cuthbertson, 1992).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "None found recorded.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "“Aerial growth is not eaten because of the spines…even sparse stands are avoided by stock” (Parsons & Cuthbertson, 1992). “Nothing will either eat it or approach it” (Maiden, 1908).",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "Young plants produce a “slowly developing rosette” from autumn or early winter and then “much branched stems form in late winter” (Parsons & Cuthbertson, 1992). “With hot temperatures the plant grows very rapidly, with the basal rosette forming quickly” (Neuz & Bermejo, 1994). Annual herb to 50-100 cm (Parsons & Cuthbertson, 1992).This herb reaches an average height for an annual.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "“Tolerates cold and drought” (Neuz & Bermejo, 1994). Danin (2005) records this plant growing in winter water-logged soils. Hardy to zone 7 (PFAF) –16�C - 12�C. Halophytic [salt-tolerant] (UNEP-WCMC, 2005). Highly tolerant to frost, and some tolerance to drought, salinity and seasonal water-logging",
+        "rating": "M",
+        "confidence": "M"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "Seed (Parsons & Cuthbertson, 1992). Hermaphrodite flowers (PFAF, 2000). No further information was found but there is the potential for cross- and self-fertilisation with hermaphrodite flowers.",
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "“Capitula…solitary or in clusters of two to four” (Neuz & Bermejo, 1994). Picture of mature plant shows at least 55 capitula (Parsons & Cuthbertson, 2002), and a photograph (Wikipedia, 2006) shows a capitulum with at least 20 florets. 55 x 20 = 1,100 propagules.",
+        "rating": "MH",
+        "confidence": "ML"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "“Germination capacity is maintained for a long time” (Neuz & Bermejo, 1994).",
+        "rating": "M",
+        "confidence": "H"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "Annual herb (Parsons & Cuthbertson, 1992).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "“Seeds germinate in autumn or early winter…aerial growth dies in late summer after seeds have matured” (Parsons & Cuthbertson, 1992). Less than a year.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Whole plants transported by wind and water and “spiny seed head catches in wool” and the plant is “present along the stock route from Breeza through Warrah to Merriwa” (Parsons & Cuthbertson, 1992), indicating transport by animals (externally)",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "“Aerial growth dies…after seeds have matured and, breaking off at the base, blows away much like a tumbleweed, shedding seeds as it goes…some plants, blown into creeks or rivers, float for long distances…Present along the stock route from Breeza through Warrah to Merriwa”… Seed are “not well adapted to wind dispersal…quite buoyant” Spiny seed heads catch in wool and contaminate fodder (Parsons & Cuthbertson, 1992).\n\nTransport by floating and attached to animals makes it likely that some propagules will disperse greater than 1 km.",
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "impact": {}
+  },
+  "Tiger pear": {
+    "invasiveness": {},
+    "impact": {
+      "social_access": {
+        "question": "1. Restrict human access?",
+        "comments": "“Dense tiger pear forms an impenetrable spiny ground-cover” (NRM, 2005) “often difficult to see in long grass” (Auld & Medd, 1992) and up to 1.5 m high (Henderson, 2001), with spines up to 4 cm long (Hosking, McFadyn & Murray, 1988) which, on a shrub this size, would prohibit access by humans.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "social_tourism": {
+        "question": "2. Reduce tourism?",
+        "comments": "Large infestations of this weed, “common along watercourses” (Hosking, McFadyn & Murray, 1988) would prevent access (see Q. 1) and recreational uses of rivers.",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "social_injurious": {
+        "question": "3. Injurious to people?",
+        "comments": "“Armed with needle-sharp, barbed spines, about 1-3 cm long” (Zimmerman, 1978). “In addition to the obvious objectionable nature of the large sharp spines…barbed bristles…readily penetrate human skin causing severe irritation and are difficult to remove” (Parsons & Cuthbertson, 2001). “I trod on a piece with my boot, and the spines readily entered the hard sole leather” (Farlow pers. comm. in Maiden, 1911).",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "social_cultural": {
+        "question": "4. Damage to cultural sites?",
+        "comments": "Thickets would have a negative visual impact on cultural sites. See picture in Parsons & Cuthbertson, 2001.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "env_flow": {
+        "question": "5. Impact flow?",
+        "comments": "“Common along watercourses” (Hosking, McFadyen & Murray, 1988) but grows along riverbanks (Moran & Annecke, 1979). Terrestrial species.",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "env_water": {
+        "question": "6. Impact water quality?",
+        "comments": "Terrestrial species (see Q. 6).",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "env_erosion": {
+        "question": "7. Increase soil erosion?",
+        "comments": "Prickly pear in general was listed as “preventer of land erosion, and as a soil arrester on barren spots” in Maiden (1911). It is a very long-lived plant (Parsons & Cuthbertson, 1992) that could bind soil with its roots and reduce the impact of rain with its foliage.",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "env_biomass": {
+        "question": "8. Reduce biomass?",
+        "comments": "“Patches…grow densely” (Parsons & Cuthbertson, 2001) and, being a fleshy succulent, would tend to increase or maintain biomass in pasture and grassland (where it is noted to invade in Carr et al, 1992 and Hosking & Deighton, 1981).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_fire": {
+        "question": "9. Change fire regime?",
+        "comments": "“Because of their high moisture content, plants are not easily burnt” (Parsons & Cuthbertson, 1992) so that in South Africa, “plants were collected, piled on firewood and later burned” (Moran & Annecke, 1979), supporting that notion that tiger pear do not burn without an associated fuel load. Likely to greatly decrease fire frequency in thick infestations and intensity in more sparse infestations.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "hab_high": {
+        "question": "10. Impact on composition \n(a) high value EVC",
+        "comments": "EVC=Damp Sands Herb Rich Woodland (V), CMA=Glenelg-Hopkins, Bioreg.=Victorian Volcanic Plain, CLIMATE=VH. Photographs in Tanner (2004a & 2004b) show dense infestations that have had a major impact on the ground layer flora. Major displacement of ground layer flora.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "hab_med": {
+        "question": "(b) medium value EVC",
+        "comments": "EVC=Woorinen Sands Mallee (D), CMA=Mallee, Bioreg.=Murray Mallee, CLIMATE=VH. \nPhotographs in Tanner (2004a & 2004b) show dense infestations that have had a major impact on the ground layer flora. Major displacement of ground layer flora.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "hab_low": {
+        "question": "(c) low value EVC",
+        "comments": "EVC=Heathy Woodland (LC), CMA=Glenelg-Hopkins, Bioreg.=Dundas Tablelands, CLIMATE=VH.\nPhotographs in Tanner (2004a & 2004b) show dense infestations that have had a major impact on the ground layer flora. Major displacement of ground layer flora.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "hab_structure": {
+        "question": "11. Impact on structure?",
+        "comments": "“Plants growing in high rainfall bushveld areas, where there are other plants to lean on, reach a height of 2 m” (Zimmerman, 1978). “This species is often difficult to see in long grass” (Auld & Medd, 1992). It’s potential height suggests that tiger cactus could impact on the ground layer and the shrub layer of vegetation communities. Photographs in Tanner (2004a & 2004b) show dense infestations that have had a major impact on the ground layer flora. As they climb into higher vegetation, tiger pear is likely to be less dense and thus have a more minor effect.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "hab_flora": {
+        "question": "12. Effect on threatened flora?",
+        "comments": "No information available",
+        "rating": "MH",
+        "confidence": "L"
+      },
+      "fauna_threatened": {
+        "question": "14. Effect on non-threatened fauna?",
+        "comments": "“Heavy infestations limit the grazing potential of [land]” as prickly pear is “armed with needle-sharp, barbed spines, about 1-3 cm long” (Zimmerman, 1978). This would prohibit access to food sources and probably to shelter also for native fauna",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "fauna_no_benefit": {
+        "question": "15. Benefits fauna?",
+        "comments": "“A native insect has been recorded feeding on flowers and young joints” (Hosking, McFadyn & Murray, 1988), however because of its ability to form spiny impenetrable infestations (see Q. 14), this plant would not normally benefit fauna as a food source. As it can harbour rabbits (Parsons & Cuthbertson, 2001) it may be able to provide shelter to small native mammals too.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "fauna_injurious": {
+        "question": "16. Injurious to fauna?",
+        "comments": "“Opuntia species are not usually grazed by stock because the stout spines and bristles damage their tongues and lips, but, in times of drought, plants are eaten” (Parsons & Cuthbertson, 2001).  “Animals…may become lame as well as full of sores and abscesses as a result of the adherence of barbed spines to different parts of their bodies” (Zimmerman, 1978). Large spines have proven dangerous to fauna.",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "pest_food": {
+        "question": "17. Food source to pests?",
+        "comments": "“O. stricta seed…is spread in the droppings of birds, foxes and other animals” (Parsons & Cuthbertson, 2001) and whilst O. aurantiaca lacks viable seed, it does produce fruit (Zimmerman, 1978) that are edible (so presumably attractive to other animals) and also hosts to fruit fly (Parsons & Cuthbertson, 2001). Food source to at least one serious pest animal at a crucial time of year.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "pest_harbor": {
+        "question": "18. Provides harbor?",
+        "comments": "“Effective harbour for pest animals such as rabbits” (Parsons & Cuthbertson, 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "ag_yield": {
+        "question": "19. Impact yield?",
+        "comments": "“High densities of the weed reduce the productivity of pastoral land” (Moran & Zimmerman, 1991).  “Heavy infestations limit the grazing potential of veld…in the supply of nutritive plants” (Zimmerman, 1978). In South Africa, “grazing by livestock on many properties was severely inhibited” (Moran & Zimmerman, 1991). In USA, prickly pear in general has been estimated to have “decreased the carrying capacity of [land] one-fourth to one-third” (Maiden, 1911).",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "ag_quality": {
+        "question": "20. Impact quality?",
+        "comments": "“Small segments…attach to wool and hides of animals” (Parsons & Cuthbertson, 2001). “The numerous long barbed spines…are injurious to livestock” (Moran & Zimmerman, 1991). “Grazing animals, especially lambs, may become lame as well as full of sores as and abscesses as a result of the adherence of barbed spines to different parts of their bodies…wool is down-graded if it is tangled with spiny leaf-pads” (Zimmerman, 1978). Meat may be downgraded if spines penetrate the muscle.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "ag_land_value": {
+        "question": "21. Affect land value?",
+        "comments": "“Infestations…seriously inhibit pastoral activities and result in a marked devaluation in the price of infested land” (Zimmerman, 1978). In USA, depreciation due to general prickly pear infestations have been estimated at 50% (Maiden, 1911). “Tiger pear is only a problem of grazing land, as it is easily destroyed by ploughing…Unfortunately, most infested grazing land is unsuitable for cultivation” (Hosking & Deighton, 1981).",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "ag_land_use": {
+        "question": "22. Change land use?",
+        "comments": "“The effectiveness of all control measures…is limited because of the difficulty of treating lose leaf-pads and small plants…Dense infestations of jointed cactus have the potential of making farming uneconomic or even impossible” (Zimmerman, 1978). “Can cover pasture land rendering it useless for grazing” (Hosking & Deighton, 1979). Tiger pear “is easily destroyed by ploughing [but] unfortunately, much infected grazing land is unsuitable for cultivation” (Hosking & Deighton, 1981). Difficulty and thus expense of control, combined with yield and quality impacts may cause farmland to be abandoned.",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "ag_harvest_costs": {
+        "question": "23. Increase harvest costs?",
+        "comments": "“Costly chemical control program (Moran & Zimmerman, 1991). “[Chemical] control is made more difficult on the steep terrain where it is frequently necessary” (Auld et al, 1982/83). “South Africa’s most expensive weed” (Zimmerman, 1978).",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "ag_disease": {
+        "question": "24. Disease host/vector?",
+        "comments": "“Hosts of fruit fly” (Parsons & Cuthbertson, 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      }
+    }
+  },
+  "Wards weed": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "Carrichtera annua needs about 15 mm of rainfall for good germination, although some seeds may germinate after 100 mm of rain (Halevy 1989). Seeds have an optimal germination temperature of 15-20�C and are thermoinhibited at 0�C and 35�C (Gat-Tilman 1995). The species requires natural seasonal disturbance for germination.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "C. annua is documented to inhabit grassy woodland communities (Carr et al. 1992) and is therefore able to establish under moderate canopy cover. It has been reported that leaf litter greatly reduced the germination of C. annua (Barritt and Facelli 2001), although germination may still occur. C. annua can establish under moderate canopy/litter cover.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "Known to invade disturbed areas, especially areas degraded by overgrazing, where it replaces pasture plants (Cooke 2003). Common plant of dry open and disturbed sites (Weber 2003). Also reported to inhabit mallee shrubland, lowland grassland, grassy woodland (Carr et al. 1992) and heathland communities (Weber 2003).\nC. annua can establish in healthy and undisturbed natural ecosystems.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "C. annua is a tap-rooted, erect winter annual herb, to 60 cm in height (Cooke 2003: Weber, 2003).\nLife form: Other",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "No allelopathic properties described in the literature reviewed.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "Stock will only eat the weed when the absence of other feed forces them to do so, due to its hairiness and pungent, penetrating odour (Orchard 1946). The plant is consumed but not preferred.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "C. annua is an erect winter annual herb, to 60 cm in height (Cooke 2003: Weber 2003). Growth rate probably similar to the same life form.",
+        "rating": "M",
+        "confidence": "M"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "Cooke (2003) describes frost not killing C. annua plants. ‘No plant mortality was recorded when plants were exposed to frost at -5�C and -2�C.\nC. annua is commonly described as a common annual desert plant (Gutterman and  Shem-Tov 1997), referring to as drought tolerant. Tolerant of frost and drought maybe tolerant of another.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "C. annua is capable of self pollination, although seed set is at least twice as high when cross pollination occurs (Boaz et al. 1990 in Cooke 2003).",
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "Carrichtera annua is capable of producing 3,000-30,000m� seeds annually (Cooke 2003), the plant is able to grow to 60 cm in height (Weber 2003) and a diameter of up to 30 cm (Halevy 1989). Therefore, C. annua has the capability of producing above 2000 propagules annually.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "In drought periods seeds of Carrichtera annua can remain on the parent plant for more than one year (Gutterman and Shem-Tov 1997). It is unclear to what extent C. annua forms a long lasting seed bank, but it is suggested to be very limited and barely sufficient to sustain one recruitment event and that seeds have very short persistence when buried (Meissner and Facelli 1999).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "C. annua is a winter growing annual plant, following plant senescence the dead plant remains upright over the summer months (Cooke 2003). The mature plant produces viable propagules for only one year.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "Flowering may begin as early as 40 days after seed germination (Cooke 2003). The first seeds mature about two months after germination (Halevy 1989).",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Dominant mechanism is by rain, although may also spreads through vehicle and stock movements due to its ability to adhere to a substrate (Cook 2003).\nSmall proportions of ingested seeds can also survive herbivory of native animals and stock, dispersal vectors may include vertebrate herbivores including goats, macropods, emus, sheep, cattle and rabbits (Cooke 2003).\nThe seed of C. annua contains a mucilaginous layer which aids its floating capabilities so that seeds can be carried in runoff water along runnels in the desert (Gutterman and Shem-Tov 1997).\nC. annua seeds are described as a possible food source for emus and ingested seed can survive herbivory, therefore dispersal by birds and highly mobile animals may occur.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "When it rains, seeds can be flicked up to 25 cm from the parent plant (Loria and Noy-Mier 1979/80). Although, this is insignificant to account for rate at which C. annua spread in Australia. C. annua has the ability to spread through vehicle and stock movements including railways, demonstrating the ability to be transported long distances, presumably by seed (Cooke 2003). C. annua seeds are also described as a possible food source for emus and when ingested, seed can survive herbivory (Cook 2003). Spennemann and Allen (2000) describe that emus are able to disperse seeds greater than 50 km. It is very likely that at least one propagule will disperse greater than one kilometre.",
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "impact": {
+      "social_access": {
+        "question": "1. Restrict human access?",
+        "comments": "C. annua can form dense stands, to 60 cm in height (Cooke 2003: Weber 2003). C. annua would not restrict human access, minimal impact.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "social_tourism": {
+        "question": "2. Reduce tourism?",
+        "comments": "Orchard (1946) describes Carrichtera annua as an ‘evil smelling weed’ due to its pungent, penetrating odour.\nThis may cause minor effects to aesthetics and tourism value.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "social_injurious": {
+        "question": "3. Injurious to people?",
+        "comments": "C. annua is not reported having any toxic qualities or spines. Not described in the literature reviewed, to cause injury to humans.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "social_cultural": {
+        "question": "4. Damage to cultural sites?",
+        "comments": "Unknown: No reviewed documentation suggests that C. annua causes damage to indigenous, european heritage sites or infrastructure.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "env_flow": {
+        "question": "5. Impact flow?",
+        "comments": "C. annua occurs in less dry habitats in desert situations (Loria and Noy-Meir 1979/80) where water runoff may occur, and is a tap-rooted, erect winter annual herb (Cooke 2003: Weber, 2003). The species does not occur within watercourses, little impact on surface or subsurface water flow.",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "env_water": {
+        "question": "6. Impact water quality?",
+        "comments": "No reviewed documentation suggests that C. annua impacts on water quality.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "env_erosion": {
+        "question": "7. Increase soil erosion?",
+        "comments": "C. annua can form dense stands and has a deep taproot (Weber 2003) which may reduce soil erosion, although because C. annua can form dense stands and displace native plants (Cooke 2003) may increase the probability of soil erosion slightly.\nThe annual species may leave bare patches that are exposed to soil erosion. Moderate probability of large scale soil movement.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "env_biomass": {
+        "question": "8. Reduce biomass?",
+        "comments": "C. annua forms dense stands displacing both native plants and other weed species and can comprise up to an estimated 95% of total herbaceous biomass (Cooke 2003). Direct replacement of biomass by invader.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "env_fire": {
+        "question": "9. Change fire regime?",
+        "comments": "C. annua is a winter growing annual plant, following plant senescence, the dead plant remains upright over the summer months (Cooke 2003). Gat-Tilman (1995) describes C. annua as a ‘dry plant’ during the summer months.\nThis suggests the plant may increase the risk of fire intensity. Minor change.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "hab_high": {
+        "question": "10. Impact on composition \n(a) high value EVC",
+        "comments": "EVC= Semi-arid woodland (V); CMA= Mallee; Bioreg= Murray Mallee; CLIMATE potential=VH.\nC. annua can form dense stands becoming the dominant herbaceous plant. Across its range, C. annua displaces both native plants and other weed species and comprises up to an estimated 95% of total herbaceous biomass.\nC. annua could be considered as forming a monoculture in the Flinders Rangers National Park within a specific layer (Cooke 2003), although in other areas such as Willandra C. annua occurs with perennial competitors.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "hab_med": {
+        "question": "(b) medium value EVC",
+        "comments": "EVC= Semi-arid woodland (D); CMA= Mallee; Bioreg= Lowan Mallee; CLIMATE potential=VH.\nC. annua can form dense stands becoming the dominant herbaceous plant. Across its range, C. annua displaces both native plants and other weed species and comprises up to an estimated 95% of total herbaceous biomass.\nC. annua could be considered as forming a monoculture in the Flinders Rangers National Park within a specific layer (Cooke 2003), although in other areas such as Willandra C. annua occurs with perennial competitors.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "hab_low": {
+        "question": "(c) low value EVC",
+        "comments": "EVC= Shrubby Woodland (E); CMA= Wimmera; Bioreg= Greater Grampians; CLIMATE potential=VH.\nC. annua can form dense stands becoming the dominant herbaceous plant. Across its range, C. annua displaces both native plants and other weed species and comprises up to an estimated 95% of total herbaceous biomass.\nC. annua could be considered as forming a monoculture in the Flinders Rangers National Park within a specific layer (Cooke 2003), although in other areas such as Willandra C. annua occurs with perennial competitors.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "hab_structure": {
+        "question": "11. Impact on structure?",
+        "comments": "Across its range, C. annua displaces both native plants and other weed species and comprises up to an estimated 95% of total herbaceous biomass. C. annua could be considered as forming a monoculture in the Flinders Rangers National Park (Cooke 2003) within the ground cover layer.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "hab_flora": {
+        "question": "12. Effect on threatened flora?",
+        "comments": "Described by Cooke (2003), C. annua may form part of a succession of weed species, which appears to have succeeded hops (Rumex vesicarius) in the Flinders Rangers, which is now rare. This species is in the same genus as Glistening dock (Rumex crystallinus s.s.) a species classed as vulnerable in Victoria.",
+        "rating": "MH",
+        "confidence": "L"
+      },
+      "fauna_threatened": {
+        "question": "14. Effect on non-threatened fauna?",
+        "comments": "No reviewed documentation directly suggests that C. annua causes a threat to fauna species, although the ability of C. annua to form dense stands becoming the dominant herbaceous plant (Cooke 2003) may suggest a reduction in the available habitat for certain fauna species.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "fauna_no_benefit": {
+        "question": "15. Benefits fauna?",
+        "comments": "The pod seed bank of C. annua forms a potential food source for vertebrate herbivores including goats, macropods, emus, sheep, cattle and rabbits. Ant species in semi-arid areas dominated by C. annua also use the seed of the species as an alternative food source (Cooke 2003 pg. 71).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "fauna_injurious": {
+        "question": "16. Injurious to fauna?",
+        "comments": "No literature suggests that C. annua is injurious to fauna although the species is described by Orchard (1946) as being unpalatable to fauna because of its hairiness and pungent, penetrating odour.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "pest_food": {
+        "question": "17. Food source to pests?",
+        "comments": "C. annua provides a potential food source for vertebrate herbivores, including rabbits (Cooke 2003).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "pest_harbor": {
+        "question": "18. Provides harbor?",
+        "comments": "C. annua can form dense stands, to 60 cm in height (Cooke 2003: Weber 2003) which may suggest that the species has the capacity to harbour pest species, especially considering C. annua provides a potential food source for vertebrate herbivores including rabbits (Cooke 2003).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "ag_yield": {
+        "question": "19. Impact yield?",
+        "comments": "C. annua is described as a major pastoral weed (Keighery 1991 in Cooke 2003 pg7) due to its ability to replace native vegetation following overgrazing. Orchard (1946) also describes that C. annua might choke out cereal crops entirely, if left uncontrolled.",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "ag_quality": {
+        "question": "20. Impact quality?",
+        "comments": "Reduced quality of meat and milk from animals feeding on C. annua has been recorded due to the strong odours of C. annua being transferred to the produce (Orchard 1946). Seeds of C. annua were also recognised as an impurity in wheat in Australia (Cooke 2003).",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "ag_land_value": {
+        "question": "21. Affect land value?",
+        "comments": "C. annua is unpalatable to sheep and cattle; it reduces the carrying capacity and so value of infested property (Cooke 2003). C. annua might choke out cereal crops entirely, if left uncontrolled. (Orchard 1946), causing a decrease in land value.",
+        "rating": "M",
+        "confidence": "MH"
+      },
+      "ag_land_use": {
+        "question": "22. Change land use?",
+        "comments": "C. annua is unpalatable to sheep and cattle therefore reduces the carrying capacity (Cooke 2003), C. annua may also choke out cereal crops entirely, if left uncontrolled (Orchard 1946) this may cause a downgrading of the priority land use, to one with less agricultural return.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "ag_harvest_costs": {
+        "question": "23. Increase harvest costs?",
+        "comments": "Unknown: No reviewed literature suggests C. annua increases the cost of production.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_disease": {
+        "question": "24. Disease host/vector?",
+        "comments": "Unknown: No reviewed documentation suggests that C. annua acts as an alternative host or vector for disease of agriculture.",
+        "rating": "M",
+        "confidence": "L"
+      }
+    }
+  },
+  "Whiskey grass": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "Germination for this species occurs in Autumn (Parsons & Cuthbertson 2001).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "The species often occurs on disturbed sites and is reported to be intolerant of shade (Parsons & Cuthbertson 2001; PFAF 2007; Restrepo & Vitousek 2001).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "The species invades habitats which are considered highly disturbed such as roadsides and overgrazed native pasture (Parsons & Cuthbertson 2001).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Grass; the species is a C4 perennial bunchgrass (Marks & Strain 1989).",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "The species has been found to have significant inhibitory effect on the growth of seedlings of a number of species (Rice 1972).  Reported to have some allelopathic properties (Rice 1984).",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "The species is reported to have little fodder value and that the dried biomass can present as a fire hazard in late summer, which would indicate that largely the species isn’t consumed (Parsons & Cuthbertson 2001). The species is considered unpalatable and of low forage value (Griffin, Watson & Strachan 1988).",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "Reported to have a slow growth rate through winter, plants are then able to grow to 1 m high during spring and summer (Parsons & Cuthbertson 2001). The species is therefore considered to have a growth rate equal to that of other grass species.",
+        "rating": "M",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "Reported to occur in ephemeral wetlands (Kirkman & Sharitz 1994). Therefore the species has some tolerance to waterlogging.  The species can persist through fire events (D’Antonio, Tunison & Loh 2000).  Tolerant of drought (Marks & Strain 1989).  Tolerant of heavy metals (Gibson & Risser 1982).  Tolerant of frost, Reported to be hardy to zone 6 (-20�C) (PFAF 2007).",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "The species reproduces sexually producing seed (Parsons & Cuthbertson 2001).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "Unknown.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "Unknown.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "The species is reported to persist in almost pure stands for many years (Rice 1972).",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "The species is able to reproduce in its first year (Parsons & Cuthbertson 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "The species seeds are reported to be dispersed externally on animals and with human aided dispersal (Parsons & Cuthbertson 2001).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "This species is spreading into Eastern Victoria through the movement of hay and livestock from NSW, which enables the species to be spread more than 1 km (Sexton 2003).",
+        "rating": "H",
+        "confidence": "H"
+      }
+    },
+    "impact": {}
+  },
+  "Annual mercury": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "An annual, the plant can be propagated by seed sown in spring or autumn (PFAF 2003). Optimum temperature for germination is constant 20 or 25�C (Anderson 1968). Lisci et al. (1994) note that M. annua flowers all year round in southern and central Italy, hence pollination and seed production would occur throughout the year. They do not report on seed dormancy. As a weed in sugar beet crops Jursik et al. (2004) noted there were several waves of emergence, influenced by weather conditions. Seedling emergence began at the end of April and progressively increased to a maximum in June (northern hemisphere summer). Germination had mostly ceased by November.  Magyar and Hunyadi (2000) record temperature as the main factor regulating germination of M. annua. Magyar (2003) states, “It can be observed that the germination of annual mercury seeds has a seasonal pattern under\nnatural field conditions.” Natural seasonal disturbance.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "Common habitats are gardens, arable land, vineyards; rubbish tips; on soils rich in nutrients, in light and moderately warm situations up to montane level. In California it is noted as a weed of agriculture in disturbed habitats (CALFLORA 2007). In Hungary, where the weed has significantly extended it area of infestation, it is mostly known in cropping situations (maize and winter wheat, sugar beet and carrot) and ruderal areas (Magyar 2003). Requires open space or bare ground to establish",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "In some areas of Europe (Hungary, Czech Republic) it is more common in arable land used for annual cropping activities (Magyar 2003). Infestations most commonly occur in highly disturbed environments. See above.",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Annual herb, 10–40 cm high. ‘Other’ life form.",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "Magyar (2003) found allelopathic potential against three species; amaranth, white mustard and wheat. In wheat, only the early growth of seedlings was affected; germination was not inhibited. Magyar’s conclusion was that, “The proven allelopathic potential of annual mercury as a part of the interference can contribute to its further expansion on arable lands.”",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "The plant is consumed by grazing animals, but the plants are known for, “high seed production and longevity.”  Reproduction may be inhibited by herbivory, but extensive seed bank would ensure weed persists. Yampolsky (1930) found that heavily pruned plants of M. annua recovered and subsequently produced flowers and seed.  (Note: some of the male-only plants produced a few female and hermaphrodite flowers after pruning.)",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "Magyar & Hunyadi (2000) state, “The high relative growth rate values during early development indicate the strong competitive nature of this weed,” but this is contradicted by Magyar (2003) and Jursik et al. (2004) who suggest it is less competitive particularly in relation to other species of primary weed infestations. Growth rate likely to be less than other species of same life form.",
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "The plant is, “frost resistant but drought tender,” (Bodkin 1990). An annual, the plant would not tolerate fire. No data on response to water logging. Resistant to one stressor, susceptible to at least two.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "An annual; dioecious (male and female flowers borne on separate plants). M. annua is known to produce both functional males and hermaphrodites under some conditions. Under experimental conditions, Yampolsky (1930) found the same male-only plant can produce female and hermaphrodite flowers during recovery from deliberate damage (pruning). Pannel et al. (2003) demonstrate also that under the influence of ecological interactions populations of M. annua can be dioecious, androdioecious (males and hermaphrodites) and functional\nhermaphroditism. It has been suggested that species of Mecurialis are out-crossers.",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "Jursik et al. (2004) found that M. annua produces up to 20,000 seeds m-2 in sugar beet stands. Propagules likely to exceed 2,000 per plant per flowering event.",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "The plant has, “a long primary seed dormancy, …and longevity in soil,” (Kohout & Hamouz 2000) Specific values of percentage viability and longevity not available. Assume at least 25% of seed survives 5 to 10 years.",
+        "rating": "ML",
+        "confidence": "L"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "Annual species.",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "An annual, the plant reaches maturity and produces viable propagules in under one year.",
+        "rating": "H",
+        "confidence": "H"
+      }
+    },
+    "impact": {
+      "social_access": {
+        "question": "1. Restrict human access?",
+        "comments": "Annual herb 10 – 40 cm high. In Western Australia, it is recorded to reach a height of 60 cm (Hussey et al. 1997).\nNegligible impact on human access",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "social_tourism": {
+        "question": "2. Reduce tourism?",
+        "comments": "An introduced species to North America, it is known in San Francisco in open, disturbed areas, fields and roadsides. Where it occurs north east of Melbourne (Victoria), it is most commonly associated with a creek corridor in a nature reserve, but is also known to be present in local gardens. Infestations likely to be undetectable to the average visitor.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "social_injurious": {
+        "question": "3. Injurious to people?",
+        "comments": "Vallverdu et al. (1997) demonstrated a high level (46.4%) of sensitisation to pollen of M. annua in subjects with a known sensitivity to other pollens. Lisci et al. (1994) records that M. annua is a wind-pollinated plant and produces pollen throughout the year in central and southern Italy. Rossof (2002) reinforces the allergenicity of this plant in Italy where, he states, its aeroallergens have caused rhinitis, bronchial asthma, and/or hypersensitivity pneumonitis in humans. “Use of it colors urine red.” Neat huh! Potential to cause allergic reaction or increase the duration of suffering for those susceptible to pollen allergies.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "social_cultural": {
+        "question": "4. Damage to cultural sites?",
+        "comments": "Low growing annual herb. Dense patches may create a moderate negative visual effect.",
+        "rating": "ML",
+        "confidence": "L"
+      },
+      "env_flow": {
+        "question": "5. Impact flow?",
+        "comments": "Although it is found near to streams and drains in Victoria, it is a terrestrial species. No impact on water flow.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "env_water": {
+        "question": "6. Impact water quality?",
+        "comments": "See comment above. No data is available to indicate the water stress-tolerance of this plant. Assume it unlikely to establish in standing water.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "env_erosion": {
+        "question": "7. Increase soil erosion?",
+        "comments": "A soft annual herb more commonly found in disturbed or ruderal situations. Its presence is unlikely to affect soil erosion.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "env_biomass": {
+        "question": "8. Reduce biomass?",
+        "comments": "In natural ecosystems it is commonly found in disturbed sites or waste places (CALFLORA 2007; Magyar 2003).  Biomass may increase slightly, but likely little to no effect.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "env_fire": {
+        "question": "9. Change fire regime?",
+        "comments": "Small, fleshy annual herb. Even dense patches are unlikely to add significantly to fuel load. Little to no affect on fire intensity or frequency.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "hab_high": {
+        "question": "10. Impact on composition \n(a) high value EVC",
+        "comments": "EVC=Valley Grassy Forest (V); CMA=Port Phillip; Bioreg=Gippsland Plain; CLIMATE potential=VH. Occurs along creek / drain line north east of Melbourne where it is displacing other herbaceous annuals and, as a prolific seeding annual, spreading quickly in the absence of control. It is difficult to comment on the level of displacement (minor or major) this species may impose on the lower stratum. Somewhere in the middle?",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "hab_med": {
+        "question": "(b) medium value EVC",
+        "comments": "EVC=Coastal Headland Scrub (D); CMA=Port Phillip; Bioreg=Gippsland Plain; CLIMATE potential=VH. A soft, annual herb. Impact similar to 10. above.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "hab_low": {
+        "question": "(c) low value EVC",
+        "comments": "EVC=Riparian scrum (LC); CMA=West Gippsland; Bioreg=Wilsons Promontory; CLIMATE potential=VH. A soft, annual herb. Impact similar to 10. above.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "hab_structure": {
+        "question": "11. Impact on structure?",
+        "comments": "Known in peppermint woodland at Hamelin Bay, Western Australia (about 35 km south of Margaret River), but no detail on effect of its presence on other vegetation. Where it occurs near Melbourne, Victoria, it is associated with a creek corridor / drain in a nature reserve (Baber; Lorimer, pers. comms) where it is displacing other more desirable annual herbs. Minor impact on lower stratum.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "hab_flora": {
+        "question": "12. Effect on threatened flora?",
+        "comments": "Not documented.",
+        "rating": "MH",
+        "confidence": "L"
+      },
+      "fauna_threatened": {
+        "question": "14. Effect on non-threatened fauna?",
+        "comments": "Displacement of beneficial plants by M. annua may lead to a reduction in available fodder for non-threatened species.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "fauna_no_benefit": {
+        "question": "15. Benefits fauna?",
+        "comments": "Provides no documented benefit. It is recorded as poisonous to domesticated animals (sheep, cattle and horses (Rossof, 2002)). See comments below.",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "fauna_injurious": {
+        "question": "16. Injurious to fauna?",
+        "comments": "Welchman et al. (1995) and Deprez et al. (1996) report the poisoning of lambs and cattle respectively. 11 lambs died, but the life outcome of the cattle is not described. In the case of lamb poisoning, the authors noted that annual mercury was the predominant vegetation. Rossof (2002) indicates that annual mercury is lethal to all domestic animals (sheep, cattle, horses). Though animals may avoid eating the plant, the potential exists to fatally harm fauna at certain times of the year.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "pest_food": {
+        "question": "17. Food source to pests?",
+        "comments": "Probably unlikely; see comments in 16 above. Pest herbivores may find consuming this plant to be fatal.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "pest_harbor": {
+        "question": "18. Provides harbor?",
+        "comments": "Images of infestations in California (CalPhotos) show the plant would not provide harbour for pest animals.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "ag_yield": {
+        "question": "19. Impact yield?",
+        "comments": "Although reported as toxic to domesticated animals no data exists on effects on yield regarding stock. Magyar (2003) has undertaken the most comprehensive study of this plant to date, though with a focus on agricultural ecosystems, notably annual crops such as maize and winter wheat. He found that the average cover in maize varied from 1.16% to 2.28%. How it affected production and yield is not discussed. The major concern was the emergence of the weed before the cultivated crop. Given this early competition for plant resources, it could result in a reduction in crop yield of more than 5%, but less than 20%.",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "ag_quality": {
+        "question": "20. Impact quality?",
+        "comments": "There are no data available to suggest the quality of agricultural produce is affected. The few studies on animals consuming the plant (Rossof 2002; Welchman et al. 1995; Deprez et al.1996) suggest that mortality is the most likely outcome rather than a reduction in vigour. It is not recorded as a seed contaminant. No impact on quality.",
+        "rating": "L",
+        "confidence": "H"
+      },
+      "ag_land_value": {
+        "question": "21. Affect land value?",
+        "comments": "The continuous spread of this weed in north-western Hungary (Magyar 2003) in annual crops indicates it has been a difficult weed to control or possibly just ignored as another weedy crop competitor. Magyar (2003) demonstrates effective control of annual mercury with herbicides. Normal farm / crop management practices would likely control the weed, though possibly adding to the cost of production. Unlikely to affect land value.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "ag_land_use": {
+        "question": "22. Change land use?",
+        "comments": "See comment in 21 above regarding cropping situations. As the weed is most closely associated with high disturbance regimes, well maintained, good quality perennial pasture is likely to suppress the growth of annual mercury. Unlikely to lead to change in land use.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "ag_harvest_costs": {
+        "question": "23. Increase harvest costs?",
+        "comments": "Not demonstrated to affect harvest costs.",
+        "rating": "L",
+        "confidence": "L"
+      },
+      "ag_disease": {
+        "question": "24. Disease host/vector?",
+        "comments": "Not documented.",
+        "rating": "M",
+        "confidence": "L"
+      }
+    }
+  },
+  "Annual ragweed": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "Germination is combination of light and temperature and although usually germinates in spring, can germinate at other times of year if conditions are suitable (Parsons & Cuthbertson 2001, DNRM 2005).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "Prefers dry, sunny grassy plains, along riverbanks, roadsides, disturbed soils, vacant lots and ruderal sites (Parsons & Cuthbertson 2001). Limited growth in shade.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "\"Primarily a plant of disturbed open areas\" occurs as weed of cultivated lands, stubble fields, old pastures, wastelands\" (Parsons & Cuthbertson 2001).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Annual herb (Parsons & Cuthbertson 2001) – life form –other.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "Annual ragweed ‘produces allelopathic responses in several other weed and crop species .. strongly inhibit germination of onion, oats, Lolium spp. (Parsons & Cuthbertson 2001).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "Cattle eat annual ragweed in early stages. A variegated leaf beetle and stem-galling moth are used in biological control in Queensland with the moth ‘reducing ragweed populations and seed production in warmer areas’ (Parsons & Cuthbertson 2001).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "Serious competitor with cereal crops and vegetables in early growth stage but poor competitor in well managed pastures and legume crops. Growth rate rapid depending on environment (Parsons & Cuthbertson 2001). Most often occurs in wasteland areas so score as Medium High.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "Due to the locations it can be found, it appears to have saline tolerance. Susceptible to frost and fire.  Drought tolerant. Can be found in flood plains but no mention of ability to withstand waterlogging (Parsons & Cuthbertson 2001).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "Wind pollinated. A ‘self-compatible species’ (Bassett & Crompton 1975 (cited in Genton, Shykoff & Giraud). Cross and self-pollination but cannot vegetatively reproduce (Parsons & Cuthbertson 2001).",
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "Annual ragweed produces an average of 3000 seeds per year (Parsons & Cuthbertson 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "Annual ragweed seeds can be viable for more than 40 years (Parsons & Cuthbertson 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "Annual plant (Parsons & Cuthbertson 2001).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "Reaches maturity in 4-5 months (Parsons & Cuthbertson 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Clings to sheep, furred animals, bags, clothing, water, contaminated gravel and soil (Parsons & Cuthbertson 2001).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "Spreads ‘readily over long distances’. Hull provides buoyancy (Parsons & Cuthbertson 2001). \n\nSeems likely that some of the propagules will disperse greater than 1 km.",
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "impact": {}
+  },
+  "Black willow": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "S. cinerea spreads by seed to riparian as well as other moist to wet habitats, and this is of special concern.” (Cremer, 1999). “S. nigra has the potential to behave in the same invasive manner as S. cinerea in wetlands” (Ladson et al, 1989). These species do not need uncommon natural events for germination.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "Willows are described as heliophyllic (intolerant of shade) (Haines, 2004) and most species …must not be over-humg by larger plants or trees (Newsholme, 1992).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "S. nigra generally invade as seedlings (Carr, 1996) and so are “virtually restricted to bare sediment that is wet for weeks or months following seed shed [and] seedlings need much light” (Cremer, 1999). This is a major disturbance with little or no competition from other plant species.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Semi-aquatic- All willows are described as growing on the banks of water courses or in moist locations. S. nigra grow in “streams in pastoral country…opening in pine and eucalypt forest” (Cremer, 1999) and offstream wetlands (Ladson et al, 1997).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "Of the naturalised willows in Australia, allelopathic compounds have been demonstrated in S. rubra (Bokarev, Kefeli & Kapeljusnikova, 1966), S. babylonica (Koul et al, 1991), S. fragilis (Davison, 1965), S. viminalis (Bowen & Hoad, 1968), S. alba (Banzhaf et al, 1983) and S. purpurea (Gilliver, 1947). For other willow species, their “dense shade and mat-forming willow roots suppress and kill indigenous understorey” (Purtle et al, 2001b), suggesting that there might be an allelopathic basis for this lack of understorey beneath willow infestations, however no specific reference to these species was found.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "No information",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "“Salix are fast growing trees or shrubs, rarely prostrate” (Spencer, 1997). Where growth rates are described, tree and shrub forms of Salix are recorded as vigorous or fast growing, e.g. S. alba (Spencer, 1997), S. glaucophylloides (Newsholme, 1992), S. nigra (Cremer, 1995), S. purpurea (Webb, Sykes & Garnock-Jones, 1988) and S. x rubens (Meikle).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "FIRE “If a tree is completely girdled by fire at ground level it may die without coppicing… however young trees tend to sprout from the buried portion of their stem” (Cremer, 1999), indicating some fire tolerance in tree and shrub willows in general.\n\nFROST All tree and shrub species (except S. humboldtiana) in this study are recorded as tolerating USDA hardiness zones of between 1 and 6 (average minimum temperatures between –46oC and –17oC) (Bailey & Bailey, 1976, Griffiths, 1992). S. humboldtiana is susceptible to frost (Newsholme, 1992).\n\nDROUGHT All willows are described as growing on the banks or in the riverbeds of water courses or in moist locations (Carr, 1996; Carr et. al, 1992; Cody, 1996; Davis, 1982; Howard, 1988; Ladson, et al, 1997; Maloney et al, 1999; Munz, 1963; Voss, 1972; Webb, Sykes & Garnock-Jones, 1988) suggesting a low drought tolerance; and only few species (S. cinerea and S. exigua) can also establish on drier soil (but are not necessarily drought tolerant), with S. purpurea alone tolerating extremely dry, sandy soils (Newsholme, 1992).\n\nWATERLOGGING Those species able to grow in riverbeds must have high tolerance of waterlogging (S. exigua, Cody, 1996; S. fragilis, Maloney et al, 1999; S. alba, S. x rubens, and S. viminalis; Webb, Sykes & Garnock-Jones, 1988) and also S. cinerea (Cremer, 1999).\n\nSALINITY S. alba is “the most tolerant of all willows to brackish water” (Zallar). S. cinerea “tolerates salt-laden air” (Newsholme, 1992), S. fragilis, S. matsudana & S. seringeana tolerate high levels of salinity (Crouch & Honeyman, 1986). S. nigra has moderately high tolerance of salt (Swift, 1997) and S. purpurea shows “considerable tolerance for salt water” (Newsholme, 1992). S. alba are highly tolerant of waterlogging, salinity and frost, have some tolerance of fire, but not of drought.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "S. nigra Seeds and possible vegetatively…brittle twigs (Spencer, 1997). Abundantly recruiting by seed…probably also reproducing vegetatively (Carr, 1996). Capable of reproduction vegetatively and also by seed.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "“A large crown would produce over 500,000 seeds (Cremer, 1999). Seeds numerous, very small, each with a tuft of long hairs (Tutin, 1993).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "“Willow seed is very short-lived” with longer-lived species recorded at surviving 8-10 weeks (Cremer, 1999).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "Following reproductive maturity “flowering tends to be ample and to occur every year” (Cremer, 1999). S. cinerea “stands are mostly monoculture excluding 97% of sunlight and most other species” (Cremer, 1999). The oldest stem S. exigua in this study was 31 years (Ottenbreit & Staniforth, 1992). An old S. fragilis tree was observed to 130 years (Meikle, 1984).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "“Flowering and the production of viable seed may begin two to three years after germination, provided the plant is at least 1 m tall if it is a shrub willow, or 2 m tall if it is a tree willow…In some taxa (e.g. S. alba) flowering tends to begin at larger sizes” (Cremer, 1999), which is probably still within 5 years.\n\nFor plants that have reproduced vegetatively, this may be reduced, as in S. nigra, observed flowering on cuttings produced from < 1 year old growth (Crouch & Honeyman, 1986).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Vegetative propagules and seed spread by water. “Seed is easily carried by wind” (Cremer, 1999).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "“Seed is easily carried by wind for more than 1 km and some travels for up to 50 km or even 100 km (Cremer, 1999) for species that commonly reproduce by seed, such as S. nigra (ARMCANZ, 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "impact": {}
+  },
+  "Blue psoralea": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "Germination is reported to occur in Autumn, especially after fire or another disturbance. The seeds are not dependent on fire for germination however (Blood 2001).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "Tolerant of partial shade, invades forest (Blood 2001).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "Highly invasive in heathland (Muyt 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "In the Fabaceae family and can fix nitrogen (Blood 2001). Therefore a legume.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "No allelopathic properties are reported for this species.",
+        "rating": "L",
+        "confidence": ""
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "Tolerant of grazing, used as a fodder source (Blood 2001).\nResprouts after being cut at the base (Blood 2001).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "Very fast growing (Blood 2001).\nCan grow rapidly to 1.5 m in a year (Eliovson 1960).",
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "Tolerant of frost, to temperatures of -4�C (Blood 2001).\nTolerant of fire; fire stimulates germination and mature plants can reprout (Blood 2001).\nTolerant of dry conditions (Blood 2001). No reported tolerance of drought however.\nTolerant of waterlogging; occurs in swamps (Blood 2001).\nTolerant of salt laden winds (Muyt 2001).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "Reproduces by seed (Blood 2001).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "Can produce thousands of seeds annually (Muyt 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "Seeds remain viable for at least 8 years (Muyt 2001).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "Can live for 15 years (Muyt 2001). Being able to start flowering in its second year as reported by Blood (2001) would give a potential reproductive period of more than 10 years.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "Can start flowering after 1 year (Eliovson 1960).",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Dispersed by water and possibly by birds (Blood 2001).\nHuman aided dispersal includes accidentally through machinery and contaminated soil and deliberately; still occasionally available in trade (Blood 2001; Muyt 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "Dispersal by water and possibly by birds would enable propagules to move more than 1 km.\nDispersal of more than 1 km along a roadside most probably through contaminated machinery has been observed (Mitchard pers comm. 2007).",
+        "rating": "H",
+        "confidence": "ML"
+      }
+    },
+    "impact": {
+      "social_access": {
+        "question": "1. Restrict human access?",
+        "comments": "A small tree growing to 4 m, reported to occur in riparian areas and able to forms dense thickets (Weber 2003). As the plant can grow to 1.5 m in one year and has a lasting seed bank, the species may need to be controlled to maintain access which would require significant works (Eliovson 1960; Muyt 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "social_tourism": {
+        "question": "2. Reduce tourism?",
+        "comments": "An ornamental tree species which can form dense thickets the species may have some effect on aesthetics (Weber 2003). \nUnknown if the species potential to restrict access has had any impact on recreational activities.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "social_injurious": {
+        "question": "3. Injurious to people?",
+        "comments": "There is no reported evidence of this.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "social_cultural": {
+        "question": "4. Damage to cultural sites?",
+        "comments": "An ornamental tree species which can form dense thickets the species may have some effect on aesthetics (Weber 2003).",
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "env_flow": {
+        "question": "5. Impact flow?",
+        "comments": "The species is reported to occur in swamps and riparian vegetation (Hussey et al 1997; Muyt 2001). There is no evidence reported of the species impacting water flow.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "env_water": {
+        "question": "6. Impact water quality?",
+        "comments": "The species is reported to occur in swamps and riparian vegetation (Hussey et al 1997; Muyt 2001). There is no evidence reported of the species impacting water quality.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "env_erosion": {
+        "question": "7. Increase soil erosion?",
+        "comments": "The species root system is described as being woody and branching but mostly shallow (Muyt 2001). Having a shallow root system would limit the species ability to prevent large scale erosion occurring.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "env_biomass": {
+        "question": "8. Reduce biomass?",
+        "comments": "Described as a fast growing species which can crowd out other shrub species and shade out species of lower strata (Muyt 2001). Invasion by this species is overall likely to cause direct replacement.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "env_fire": {
+        "question": "9. Change fire regime?",
+        "comments": "Blood (2001) reports that fire stimulates mass germination of this fast growing species, this could increase fire frequency.\nThe flammability of this species is not reported and therefore its affect on fire intensity can’t be speculated.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "hab_high": {
+        "question": "10. Impact on composition \n(a) high value EVC",
+        "comments": "EVC= Wet Heathland (V); CMA= Glenelg Hopkins; Bioreg= Greater Grampians; VH CLIMATE potential.\nP. pinnata is a small tree species, which can form dense thickets, shading out species of the lower strata, crowd out shrub species and impede the regeneration of overstorey species (Muyt 2001; Weber 2003). It can also fix nitrogen which can change the soil fertility and affect indigenous species persistence in the long term (Muyt 2001). Therefore the species is capable of causing major displacement within layers.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "hab_med": {
+        "question": "(b) medium value EVC",
+        "comments": "EVC= Damp Heathland (D); CMA= Glenelg Hopkins; Bioreg= Glenelg Plain; VH CLIMATE potential.\nP. pinnata is a small tree species, which can form dense thickets, shading out species of the lower strata, crowd out shrub species and impede the regeneration of overstorey species (Muyt 2001; Weber 2003). It can also fix nitrogen which can change the soil fertility and affect indigenous species persistence in the long term (Muyt 2001). Therefore the species is capable of causing major displacement within layers.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "hab_low": {
+        "question": "(c) low value EVC",
+        "comments": "EVC= Wet Heathland (LC); CMA= Glenelg Hopkins; Bioreg= Glenelg Plain; VH CLIMATE potential.\nP. pinnata is a small tree species, which can form dense thickets, shading out species of the lower strata, crowd out shrub species and impede the regeneration of overstorey species (Muyt 2001; Weber 2003). It can also fix nitrogen which can change the soil fertility and affect indigenous species persistence in the long term (Muyt 2001). Therefore the species is capable of causing major displacement within layers.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "hab_structure": {
+        "question": "11. Impact on structure?",
+        "comments": "P. pinnata is a small tree species, which can form dense thickets, shading out species of the lower strata, crowd out shrub species and impede the regeneration of overstorey species (Muyt 2001; Weber 2003). It can also fix nitrogen which can change the soil fertility and affect indigenous species persistence in the long term (Muyt 2001). Therefore the species has potential to have a major impact on the middle to lower strata through direct competition and a minor impact through impeding regeneration and alteration of soil chemistry.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "hab_flora": {
+        "question": "12. Effect on threatened flora?",
+        "comments": "Listed as threatening competitor to Villarsia calthifolia a rare species in Western Australia (Gilfillan & Barrett 2004). There is no data reported however of this species impacting a species threatened in Victoria.",
+        "rating": "MH",
+        "confidence": "L"
+      },
+      "fauna_threatened": {
+        "question": "14. Effect on non-threatened fauna?",
+        "comments": "Is managed as a threat to the Southern Emu-wren Stipiturus malachurus (Maguire & Mulder 2004).",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "fauna_no_benefit": {
+        "question": "15. Benefits fauna?",
+        "comments": "Observed as a food source of the New Holland Honeyeater Phylidonyris novaehollandiae (Lepschi 1997). Is reported to be used by the Southern Emu-wren Stipiturus malachurus (Maguire 2005).",
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "fauna_injurious": {
+        "question": "16. Injurious to fauna?",
+        "comments": "There is no evidence of this occurring.",
+        "rating": "L",
+        "confidence": "M"
+      },
+      "pest_food": {
+        "question": "17. Food source to pests?",
+        "comments": "Introduced as a nectar source for bees (Blood 2001).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "pest_harbor": {
+        "question": "18. Provides harbor?",
+        "comments": "Reported to forms thickets (Weber 2003). There is potential therefore for the species to harbour species such as rabbits and foxes. There is no evidence of this occurring however.",
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "ag_yield": {
+        "question": "19. Impact yield?",
+        "comments": "Reported to be becoming a problem in forestry (Blood 2001). The species impact is unknown however.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_quality": {
+        "question": "20. Impact quality?",
+        "comments": "Reported to be becoming a problem in forestry (Blood 2001). The species impact is unknown however.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_land_value": {
+        "question": "21. Affect land value?",
+        "comments": "Reported to be becoming a problem in forestry (Blood 2001). The species impact is unknown however.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_land_use": {
+        "question": "22. Change land use?",
+        "comments": "Reported to be becoming a problem in forestry (Blood 2001). The species impact is unknown however.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_harvest_costs": {
+        "question": "23. Increase harvest costs?",
+        "comments": "Reported to be becoming a problem in forestry (Blood 2001). The species impact is unknown however.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_disease": {
+        "question": "24. Disease host/vector?",
+        "comments": "Phakopsora pachyrhizae has been identified on the plant and other Phakopsora species are reported to infect a range of legume species (Mennicken & Oberwinkler 2004). Therefore this species my be an alternate host for rusts that effect legume crops, at this stage however there is no direct evidence.",
+        "rating": "M",
+        "confidence": "L"
+      }
+    }
+  },
+  "Burr ragweed": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "Germinates in autumn (Parsons & Cuthbertson 2001). Requires natural seasonal conditions.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "Prefers dryplains of temperate regions and is a weed of wastelands (Parsons & Cuthbertson 2001). Limited growth in shade.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "Occurs in ‘run-down pastures, orchards, roadsides, wastelands and other disturbed areas’ (Parsons & Cuthbertson 2001). Established in highly disturbed natural ecosystems.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Perennial herbaceous plants (Parsons & Cuthbertson 2001). Life form – other.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "A. confertiflora not documented to have allelopathic properties (Parsons & Cuthbertson).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "A. confertiflora not known to be eaten by animals and insects",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "Seedlings grow at moderate rate during winter with growth rate increasing in spring (Parsons & Cuthbertson 2001). No indication that plant growth rate would equal competitive species of same life form. Therefore score as medium.",
+        "rating": "M",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "‘When dry periods occur in summer, aerial growth dies back and redevelops from the perennial roots in autumn’ Drought tolerant. Can be found in flood plains but no mention of ability to withstand waterlogging (Parsons & Cuthbertson 2001). Due to locations found, assume weed has some tolerance to salinity.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "Reproduces sexually and vegetatively (Parsons & Cuthbertson 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "“All types (of ragweed) are prolific seeders … average about 3,000 seeds per year’ (Parsons & Cuthbertson 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "Annual ragweed propagule longevity is up to 40 years (Schmoll, Reigner & Harrison 2004). In contrast, giant ragweed is only viable for 6 weeks (Parsons & Cuthbertson 2001). No information on A. confertiflora. Due to variation within genus, scored as medium.",
+        "rating": "M",
+        "confidence": "H"
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "Not specified. Form large colonies and plants known to live up to 10 years (Parsons & Cuthbertson 2001).  Therefore score as medium high.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "A. confertiflora reaches maturity in approximately 9 months (Parsons & Cuthbertson 2001).",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Known to be dispersed by clinging to sheep, furred animals, bags, clothing, water, contaminated gravel and soil (Parsons & Cuthbertson 2001).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "Spreads ‘readily over long distances’. Hull provides buoyancy (Parsons & Cuthbertson 2001). Assume likely that some of the propagules will disperse greater than 1 km.",
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "impact": {
+      "social_access": {
+        "question": "1. Restrict human access?",
+        "comments": "Grows from 75 to 200 cm. The burrs associated with burr ragweed and dermatogenic properties have the potential to impede individual access (Parsons & Cuthbertson 2001).",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "social_tourism": {
+        "question": "2. Reduce tourism?",
+        "comments": "Most species are ‘so ordinary in appearance that they are rarely noticed despite their abundance’. All species are noted for their allergens and are a major contributor to hay fever in US, with some places advertising as ‘ragweed free’ (Parsons & Cuthbertson 2001). Potential to have major impact on tourism in autumn months when pollen counts is high.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "social_injurious": {
+        "question": "3. Injurious to people?",
+        "comments": "‘Most important hay-fever producing plant in North America’. Also associated with asthma and dermatogenic properties. Burr ragweed ‘burrs’ cause discomfort throughout the year with three species having a high pollen count from late summer through to autumn being a major component in hayfever and asthma (Parsons & Cuthbertson 2001).",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "social_cultural": {
+        "question": "4. Damage to cultural sites?",
+        "comments": "Not known to cause structural damage. Little or negligible effect on aesthetics.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_flow": {
+        "question": "5. Impact flow?",
+        "comments": "Terrestrial species (Parsons & Cuthbertson 2001).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_water": {
+        "question": "6. Impact water quality?",
+        "comments": "Terrestrial species (Parsons & Cuthbertson 2001).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_erosion": {
+        "question": "7. Increase soil erosion?",
+        "comments": "In dry periods over summer and in autumn, aerial growth dies back. Plants have ‘creeping runner-like roots’ and form large colonies (Parsons & Cuthbertson 2001). Unlikely that the species would contribute to large-scale soil erosion.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_biomass": {
+        "question": "8. Reduce biomass?",
+        "comments": "Plant grows up to 200 cm and forms large colonies. Often occurs in wasteland where little vegetation exists (Parsons & Cuthbertson 2001). Likely that biomass would slightly increase.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_fire": {
+        "question": "9. Change fire regime?",
+        "comments": "Herbaceous plant (Parsons & Cuthbertson 2001) so assume that it would have small or negligible effect on fire risk.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "hab_high": {
+        "question": "10. Impact on composition \n(a) high value EVC",
+        "comments": "EVC=Plains Grassy Woodland (E), CMA=Wimmera, Bioreg.=Wimmera, CLIMATE=VH. \nWeed doesn’t occur in healthy, well-established ecosystems. Occurs mostly in open, disturbed areas where less than 3 strata are present (Parsons & Cuthbertson 2001). Very little displacement of any indigenous species.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "hab_med": {
+        "question": "(b) medium value EVC",
+        "comments": "EVC=Hills Herb-rich Woodland (D), CMA=NorthCentral, Bioreg=Goldfields, CLIMATE=VH. \nWeed doesn’t occur in healthy, well-established ecosystems. Occurs mostly in open, disturbed areas where less than 3 strata are present (Parsons & Cuthbertson 2001). Very little displacement of any indigenous species.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "hab_low": {
+        "question": "(c) low value EVC",
+        "comments": "EVC=Coastal Tussock Grassland (LC), CMA=West Gippsland, Bioreg.=Gippsland Plain, CLIMATE=L. \nWeed doesn’t occur in healthy, well-established ecosystems. Occurs mostly in open, disturbed areas where less than 3 strata\nare present (Parsons & Cuthbertson 2001). Very little displacement of any indigenous species.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "hab_structure": {
+        "question": "11. Impact on structure?",
+        "comments": "Weed doesn’t occur in healthy, well-established ecosystems. Occurs mostly in open, disturbed areas where less than 3 strata are present (Parsons & Cuthbertson 2001). Usually only affecting one of the strata.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "hab_flora": {
+        "question": "12. Effect on threatened flora?",
+        "comments": "No information available.",
+        "rating": "MH",
+        "confidence": "L"
+      },
+      "fauna_threatened": {
+        "question": "14. Effect on non-threatened fauna?",
+        "comments": "Tends to grow in ruderal sites so assume that there is no reduction in habitat/food/shelter for non threatened fauna spp. (Parsons & Cuthbertson 2001).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "fauna_no_benefit": {
+        "question": "15. Benefits fauna?",
+        "comments": "No documented evidence that A. confertiflora benefits fauna.",
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "fauna_injurious": {
+        "question": "16. Injurious to fauna?",
+        "comments": "Hooked spines and burrs attach to sheep and furred animals but no documented impact on health or well being of animals (Parsons & Cuthbertson 2001).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "pest_food": {
+        "question": "17. Food source to pests?",
+        "comments": "No documented evidence that A. confertiflora is a food source to pests (Parsons & Cuthbertson 2001).",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "pest_harbor": {
+        "question": "18. Provides harbor?",
+        "comments": "No documented evidence that A. confertiflora provides harbour for pest spp.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "ag_yield": {
+        "question": "19. Impact yield?",
+        "comments": "‘Is an extremely competitive plant, readily suppressing pasture species…also a problem in orchards, competing for nutrients’ (Parsons & Cuthbertson 2001). Minor impact on quantity of produce.",
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "ag_quality": {
+        "question": "20. Impact quality?",
+        "comments": "Burr ragweed contaminates wool with hooked spines (Parsons & Cuthbertson 2001). Likely that would have greater than 5% impact on quality of produce.",
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "ag_land_value": {
+        "question": "21. Affect land value?",
+        "comments": "No information on whether or not the weed affects land value. Numerous studies on effect of annual ragweed and giant ragweed on cropping systems but no references made to burr ragweed and land values. Score medium.",
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_land_use": {
+        "question": "22. Change land use?",
+        "comments": "Weed can be controlled by herbicides in pasture (Parsons & Cuthbertson 2001). Assume little or no change in priority of land use.",
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "ag_harvest_costs": {
+        "question": "23. Increase harvest costs?",
+        "comments": "‘..a problem in orchards, competing for nutrients, interfering with the harvest, and both pollen and burrs cause discomfort to pickers’ (Parsons & Cuthbertson 2001). Hooked spines difficult to remove from wool so added costs in acid carbonate used for removal (Parsons & Cuthbertson 2001). Increase in time, labour and cost.",
+        "rating": "M",
+        "confidence": "MH"
+      },
+      "ag_disease": {
+        "question": "24. Disease host/vector?",
+        "comments": "None evident",
+        "rating": "L",
+        "confidence": "MH"
+      }
+    }
+  },
+  "Buffalo burr": {
+    "invasiveness": {
+      "inv_germination": {
+        "question": "Germination requirements?",
+        "comments": "Seeds germinate in autumn.",
+        "rating": "MH",
+        "confidence": ""
+      },
+      "inv_establishment": {
+        "question": "Establishment requirements?",
+        "comments": "Establishes in mostly ‘open’ situations e.g. pasture, fields.",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "inv_disturbance": {
+        "question": "How much disturbance is required?",
+        "comments": "Establishes in vigorously growing crops (e.g. cotton) and pastures.",
+        "rating": "MH",
+        "confidence": ""
+      },
+      "inv_life_form": {
+        "question": "Life form?",
+        "comments": "Annual herb.\n\nOther.",
+        "rating": "L",
+        "confidence": ""
+      },
+      "inv_allelopathic": {
+        "question": "Allelopathic properties?",
+        "comments": "Minor allelopathic effects on itself and tomato plants have been shown.",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "inv_herb_pressure": {
+        "question": "Tolerates herb pressure?",
+        "comments": "The plant’s prickly nature deters grazing animals.",
+        "rating": "MH",
+        "confidence": ""
+      },
+      "inv_growth_rate": {
+        "question": "Normal growth rate?",
+        "comments": "“Is a strong competitor in cotton crops in parts of the United States”.",
+        "rating": "MH",
+        "confidence": ""
+      },
+      "inv_stress_tolerance": {
+        "question": "Stress tolerance to frost, drought, w/logg, sal. etc?",
+        "comments": "Tolerance to water logging (occurs on shores), drought (occurs in arid areas).",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "inv_repro_system": {
+        "question": "Reproductive system",
+        "comments": "Reproducing by seed.\n\nHas capacity for both self and cross pollination.",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "inv_propagules_count": {
+        "question": "Number of propagules produced?",
+        "comments": "Established based on pictures and descriptions.\n\n 20 berries per plant x 85 seeds per berry = 1,700 seeds per plant.",
+        "rating": "MH",
+        "confidence": ""
+      },
+      "inv_propagule_longevity": {
+        "question": "Propagule longevity?",
+        "comments": "?",
+        "rating": "M",
+        "confidence": ""
+      },
+      "inv_repro_period": {
+        "question": "Reproductive period?",
+        "comments": "Annual.",
+        "rating": "L",
+        "confidence": ""
+      },
+      "inv_maturity_time": {
+        "question": "Time to reproductive maturity?",
+        "comments": "Annual  < one year.",
+        "rating": "H",
+        "confidence": ""
+      },
+      "inv_mechanisms_count": {
+        "question": "Number of mechanisms?",
+        "comments": "Containment of cereal grain: burr also sticks to wool and bags, and can float on water.  Can also be blown about.",
+        "rating": "MH",
+        "confidence": ""
+      },
+      "inv_dispersal_distance": {
+        "question": "How far do they disperse?",
+        "comments": "Above mechanisms would transport burrs between at least 20-200 m or even > 200 m. burr also stated to float ‘some’ distance on water.",
+        "rating": "ML",
+        "confidence": ""
+      }
+    },
+    "impact": {
+      "social_access": {
+        "question": "1. Restrict human access?",
+        "comments": "“An erect annual herb, commonly 20 to 30 cm high.” Information on population density not available, and it is not recorded as being aggressive or invasive in natural ecosystems. From images available, which demonstrate the plant’s growth habit, it would be a minor nuisance to humans. Its spiny nature would ensure walkers avoid contact with the plant.",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "social_tourism": {
+        "question": "2. Reduce tourism?",
+        "comments": "The spiny stems and fruit of the plant would make its presence felt. Recreational uses may be affected because infested areas cannot be used.",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "social_injurious": {
+        "question": "3. Injurious to people?",
+        "comments": "It grows through winter and survives well into summer before dying. Dead material continues to present a hazard because of spines. “Buffalo burr is poisonous and, overseas, there have been fatalities in children after eating the fruit.” (One source has described the plant thus: “Nasty, nasty, nasty. This plant is not one to be handled or even stepped on. The spines are very dense, stiff, and sharp. The plant is just brutal.”)",
+        "rating": "H",
+        "confidence": ""
+      },
+      "social_cultural": {
+        "question": "4. Damage to cultural sites?",
+        "comments": "Limited spread of plant. Likely to present a moderate negative visual effect. No effect on structure.",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "env_flow": {
+        "question": "5. Impact flow?",
+        "comments": "Terrestrial species.",
+        "rating": "L",
+        "confidence": ""
+      },
+      "env_water": {
+        "question": "6. Impact water quality?",
+        "comments": "Terrestrial species.",
+        "rating": "L",
+        "confidence": ""
+      },
+      "env_erosion": {
+        "question": "7. Increase soil erosion?",
+        "comments": "In the western United States it commonly occurs on disturbed sites and sandy soils. Its presence would not increase soil erosion. In Victoria, S. rostratum is more commonly a problem in the wheat-growing areas.",
+        "rating": "L",
+        "confidence": ""
+      },
+      "env_biomass": {
+        "question": "8. Reduce biomass?",
+        "comments": "Its growth habit and common habitat (waste areas, overgrazed pastures and roadsides) suggest that biomass would not be greatly affected. Invader replaces biomass.",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "env_fire": {
+        "question": "9. Change fire regime?",
+        "comments": "The dead plant presents a small amount of dry matter, and “mature plants break off at ground level and are blown about as ‘tumble weeds’.” Not likely to change the fire regime.",
+        "rating": "L",
+        "confidence": ""
+      },
+      "hab_high": {
+        "question": "10. Impact on composition \n(a) high value EVC",
+        "comments": "EVC=Plains grassy woodland (E); CMA=Wimmera; Bioreg=Wimmera; Very high CLIMATE match. \nMainly a weed of cropping. “…it is generally confined to the wheatbelt. It is somewhat weedy on neglected sites and pastures.” In natural ecosystem minor displace species within a strata.",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "hab_med": {
+        "question": "(b) medium value EVC",
+        "comments": "EVC=Heathy Woodland (D); CMA=Corangamite; Bioreg=Central Victorian Uplands; High potential CLIMATE match only; little displacement of any indigenous species.",
+        "rating": "L",
+        "confidence": ""
+      },
+      "hab_low": {
+        "question": "(c) low value EVC",
+        "comments": "EVC=Heathy woodland (LC); CMA=Glenelg Hopkins; Bioreg=Glenelg Plain; Very high CLIMATE match. \nMainly a weed of cropping. “…it is generally confined to the wheatbelt. It is somewhat weedy on neglected sites and pastures.” In natural ecosystem minor displace species within a strata.",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "hab_structure": {
+        "question": "11. Impact on structure?",
+        "comments": "Its effect on other species is not recorded. As a low growing annual it may not have a serious impact on structure. In its native region (midwest USA) it is regarded as highly aggressive and invasive, but beyond this range it seems less so. Possibly a minor effect on the floral strata.",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "hab_flora": {
+        "question": "12. Effect on threatened flora?",
+        "comments": "Direct threat to native orchid Pterostylis truncata (brittle greenhood) in the You Yang ranges.\n\nThreatens ANZECC rated rare or threatened native plant species",
+        "rating": "H",
+        "confidence": ""
+      },
+      "fauna_threatened": {
+        "question": "14. Effect on non-threatened fauna?",
+        "comments": "Not known to invade natural ecosystems. However, its spiny nature and toxic fruit may have a minor impact on non-threatened fauna.",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "fauna_no_benefit": {
+        "question": "15. Benefits fauna?",
+        "comments": "No known benefits.",
+        "rating": "H",
+        "confidence": ""
+      },
+      "fauna_injurious": {
+        "question": "16. Injurious to fauna?",
+        "comments": "“The plant causes physical injury to stock, particularly around the mouth and nose, and these areas become infected.” Potential to harm fauna.",
+        "rating": "H",
+        "confidence": ""
+      },
+      "pest_food": {
+        "question": "17. Food source to pests?",
+        "comments": "None documented.",
+        "rating": "L",
+        "confidence": ""
+      },
+      "pest_harbor": {
+        "question": "18. Provides harbor?",
+        "comments": "A low growing annual. It would not provide harbor.",
+        "rating": "L",
+        "confidence": ""
+      },
+      "ag_yield": {
+        "question": "19. Impact yield?",
+        "comments": "Where it occurs in pastures it may reduce available fodder as the plant’s prickly nature deters animals from grazing.",
+        "rating": "MH",
+        "confidence": ""
+      },
+      "ag_quality": {
+        "question": "20. Impact quality?",
+        "comments": "S. rostratum became a problem in wheat growing areas in Victoria. Its seeds contaminate cereal crops. “Changed farming methods have reduced its significance… it is no longer considered an important weed.” The burrs stick to wool, and contribute to vegetable fault in a wool clip.",
+        "rating": "ML",
+        "confidence": ""
+      },
+      "ag_land_value": {
+        "question": "21. Affect land value?",
+        "comments": "Occurs in overgrazed pasture and cropping situations. Cultivation prior to flowering effectively controls the weed, and it is not known as an aggressive weed in Victoria. Likely to have little affect on land value.",
+        "rating": "L",
+        "confidence": ""
+      },
+      "ag_land_use": {
+        "question": "22. Change land use?",
+        "comments": "Occurs in overgrazed pasture and cropping situations. Cultivation prior to flowering effectively controls the weed, and it is not known as an aggressive weed in Victoria. Population density not known. Change in land use unlikely.",
+        "rating": "L",
+        "confidence": ""
+      },
+      "ag_harvest_costs": {
+        "question": "23. Increase harvest costs?",
+        "comments": "No evidence",
+        "rating": "L",
+        "confidence": ""
+      },
+      "ag_disease": {
+        "question": "24. Disease host/vector?",
+        "comments": "“The weed acts a host for nematodes which affect tomatoes and tobacco in North America.” Potential problem for Victorian agriculture.",
+        "rating": "H",
+        "confidence": ""
+      }
+    }
+  }
+}

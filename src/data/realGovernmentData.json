@@ -1,0 +1,608 @@
+{
+  "Abrojo (chain link cactus)": {
+    "impact": {
+      "social_access": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "social_tourism": {
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "social_injurious": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "social_cultural": {
+        "rating": "ML",
+        "confidence": "L"
+      },
+      "env_flow": {
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_water": {
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_erosion": {
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_biomass": {
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "env_fire": {
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "hab_high": {
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "hab_med": {
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "hab_low": {
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "hab_structure": {
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "hab_flora": {
+        "rating": "MH",
+        "confidence": "L"
+      },
+      "fauna_threatened": {
+        "rating": "MH",
+        "confidence": "L"
+      },
+      "fauna_non_threatened": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "fauna_no_benefit": {
+        "rating": "H",
+        "confidence": "M"
+      },
+      "fauna_injurious": {
+        "rating": "H",
+        "confidence": "M"
+      },
+      "pest_food": {
+        "rating": "M",
+        "confidence": "M"
+      },
+      "pest_harbor": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_yield": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_quality": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_land_value": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_land_use": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "ag_harvest_costs": {
+        "rating": "M",
+        "confidence": "M"
+      },
+      "ag_disease": {
+        "rating": "M",
+        "confidence": "L"
+      }
+    },
+    "invasiveness": {
+      "inv_germination": {
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_establishment": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_allelopathic": {
+        "rating": "L",
+        "confidence": "M"
+      },
+      "inv_herb_pressure": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_growth_rate": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_repro_system": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_propagule_longevity": {
+        "rating": "L",
+        "confidence": "M"
+      },
+      "inv_repro_period": {
+        "rating": "H",
+        "confidence": "M"
+      },
+      "inv_maturity_time": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "rating": "MH",
+        "confidence": "M"
+      }
+    },
+    "notes": "Imported from database."
+  },
+  "Asparagus fern": {
+    "impact": {},
+    "invasiveness": {
+      "inv_germination": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_disturbance": {
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_life_form": {
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_allelopathic": {
+        "rating": "L",
+        "confidence": "L"
+      },
+      "inv_herb_pressure": {
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_growth_rate": {
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_stress_tolerance": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_propagules_count": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_propagule_longevity": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_repro_period": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_maturity_time": {
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_dispersal_distance": {
+        "rating": "ML",
+        "confidence": "MH"
+      }
+    },
+    "notes": "Imported from database."
+  },
+  "Athel pine": {
+    "impact": {},
+    "invasiveness": {
+      "inv_germination": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_disturbance": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "rating": "L",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "rating": "L",
+        "confidence": "L"
+      },
+      "inv_herb_pressure": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_growth_rate": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagule_longevity": {
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_repro_period": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_mechanisms_count": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "notes": "Imported from database."
+  },
+  "Bridal creeper": {
+    "impact": {
+      "social_access": {
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "social_tourism": {
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "social_injurious": {
+        "rating": "L",
+        "confidence": "M"
+      },
+      "social_cultural": {
+        "rating": "H",
+        "confidence": "ML"
+      },
+      "env_flow": {
+        "rating": "L",
+        "confidence": "L"
+      },
+      "env_water": {
+        "rating": "L",
+        "confidence": "L"
+      },
+      "env_erosion": {
+        "rating": "L",
+        "confidence": "L"
+      },
+      "env_biomass": {
+        "rating": "L",
+        "confidence": "L"
+      },
+      "env_fire": {
+        "rating": "ML",
+        "confidence": "ML"
+      },
+      "hab_high": {
+        "rating": "H",
+        "confidence": "M"
+      },
+      "hab_med": {
+        "rating": "H",
+        "confidence": "M"
+      },
+      "hab_low": {
+        "rating": "H",
+        "confidence": "M"
+      },
+      "hab_structure": {
+        "rating": "H",
+        "confidence": "M"
+      },
+      "hab_flora": {
+        "rating": "H",
+        "confidence": "L"
+      },
+      "fauna_threatened": {
+        "rating": "MH",
+        "confidence": "L"
+      },
+      "fauna_non_threatened": {
+        "rating": "MH",
+        "confidence": "L"
+      },
+      "fauna_no_benefit": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "fauna_injurious": {
+        "rating": "L",
+        "confidence": "M"
+      },
+      "pest_food": {
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "pest_harbor": {
+        "rating": "L",
+        "confidence": "L"
+      },
+      "ag_yield": {
+        "rating": "M",
+        "confidence": "M"
+      },
+      "ag_quality": {
+        "rating": "M",
+        "confidence": "M"
+      },
+      "ag_land_value": {
+        "rating": "M",
+        "confidence": "M"
+      },
+      "ag_land_use": {
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "ag_harvest_costs": {
+        "rating": "M",
+        "confidence": "M"
+      },
+      "ag_disease": {
+        "rating": "H",
+        "confidence": "M"
+      }
+    },
+    "invasiveness": {
+      "inv_germination": {
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_establishment": {
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_disturbance": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_herb_pressure": {
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_growth_rate": {
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_stress_tolerance": {
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_repro_system": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagule_longevity": {
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_repro_period": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_maturity_time": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "notes": "Imported from database."
+  },
+  "Broadleaf privet": {
+    "impact": {},
+    "invasiveness": {
+      "inv_germination": {
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_establishment": {
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_disturbance": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_allelopathic": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_herb_pressure": {
+        "rating": "MH",
+        "confidence": "H"
+      },
+      "inv_growth_rate": {
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_stress_tolerance": {
+        "rating": "M",
+        "confidence": "MH"
+      },
+      "inv_repro_system": {
+        "rating": "ML",
+        "confidence": "H"
+      },
+      "inv_propagules_count": {
+        "rating": "H",
+        "confidence": "H"
+      },
+      "inv_propagule_longevity": {
+        "rating": "L",
+        "confidence": "H"
+      },
+      "inv_repro_period": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "rating": "H",
+        "confidence": "H"
+      }
+    },
+    "notes": "Imported from database."
+  },
+  "Freesia": {
+    "impact": {},
+    "invasiveness": {
+      "inv_germination": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_establishment": {
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_disturbance": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_life_form": {
+        "rating": "ML",
+        "confidence": "MH"
+      },
+      "inv_allelopathic": {
+        "rating": "L",
+        "confidence": "M"
+      },
+      "inv_herb_pressure": {
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_growth_rate": {
+        "rating": "H",
+        "confidence": "M"
+      },
+      "inv_stress_tolerance": {
+        "rating": "MH",
+        "confidence": "M"
+      },
+      "inv_repro_system": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_propagules_count": {
+        "rating": "ML",
+        "confidence": "M"
+      },
+      "inv_propagule_longevity": {
+        "rating": "M",
+        "confidence": "L"
+      },
+      "inv_repro_period": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_maturity_time": {
+        "rating": "H",
+        "confidence": "MH"
+      },
+      "inv_mechanisms_count": {
+        "rating": "MH",
+        "confidence": "MH"
+      },
+      "inv_dispersal_distance": {
+        "rating": "H",
+        "confidence": "MH"
+      }
+    },
+    "notes": "Imported from database."
+  }
+}

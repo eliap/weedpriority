@@ -1,0 +1,103 @@
+{
+  "Asparagus fern": {
+    "scientificName": "Asparagus aethiopicus",
+    "commonNames": ["Asparagus Fern", "Ground Asparagus", "Basket Fern", "Sprengi's Fern", "Bushy Asparagus", "Emerald Asparagus"],
+    "profileUrl": "https://weeds.org.au/weeds-profiles/asparagus-fern/",
+    "quickFacts": [
+      "Originally from South Africa, Asparagus Fern (Asparagus aethiopicus), a Weed of National Significance, is a perennial evergreen herb that has become a serious environmental weed in temperate to tropical climates, especially in coastal or damp areas.",
+      "It is a common garden plant which easily re-establishes after being dumped as garden waste and is commonly spread by birds who eat the fruits dispersing viable seeds in droppings up to several kilometres away from the parent plant.",
+      "Forms dense impenetrable thickets that smothers other plants, excluding desirable species, also impacting native animals.",
+      "Produces a profusion of below ground rhizomes and tubers which suppresses other ground flora and reduces available soil moisture and nutrients.",
+      "The extensive root system and prolific seed production makes control difficult requiring very long-term commitment over decades, with repeated control action and monitoring requiring an integrated management strategy.",
+      "Control options include chemical with a variety of application options; non-chemical including mechanical, hand pulling, and crowning (removing underground rhizome to kill plant), with long term follow-up critical.",
+      "All control programs should aim to reduce the amount of seed produced, with prevention the most cost-effective form of weed control."
+    ],
+    "flowerColour": "White, to creamy-white, to pale pink",
+    "growthForm": "Herb",
+    "origin": "South Africa"
+  },
+  "Bridal creeper": {
+    "scientificName": "Asparagus asparagoides",
+    "commonNames": ["Bridal Creeper", "Bridal Veil Creeper", "Smilax", "Florist's Smilax", "Smilax Asparagus"],
+    "profileUrl": "https://weeds.org.au/weeds-profiles/bridal-creeper/",
+    "quickFacts": [
+      "Originally from Africa, Bridal Creeper (Asparagus asparagoides), a Weed of National Significance, is a long lived highly invasive scrambling herb / vine that is an environmental weed, destroying large areas of native vegetation in southern Australia.",
+      "It is easily spread by birds who eat the fruits dispersing viable seeds in droppings up to several kilometres away from the parent plant.",
+      "Forms dense impenetrable thickets smothers other plants, producing a profusion of below ground rhizomes and tubers which suppresses other ground flora and reduces available soil moisture and nutrients, excluding desirable species, also impacting native animals.",
+      "The extensive root system and prolific seed production makes control difficult with herbicides and manual removal the most effective methods but they are costly and labour intensive and not feasible in many areas.",
+      "Manual removal should remove all underground rhizome that are capable of producing new plants.",
+      "Requires very long-term commitment over decades, with repeated control action and monitoring requiring an integrated management strategy.",
+      "All control programs should aim to reduce the amount of seed produced, with prevention the most cost-effective form of weed control.",
+      "Biological control is regarded as a preferred management option for many infestations of Bridal Creeper."
+    ],
+    "flowerColour": "White to greenish",
+    "growthForm": "Herb/Vine",
+    "origin": "Africa"
+  },
+  "Athel pine": {
+    "scientificName": "Tamarix aphylla",
+    "commonNames": ["Athel Pine", "Athel Tree", "Tamarisk", "Athel Tamarisk", "Desert Tamarisk", "Flowering Cypress", "Salt Cedar"],
+    "profileUrl": "https://weeds.org.au/weeds-profiles/athel-pine/",
+    "quickFacts": [
+      "Originally from North Africa, Arabian peninsula and India, Athel Pine (Tamarix aphylla), a Weed of National Significance, is a fast growing tree with serious impacts along waterways in arid and semi arid Australia.",
+      "Readily established on saline and alkaline soils, spread by seed, and broken stem material that is moved by flood water. All new plants become reproductive at three years of age.",
+      "Established plants also spread vegetatively as roots develop and plants sucker from fallen and buried limbs and stems.",
+      "The movement of soil by earth-moving machinery containing fresh seed and root fragments is another means of spread. Good weed hygiene avoids further spread.",
+      "Control requires a strategic program integrating a range of techniques including manual removal and chemical applications.",
+      "It is a threat to the pastoral and tourism industry and the riparian biodiversity of central Australia."
+    ],
+    "flowerColour": "White or pale pink",
+    "growthForm": "Tree",
+    "origin": "North Africa, Arabian Peninsula, India"
+  },
+  "Abrojo (chain link cactus)": {
+    "scientificName": "Cylindropuntia imbricata",
+    "commonNames": ["Abrojo", "Chain Link Cactus", "Devil's Rope Pear", "Tiger Pear", "Devil's Rope Cactus", "Rope Pear"],
+    "profileUrl": "https://weeds.org.au/weeds-profiles/prickly-pears/",
+    "quickFacts": [
+      "Originally from the Americas, Prickly Pears (Opuntia species), Weeds of National Significance, are succulent drought tolerant shrubs or small trees with cylindrical or flattened stems armed with spines that impact the environment, agriculture and the economy across Australia especially in arid to semi-arid areas.",
+      "Armed with sharp large spines and detachable small glochids (bristle-like or hair-like spines with reverse barbs), both can penetrate skin causing irritation and occasionally lead to infection of wounds.",
+      "They form dense impenetrable patches that can cause injury to wild animals and livestock, and harbour pest species and reduce land productivity.",
+      "All are spread vegetatively with many species also spread by seed, invading most habitats if allowed to establish.",
+      "Physical removal of plants appears to be the most effective control method, but spines and glochids, asexual reproduction from stem segments, and long distance dispersal of seeds by animals makes controlling populations difficult.",
+      "Biological control agents are useful for controlling some species but not others, and their effects are limited in cooler climates."
+    ],
+    "flowerColour": "Yellow, orange, red to purple",
+    "growthForm": "Shrub/Tree (succulent)",
+    "origin": "Americas"
+  },
+  "Broadleaf privet": {
+    "scientificName": "Ligustrum lucidum",
+    "commonNames": ["Broadleaf Privet", "Broad-leaved Privet", "Tree Privet", "Large Leaf Privet", "Glossy Privet", "Wax Leaf Privet"],
+    "profileUrl": null,
+    "quickFacts": [
+      "Originally from China, Broadleaf Privet (Ligustrum lucidum) is a fast-growing evergreen shrub or tree that can grow 4-12 metres tall, becoming a significant environmental weed in eastern Australia.",
+      "It has glossy dark green leaves and produces clusters of fragrant white flowers, followed by masses of bluish-black fruit during winter. These fruits are poisonous to people.",
+      "Seeds are primarily dispersed by fruit-eating birds and other animals, but can also spread via water and dumped garden waste.",
+      "Forms dense thickets that outcompete native plants and alter habitats for native animals, particularly invading rainforests, gullies and waterways in NSW and Queensland.",
+      "Can reduce yields in orchards, pastures and plantations, restrict access to waterways, and cause skin irritation and respiratory issues in people.",
+      "Seedlings can tolerate dense shade, while mature plants grow faster in full sunlight, thriving in warm humid areas with adequate rainfall on fertile soils."
+    ],
+    "flowerColour": "White",
+    "growthForm": "Shrub/Tree",
+    "origin": "China",
+    "dataSource": "NSW Government / web search (not on weeds.org.au)"
+  },
+  "Freesia": {
+    "scientificName": "Freesia alba × leichtlinii",
+    "commonNames": ["Freesia", "Wild Freesia"],
+    "profileUrl": null,
+    "quickFacts": [
+      "Originally from South Africa, Freesia is a perennial bulbous herb that has become an environmental weed in parts of southern Australia, particularly in coastal areas of Victoria and South Australia.",
+      "Spreads readily via underground corms and by seed, forming dense colonies that displace native ground-cover species in bushland and grassland.",
+      "A common garden escapee that can persist and spread from dumped garden waste or from nearby gardens into adjacent bushland.",
+      "Competes with native wildflowers and ground-cover plants, particularly in grassy woodlands and coastal vegetation communities.",
+      "Control involves digging out corms, hand-pulling before seed-set, or targeted herbicide application, with follow-up essential as corms can persist in soil.",
+      "Listed as an environmental weed in Victoria where it invades native grasslands and grassy woodlands."
+    ],
+    "flowerColour": "White to yellow",
+    "growthForm": "Herb (bulbous)",
+    "origin": "South Africa",
+    "dataSource": "General botanical sources (not on weeds.org.au)"
+  }
+}

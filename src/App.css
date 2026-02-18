@@ -1,0 +1,5 @@
+/* App.css is largely replaced by Tailwind classes in JSX */
+.header-bg {
+  background-color: #f0fdf9;
+  /* teal-50 equivalent */
+}

@@ -21,6 +21,9 @@ export default function ValuesAssessment({ selectedValues, setSelectedValues }) 
                     Select the impact categories that are relevant to your site and community.
                     Unchecked items will be excluded from the final prioritization calculations.
                 </p>
+                <p className="text-slate-600 mb-4 italic font-medium">
+                    Read the following options as "does it matter to you if a weed is known to..."
+                </p>
             </div>
 
             <div className="space-y-8">

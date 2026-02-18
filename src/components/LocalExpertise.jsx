@@ -122,6 +122,67 @@ export default function LocalExpertise({ weeds, setWeeds }) {
                 </div>
             </form>
 
+            {/* Scoring Key Info Box */}
+            <div className="mb-8 bg-teal-50 border border-teal-100 rounded-lg p-5 text-sm text-slate-700">
+                <h3 className="font-bold text-teal-800 text-base mb-3 border-b border-teal-200 pb-2">Scoring Key</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 className="font-bold text-teal-700 mb-2">Extent Score (1 - 5)</h4>
+                        <ul className="space-y-3">
+                            <li className="flex gap-3">
+                                <span className="font-bold text-teal-600 min-w-[1.5rem]">5:</span>
+                                <span>Species not yet here but present nearby</span>
+                            </li>
+                            <li className="flex gap-3">
+                                <span className="font-bold text-teal-600 min-w-[1.5rem]">4:</span>
+                                <div>
+                                    <p className="font-medium">Species present as small populations that are:</p>
+                                    <ul className="list-disc ml-4 text-xs text-slate-600 my-1">
+                                        <li>Small new populations</li>
+                                        <li>Small outliers of larger populations, OR</li>
+                                        <li>Small populations remaining after existing control programs</li>
+                                    </ul>
+                                    <p className="font-medium text-teal-600">AND species is appearing to spread quickly</p>
+                                </div>
+                            </li>
+                            <li className="flex gap-3">
+                                <span className="font-bold text-teal-600 min-w-[1.5rem]">3:</span>
+                                <div>
+                                    <p className="font-medium">Species present as small populations that are:</p>
+                                    <ul className="list-disc ml-4 text-xs text-slate-600 my-1">
+                                        <li>Small new populations</li>
+                                        <li>Small outliers of larger populations, OR</li>
+                                        <li>Small populations remaining after existing control programs</li>
+                                    </ul>
+                                    <p className="font-medium text-teal-600">AND species is appearing to spread slowly</p>
+                                </div>
+                            </li>
+                            <li className="flex gap-3">
+                                <span className="font-bold text-teal-600 min-w-[1.5rem]">2:</span>
+                                <span>Species present in large populations that continue to expand (or would continue to expand if we ceased current control programs)</span>
+                            </li>
+                            <li className="flex gap-3">
+                                <span className="font-bold text-teal-600 min-w-[1.5rem]">1:</span>
+                                <span>Species present in large populations that are not expanding</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="font-bold text-teal-700 mb-2">Habitat Value Score (1 or 2)</h4>
+                        <ul className="space-y-3">
+                            <li className="flex gap-3">
+                                <span className="font-bold text-teal-600 min-w-[1.5rem]">1:</span>
+                                <span>Low value habitat (e.g. roadsides, degraded land)</span>
+                            </li>
+                            <li className="flex gap-3">
+                                <span className="font-bold text-teal-600 min-w-[1.5rem]">2:</span>
+                                <span>High value habitat (e.g. native bushland, waterways, threatened species habitat)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             {/* Weed List Table */}
             <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
                 <div className="overflow-x-auto">

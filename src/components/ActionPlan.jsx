@@ -156,8 +156,9 @@ export default function ActionPlan({ weeds, setWeeds, selectedValues }) {
             <div className="mb-8">
                 <h2 className="font-amatic text-4xl text-teal-800 font-bold mb-4">Step 5: Prioritised Weed List</h2>
                 <p className="text-slate-600 mb-4 max-w-3xl">
-                    Final scores for each weed are calculated from the five criteria below.
-                    You can adjust the weighting of each criterion. Higher score = higher priority.
+                    Final scores for each weed are calculated from the five criteria below. You can adjust the weighting of each criterion. Higher score = higher priority.
+                    You can also sort your weeds by a "weighted total", which scales each impact by the confidence level, or an "unweighted total" which ignores all confidence ratings.
+                    Any species which lacked ratings for impact or invasiveness are tagged with a 'gap' icon to remind you the priority list is based on incomplete information.
                 </p>
             </div>
 
@@ -342,12 +343,7 @@ export default function ActionPlan({ weeds, setWeeds, selectedValues }) {
                     >
                         📄 Export Full Report
                     </button>
-                    <button
-                        onClick={() => window.print()}
-                        className="px-8 py-3 bg-slate-800 text-white font-bold rounded-lg shadow-md hover:bg-slate-900 transition-all flex items-center gap-2"
-                    >
-                        🖨 Print Results
-                    </button>
+
                 </div>
             </div>
         </div>

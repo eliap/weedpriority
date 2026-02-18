@@ -158,16 +158,7 @@ export default function BrochureFlier({ weeds, selectedValues }) {
         const profile = weedProfiles[weed.name] || {};
         const weedPhotos = photos[weed.name] || [];
 
-        // Build a description from quick facts, allowing more text to fill space
-        const description = (profile.quickFacts || [])
-            .slice(0, 3)
-            .join(' ')
-            || 'Priority weed species identified for management in our region.';
 
-        // Shorter text since fonts are larger for print
-        const shortDesc = description.length > 180
-            ? description.substring(0, 180).replace(/\s+\S*$/, '') + '…'
-            : description;
 
         return (
             <div style={{
@@ -196,23 +187,23 @@ export default function BrochureFlier({ weeds, selectedValues }) {
                     )}
                 </div>
 
-                {/* Photo grid — 1 large + 2 smaller, much taller */}
+                {/* Photo grid — 1 large + 2 smaller, takes 2/3 of height */}
                 <div style={{
                     display: 'flex', gap: '2px', padding: '2px',
-                    background: TEAL_HEADER, flex: '0 0 auto'
+                    background: TEAL_HEADER, flex: 2, overflow: 'hidden'
                 }}>
                     {/* Main photo */}
-                    <div style={{ flex: '1 1 58%' }}>
+                    <div style={{ flex: '1 1 58%', position: 'relative' }}>
                         {weedPhotos[0] ? (
                             <img
                                 src={weedPhotos[0].url}
                                 alt={weed.name}
                                 crossOrigin="anonymous"
-                                style={{ width: '100%', height: '170px', objectFit: 'cover', display: 'block', borderRadius: '2px' }}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '2px' }}
                             />
                         ) : (
                             <div style={{
-                                width: '100%', height: '170px', background: '#334155',
+                                width: '100%', height: '100%', background: '#334155',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 color: '#64748b', fontSize: '13px', borderRadius: '2px'
                             }}>No photo</div>
@@ -221,21 +212,22 @@ export default function BrochureFlier({ weeds, selectedValues }) {
                     {/* Two stacked smaller photos */}
                     <div style={{ flex: '0 0 40%', display: 'flex', flexDirection: 'column', gap: '2px' }}>
                         {[1, 2].map(i => (
-                            weedPhotos[i] ? (
-                                <img
-                                    key={i}
-                                    src={weedPhotos[i].url}
-                                    alt={`${weed.name} ${i + 1}`}
-                                    crossOrigin="anonymous"
-                                    style={{ width: '100%', height: '84px', objectFit: 'cover', display: 'block', borderRadius: '2px' }}
-                                />
-                            ) : (
-                                <div key={i} style={{
-                                    width: '100%', height: '84px', background: '#475569',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    color: '#64748b', fontSize: '16px', borderRadius: '2px'
-                                }}>🌿</div>
-                            )
+                            <div key={i} style={{ flex: 1, position: 'relative' }}>
+                                {weedPhotos[i] ? (
+                                    <img
+                                        src={weedPhotos[i].url}
+                                        alt={`${weed.name} ${i + 1}`}
+                                        crossOrigin="anonymous"
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '2px', position: 'absolute', top: 0, left: 0 }}
+                                    />
+                                ) : (
+                                    <div style={{
+                                        width: '100%', height: '100%', background: '#475569',
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                        color: '#64748b', fontSize: '16px', borderRadius: '2px'
+                                    }}>🌿</div>
+                                )}
+                            </div>
                         ))}
                     </div>
                 </div>
@@ -248,22 +240,39 @@ export default function BrochureFlier({ weeds, selectedValues }) {
                     flexDirection: 'column',
                     justifyContent: 'space-between'
                 }}>
-                    <p style={{
-                        fontSize: '16px', color: '#334155', lineHeight: 1.45,
-                        margin: 0
-                    }}>
-                        {shortDesc}
-                    </p>
-                    {/* Key features line */}
+                    {/* Structured details grid */}
                     <div style={{
-                        marginTop: '4px', fontSize: '14px', color: '#0f766e',
-                        fontWeight: 700, lineHeight: 1.4
+                        display: 'grid',
+                        gridTemplateColumns: 'max-content 1fr',
+                        columnGap: '10px',
+                        rowGap: '2px',
+                        fontSize: '13px',
+                        lineHeight: '1.35',
+                        color: '#334155'
                     }}>
-                        {profile.origin && <span>Origin: {profile.origin}</span>}
-                        {profile.origin && profile.growthForm && <span> · </span>}
-                        {profile.growthForm && <span>Form: {profile.growthForm}</span>}
-                        {(profile.origin || profile.growthForm) && profile.flowerColour && <span> · </span>}
-                        {profile.flowerColour && <span>Flowers: {profile.flowerColour}</span>}
+                        {/* Row 1: Form */}
+                        <div style={{ fontWeight: 700, color: '#0f766e', textAlign: 'right' }}>Form:</div>
+                        <div>{profile.growthForm || '—'}</div>
+
+                        {/* Row 2: Size */}
+                        <div style={{ fontWeight: 700, color: '#0f766e', textAlign: 'right' }}>Size:</div>
+                        <div>{profile.size || '—'}</div>
+
+                        {/* Row 2: Origin */}
+                        <div style={{ fontWeight: 700, color: '#0f766e', textAlign: 'right' }}>Origin:</div>
+                        <div>{profile.origin || '—'}</div>
+
+                        {/* Row 3: Flowers */}
+                        <div style={{ fontWeight: 700, color: '#0f766e', textAlign: 'right' }}>Flowers:</div>
+                        <div>{profile.flowerColour || '—'}</div>
+
+                        {/* Row 4: Control */}
+                        <div style={{ fontWeight: 700, color: '#b91c1c', textAlign: 'right' }}>Control:</div>
+                        <div style={{ fontWeight: 500 }}>{profile.controlMethods || 'Contact Landcare'}</div>
+
+                        {/* Row 5: Season */}
+                        <div style={{ fontWeight: 700, color: '#b91c1c', textAlign: 'right' }}>Season:</div>
+                        <div style={{ fontWeight: 500 }}>{profile.bestControlSeason || '—'}</div>
                     </div>
                 </div>
             </div>

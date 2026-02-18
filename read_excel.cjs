@@ -1,21 +1,27 @@
 const XLSX = require('xlsx');
-
-// Read the workbook
-const wb = XLSX.readFile('../Weed prioritization worksheet_Jallukar 2024.xlsx');
+const wb = XLSX.readFile('../Weed prioritization worksheet_FINAL for sharing_unprotected.xlsx');
 
 const sheets = {};
-// Define sheets we are interested in based on user prompt
 const targetSheets = [
-    'FILL IN Group consensus values',
     'EXTENT AND HABITAT SCORE KEY'
 ];
 
 wb.SheetNames.forEach(sheetName => {
     if (targetSheets.includes(sheetName)) {
         const ws = wb.Sheets[sheetName];
-        // Convert to JSON (array of arrays for structure)
-        const jsonData = XLSX.utils.sheet_to_json(ws, { header: 1 });
-        sheets[sheetName] = jsonData; // Get ALL rows
+        console.log(`Sheet: ${sheetName}`);
+        console.log(ws['!ref']); // Log the range
+        // Get first few cells to see what's there
+        const range = XLSX.utils.decode_range(ws['!ref']);
+        for (let R = range.s.r; R <= Math.min(range.e.r, 20); ++R) {
+            const row = [];
+            for (let C = range.s.c; C <= range.e.c; ++C) {
+                const cell_address = { c: C, r: R };
+                const cell_ref = XLSX.utils.encode_cell(cell_address);
+                if (ws[cell_ref]) row.push(ws[cell_ref].v);
+            }
+            console.log(row);
+        }
     }
 });
 

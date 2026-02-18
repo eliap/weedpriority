@@ -1,7 +1,14 @@
 {
   "Asparagus fern": {
     "scientificName": "Asparagus aethiopicus",
-    "commonNames": ["Asparagus Fern", "Ground Asparagus", "Basket Fern", "Sprengi's Fern", "Bushy Asparagus", "Emerald Asparagus"],
+    "commonNames": [
+      "Asparagus Fern",
+      "Ground Asparagus",
+      "Basket Fern",
+      "Sprengi's Fern",
+      "Bushy Asparagus",
+      "Emerald Asparagus"
+    ],
     "profileUrl": "https://weeds.org.au/weeds-profiles/asparagus-fern/",
     "quickFacts": [
       "Originally from South Africa, Asparagus Fern (Asparagus aethiopicus), a Weed of National Significance, is a perennial evergreen herb that has become a serious environmental weed in temperate to tropical climates, especially in coastal or damp areas.",
@@ -14,11 +21,20 @@
     ],
     "flowerColour": "White, to creamy-white, to pale pink",
     "growthForm": "Herb",
-    "origin": "South Africa"
+    "size": "Stems to 60cm, Scrambling to 2m",
+    "origin": "South Africa",
+    "controlMethods": "Chemical, mechanical, crowning",
+    "bestControlSeason": "Spring to Summer"
   },
   "Bridal creeper": {
     "scientificName": "Asparagus asparagoides",
-    "commonNames": ["Bridal Creeper", "Bridal Veil Creeper", "Smilax", "Florist's Smilax", "Smilax Asparagus"],
+    "commonNames": [
+      "Bridal Creeper",
+      "Bridal Veil Creeper",
+      "Smilax",
+      "Florist's Smilax",
+      "Smilax Asparagus"
+    ],
     "profileUrl": "https://weeds.org.au/weeds-profiles/bridal-creeper/",
     "quickFacts": [
       "Originally from Africa, Bridal Creeper (Asparagus asparagoides), a Weed of National Significance, is a long lived highly invasive scrambling herb / vine that is an environmental weed, destroying large areas of native vegetation in southern Australia.",
@@ -32,11 +48,22 @@
     ],
     "flowerColour": "White to greenish",
     "growthForm": "Herb/Vine",
-    "origin": "Africa"
+    "size": "Climber/Scrambler to 3m",
+    "origin": "Africa",
+    "controlMethods": "Biological, herbicide, manual",
+    "bestControlSeason": "Late Winter to Early Spring"
   },
   "Athel pine": {
     "scientificName": "Tamarix aphylla",
-    "commonNames": ["Athel Pine", "Athel Tree", "Tamarisk", "Athel Tamarisk", "Desert Tamarisk", "Flowering Cypress", "Salt Cedar"],
+    "commonNames": [
+      "Athel Pine",
+      "Athel Tree",
+      "Tamarisk",
+      "Athel Tamarisk",
+      "Desert Tamarisk",
+      "Flowering Cypress",
+      "Salt Cedar"
+    ],
     "profileUrl": "https://weeds.org.au/weeds-profiles/athel-pine/",
     "quickFacts": [
       "Originally from North Africa, Arabian peninsula and India, Athel Pine (Tamarix aphylla), a Weed of National Significance, is a fast growing tree with serious impacts along waterways in arid and semi arid Australia.",
@@ -48,11 +75,21 @@
     ],
     "flowerColour": "White or pale pink",
     "growthForm": "Tree",
-    "origin": "North Africa, Arabian Peninsula, India"
+    "size": "Tree to 12m",
+    "origin": "North Africa, Arabian Peninsula, India",
+    "controlMethods": "Mechanical, chemical (basal bark)",
+    "bestControlSeason": "Autumn to Winter"
   },
   "Abrojo (chain link cactus)": {
     "scientificName": "Cylindropuntia imbricata",
-    "commonNames": ["Abrojo", "Chain Link Cactus", "Devil's Rope Pear", "Tiger Pear", "Devil's Rope Cactus", "Rope Pear"],
+    "commonNames": [
+      "Abrojo",
+      "Chain Link Cactus",
+      "Devil's Rope Pear",
+      "Tiger Pear",
+      "Devil's Rope Cactus",
+      "Rope Pear"
+    ],
     "profileUrl": "https://weeds.org.au/weeds-profiles/prickly-pears/",
     "quickFacts": [
       "Originally from the Americas, Prickly Pears (Opuntia species), Weeds of National Significance, are succulent drought tolerant shrubs or small trees with cylindrical or flattened stems armed with spines that impact the environment, agriculture and the economy across Australia especially in arid to semi-arid areas.",
@@ -64,11 +101,21 @@
     ],
     "flowerColour": "Yellow, orange, red to purple",
     "growthForm": "Shrub/Tree (succulent)",
-    "origin": "Americas"
+    "size": "Shrub to 3m",
+    "origin": "Americas",
+    "controlMethods": "Physical removal, biological (cochineal)",
+    "bestControlSeason": "Active growth period"
   },
   "Broadleaf privet": {
     "scientificName": "Ligustrum lucidum",
-    "commonNames": ["Broadleaf Privet", "Broad-leaved Privet", "Tree Privet", "Large Leaf Privet", "Glossy Privet", "Wax Leaf Privet"],
+    "commonNames": [
+      "Broadleaf Privet",
+      "Broad-leaved Privet",
+      "Tree Privet",
+      "Large Leaf Privet",
+      "Glossy Privet",
+      "Wax Leaf Privet"
+    ],
     "profileUrl": null,
     "quickFacts": [
       "Originally from China, Broadleaf Privet (Ligustrum lucidum) is a fast-growing evergreen shrub or tree that can grow 4-12 metres tall, becoming a significant environmental weed in eastern Australia.",
@@ -80,12 +127,18 @@
     ],
     "flowerColour": "White",
     "growthForm": "Shrub/Tree",
+    "size": "Tree to 12m",
     "origin": "China",
+    "controlMethods": "Cut-stump, Foliar spray, Hand pull",
+    "bestControlSeason": "Spring to Summer",
     "dataSource": "NSW Government / web search (not on weeds.org.au)"
   },
   "Freesia": {
     "scientificName": "Freesia alba × leichtlinii",
-    "commonNames": ["Freesia", "Wild Freesia"],
+    "commonNames": [
+      "Freesia",
+      "Wild Freesia"
+    ],
     "profileUrl": null,
     "quickFacts": [
       "Originally from South Africa, Freesia is a perennial bulbous herb that has become an environmental weed in parts of southern Australia, particularly in coastal areas of Victoria and South Australia.",
@@ -97,7 +150,10 @@
     ],
     "flowerColour": "White to yellow",
     "growthForm": "Herb (bulbous)",
+    "size": "To 40cm high",
     "origin": "South Africa",
+    "controlMethods": "Dig out corms, spot spray",
+    "bestControlSeason": "Late Winter to Spring",
     "dataSource": "General botanical sources (not on weeds.org.au)"
   }
 }

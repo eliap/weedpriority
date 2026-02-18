@@ -316,18 +316,45 @@ async function processAssessmentPage(weedId, type, url) {
 
 async function main() {
     await initDB();
-    const weeds = await parseMainPage();
 
-    // Process sequentially or with limited concurrency to be nice to the archive
-    // Archive.org can be slow/rate-limited.
-    for (const weed of weeds) {
-        await processWeedPage(weed);
-        // Small delay to be polite
-        await new Promise(r => setTimeout(r, 5000));
+    while (true) {
+        try {
+            console.log("Starting scraper loop...");
+            const weeds = await parseMainPage();
+
+            // Shuffle weeds slightly to avoid hammering same ones if constantly restarting? No, priority sort handles order.
+            // Just process normally.
+
+            if (!weeds || weeds.length === 0) {
+                console.log("No weeds found? Waiting 60s...");
+                await new Promise(r => setTimeout(r, 60000));
+                continue;
+            }
+
+            for (const weed of weeds) {
+                try {
+                    await processWeedPage(weed);
+                } catch (innerErr) {
+                    console.error(`Error processing ${weed.name}:`, innerErr);
+                    // Continue to next weed
+                }
+                // Small delay to be polite
+                await new Promise(r => setTimeout(r, 5000));
+            }
+
+            console.log("Finished all weeds. Waiting 1 hour before checking again...");
+            await new Promise(r => setTimeout(r, 3600000));
+
+        } catch (err) {
+            console.error("Main loop error:", err);
+            console.log("Restarting main loop in 60s...");
+            await new Promise(r => setTimeout(r, 60000));
+        }
     }
-
-    console.log("Done!");
-    db.close();
 }
 
-main().catch(err => console.error(err));
+main().catch(err => {
+    console.error("Fatal error:", err);
+    // Even if main crashes, try to restart it? No, process exits.
+    // The internal loop catches most things.
+});

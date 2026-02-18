@@ -180,9 +180,11 @@ export default function ScientificReview({ weeds, setWeeds, selectedValues }) {
             <div className="mb-8">
                 <h2 className="font-amatic text-4xl text-teal-800 font-bold mb-4">Step 3: Scientific Review</h2>
                 <p className="text-slate-600 mb-4 max-w-3xl">
-                    Review the detailed government breakdown for <strong>Impact</strong> and <strong>Invasiveness</strong> using the
-                    <strong> L (Low) to H (High)</strong> grading scale. You can also assign a confidence level to each rating.
-                    Items filtered out in Step 1 are hidden.
+                    Review the detailed government breakdown for Impact and Invasiveness using the L (Low) to H (High) grading scale.
+                    Remember, these are overall rankings that are meant to be relevent across the entire state.
+                    You can alter any of these ratings based on what you know about how the weed interacts with your local environment.
+                    You can also assign a confidence level to any new rating you set.
+                    If the statewide rankings column is blank, it means no such rankings exist for this species. You may still add your own.
                 </p>
             </div>
 
@@ -212,15 +214,15 @@ export default function ScientificReview({ weeds, setWeeds, selectedValues }) {
                                             <thead className="bg-white">
                                                 <tr>
                                                     <th className="px-4 py-2 text-left text-xs font-bold text-slate-500 uppercase w-1/3">Impact Criteria</th>
-                                                    <th className="px-4 py-2 text-center text-xs font-bold text-slate-500 uppercase bg-slate-100/50">Gov Rating / Conf</th>
-                                                    <th className="px-4 py-2 text-center text-xs font-bold text-teal-700 uppercase bg-teal-50/50">Local Rating</th>
-                                                    <th className="px-4 py-2 text-center text-xs font-bold text-teal-700 uppercase bg-teal-50/50">Local Conf</th>
-                                                    <th className="px-4 py-2 text-left text-xs font-bold text-slate-500 uppercase w-1/4">Reason (if diff)</th>
+                                                    <th className="px-4 py-2 text-center text-xs font-bold text-slate-500 uppercase bg-slate-100/50">State wide rating and confidence</th>
+                                                    <th className="px-4 py-2 text-center text-xs font-bold text-teal-700 uppercase bg-teal-50/50">Your updated rating</th>
+                                                    <th className="px-4 py-2 text-center text-xs font-bold text-teal-700 uppercase bg-teal-50/50">Your confidence</th>
+                                                    <th className="px-4 py-2 text-left text-xs font-bold text-slate-500 uppercase w-1/4">Reason for update</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
                                                 {valueCategories.map(cat =>
-                                                    cat.items.filter(item => selectedValues[item.id]).map(item => {
+                                                    cat.items.filter(item => Object.keys(selectedValues).length === 0 || selectedValues[item.id]).map(item => {
                                                         const govItem = govData.impact[item.id] || {};
                                                         const userItem = userReview.impact[item.id] || {};
                                                         return (
@@ -278,10 +280,10 @@ export default function ScientificReview({ weeds, setWeeds, selectedValues }) {
                                             <thead className="bg-white">
                                                 <tr>
                                                     <th className="px-4 py-2 text-left text-xs font-bold text-slate-500 uppercase w-1/3">Invasiveness Criteria</th>
-                                                    <th className="px-4 py-2 text-center text-xs font-bold text-slate-500 uppercase bg-slate-100/50">Gov Rating / Conf</th>
-                                                    <th className="px-4 py-2 text-center text-xs font-bold text-teal-700 uppercase bg-teal-50/50">Local Rating</th>
-                                                    <th className="px-4 py-2 text-center text-xs font-bold text-teal-700 uppercase bg-teal-50/50">Local Conf</th>
-                                                    <th className="px-4 py-2 text-left text-xs font-bold text-slate-500 uppercase w-1/4">Reason (if diff)</th>
+                                                    <th className="px-4 py-2 text-center text-xs font-bold text-slate-500 uppercase bg-slate-100/50">State wide rating and confidence</th>
+                                                    <th className="px-4 py-2 text-center text-xs font-bold text-teal-700 uppercase bg-teal-50/50">Your updated rating</th>
+                                                    <th className="px-4 py-2 text-center text-xs font-bold text-teal-700 uppercase bg-teal-50/50">Your confidence</th>
+                                                    <th className="px-4 py-2 text-left text-xs font-bold text-slate-500 uppercase w-1/4">Reason for update</th>
                                                 </tr>
                                             </thead>
                                             <tbody className="bg-white divide-y divide-gray-200">
@@ -354,7 +356,7 @@ export default function ScientificReview({ weeds, setWeeds, selectedValues }) {
                     onClick={() => navigate('/step-4')}
                     className="px-8 py-3 bg-teal-600 text-white font-bold rounded-lg shadow-md hover:bg-teal-700 hover:shadow-lg transition-all transform hover:-translate-y-0.5"
                 >
-                    View Final Results (Step 4)
+                    Step 4: Ease of Control
                 </button>
             </div>
         </div>

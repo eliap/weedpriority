@@ -20,22 +20,36 @@ const About = () => {
                         <div className="flex gap-4">
                             <div className="flex-shrink-0 w-8 h-8 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-sm">1</div>
                             <div>
-                                <h3 className="font-semibold text-slate-800 mb-1">Session 1: Initial Assessment</h3>
+                                <h3 className="font-semibold text-slate-800 mb-1">Step 1: Initial Assessment</h3>
                                 <p className="text-slate-600 text-sm">Identify values, list local weeds, perform an initial "gut feel" ranking, and discuss the extent and difficulty of control for each species.</p>
                             </div>
                         </div>
                         <div className="flex gap-4">
                             <div className="flex-shrink-0 w-8 h-8 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-sm">2</div>
                             <div>
-                                <h3 className="font-semibold text-slate-800 mb-1">Session 2: Scientific Review & Refinement</h3>
-                                <p className="text-slate-600 text-sm">Review scientific rankings (VRO), fill knowledge gaps with local expertise, compare initial rankings to numerical scores, and finalize the priority list.</p>
+                                <h3 className="font-semibold text-slate-800 mb-1">Step 2: Local Expertise</h3>
+                                <p className="text-slate-600 text-sm">Create your list local weeds to consider, perform an initial "gut feel" ranking of their importance, and enter what you know about the extent of the weed and the value of the habitat it threatens in your local area.</p>
                             </div>
                         </div>
                         <div className="flex gap-4">
                             <div className="flex-shrink-0 w-8 h-8 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-sm">3</div>
                             <div>
-                                <h3 className="font-semibold text-slate-800 mb-1">Session 3: Action Planning</h3>
-                                <p className="text-slate-600 text-sm">Create a targeted action strategy and seasonal work plan based on the finalized prioritized list.</p>
+                                <h3 className="font-semibold text-slate-800 mb-1">Step 3: Scientific Review</h3>
+                                <p className="text-slate-600 text-sm">Apply scientific rankings of impact and invasiveness (compiled under the Victorian Weed Prioritisation Plan), and refine with your local expertise.</p>
+                            </div>
+                        </div>
+                        <div className="flex gap-4">
+                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-sm">4</div>
+                            <div>
+                                <h3 className="font-semibold text-slate-800 mb-1">Step 4: Ease of control</h3>
+                                <p className="text-slate-600 text-sm">Reflect on the difficulty of control of each species.</p>
+                            </div>
+                        </div>
+                        <div className="flex gap-4">
+                            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-sm">5</div>
+                            <div>
+                                <h3 className="font-semibold text-slate-800 mb-1">Step 5: Priority List</h3>
+                                <p className="text-slate-600 text-sm">Explore your prioritised list, understanding why each weed has been ranked where it has. Use this list to guide your on ground work.</p>
                             </div>
                         </div>
                     </div>

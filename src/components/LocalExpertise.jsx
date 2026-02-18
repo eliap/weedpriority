@@ -1,8 +1,12 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import realWeedData from '../data/realGovernmentData.json';
+import scrapedData from '../data/weed_assessments.json';
 
-const AVAILABLE_WEEDS = Object.keys(realWeedData).sort();
+const AVAILABLE_WEEDS = Array.from(new Set([
+    ...Object.keys(realWeedData),
+    ...Object.keys(scrapedData)
+])).sort();
 
 export default function LocalExpertise({ weeds, setWeeds }) {
     const navigate = useNavigate();
@@ -95,6 +99,16 @@ export default function LocalExpertise({ weeds, setWeeds }) {
                             placeholder="Start typing or click to see all options..."
                             className="w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 sm:text-sm p-3 border"
                             autoComplete="off"
+                            onBlur={() => {
+                                // Small delay to allow click event on dropdown items to fire first
+                                setTimeout(() => setShowSuggestions(false), 200);
+                            }}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Escape') {
+                                    setShowSuggestions(false);
+                                    e.currentTarget.blur();
+                                }
+                            }}
                         />
                         {/* Autocomplete Dropdown */}
                         {showSuggestions && suggestions.length > 0 && (

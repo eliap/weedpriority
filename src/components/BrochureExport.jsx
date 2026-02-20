@@ -202,11 +202,41 @@ async function toDataUrl(url) {
         return null;
     }
 }
+// Summarize verbose control methods text into a short plain-language summary
+function summarizeControl(text) {
+    if (!text || text.length < 10) return 'No specific control methods documented.';
+
+    // Remove references like (Author 2004), (CRC 2003), etc.
+    let clean = text.replace(/\(([^)]{0,80})\d{4}[^)]*\)/g, '');
+    // Remove URLs
+    clean = clean.replace(/https?:\/\/[^\s)]+/g, '');
+    // Remove boilerplate lines
+    clean = clean.replace(/Please see the Australian Pesticides[^.]*\./gi, '');
+    clean = clean.replace(/NOTE: Training is normally[^.]*\./gi, '');
+    clean = clean.replace(/Check with your local council[^.]*\./gi, '');
+    // Remove section headers like "Chemical control:" or "Non-chemical control:"
+    clean = clean.replace(/(Non-)?[Cc]hemical control:|Physical control:|Manual control:|Mechanical control:|Biological control:|Land management:|Competition and management:|Grazing:|Cultivation:|Fire:|Cultural:|Disposal:|Hygiene:|Prevention:|Mulching:|Flooding:/g, '');
+    // Remove escaped newlines and normalize whitespace
+    clean = clean.replace(/\\n/g, ' ').replace(/\s+/g, ' ').trim();
+
+    // Split into sentences
+    const sentences = clean.split(/(?<=[.!?])\s+/).filter(s => {
+        const trimmed = s.trim();
+        return trimmed.length > 15 && trimmed.length < 300 && !trimmed.match(/^\s*$/);
+    });
+
+    if (sentences.length === 0) return 'No specific control methods documented.';
+
+    // Take the first 3 meaningful sentences
+    return sentences.slice(0, 3).join(' ').trim();
+}
 
 // Fetch cover image from iNaturalist
 async function fetchINatPhoto(scientificName) {
     try {
-        const res = await fetch(`https://api.inaturalist.org/v1/taxa?q=${encodeURIComponent(scientificName)}&per_page=1`);
+        // Strip to genus + species only (remove subspecies, "aggregate", "var.", etc.)
+        const cleanName = scientificName.trim().split(/\s+/).slice(0, 2).join(' ');
+        const res = await fetch(`https://api.inaturalist.org/v1/taxa?q=${encodeURIComponent(cleanName)}&per_page=1`);
         const data = await res.json();
         if (data.results && data.results.length > 0) {
             const taxon = data.results[0];
@@ -306,7 +336,7 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
                 if (weed.scientificName) {
                     const photo = await fetchINatPhoto(weed.scientificName);
                     if (!cancelled && photo) {
-                        photoMap[weed.name] = photo;
+                        photoMap[weed.name] = [photo];
                     }
                 } else {
                     // Fallback to old lookup if scientificName missing (unlikely now)
@@ -314,7 +344,7 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
                     if (profile?.scientificName) {
                         const photo = await fetchINatPhoto(profile.scientificName);
                         if (!cancelled && photo) {
-                            photoMap[weed.name] = photo;
+                            photoMap[weed.name] = [photo];
                         }
                     }
                 }
@@ -708,35 +738,32 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
                             display: 'flex',
                             flexDirection: 'column'
                         }}>
-                            {/* Header Section */}
+                            {/* Header: Species Name & Scientific Name */}
                             <div style={{
                                 borderBottom: '4px solid #0f766e',
-                                paddingBottom: '20px',
-                                marginBottom: '30px',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'flex-end'
+                                paddingBottom: '16px',
+                                marginBottom: '28px'
                             }}>
-                                <div>
-                                    <div style={{
-                                        fontSize: '11px',
-                                        fontWeight: 700,
-                                        textTransform: 'uppercase',
-                                        color: '#64748b',
-                                        letterSpacing: '1px',
-                                        marginBottom: '4px'
-                                    }}>
-                                        Priority Species Profile
-                                    </div>
-                                    <h2 style={{
-                                        fontSize: '36px',
-                                        fontWeight: 800,
-                                        color: '#0f172a',
-                                        margin: 0,
-                                        lineHeight: 1.1
-                                    }}>
-                                        {weed.name}
-                                    </h2>
+                                <div style={{
+                                    fontSize: '11px',
+                                    fontWeight: 700,
+                                    textTransform: 'uppercase',
+                                    color: '#64748b',
+                                    letterSpacing: '1px',
+                                    marginBottom: '4px'
+                                }}>
+                                    #{index + 1} — Priority Species Profile
+                                </div>
+                                <h2 style={{
+                                    fontSize: '36px',
+                                    fontWeight: 800,
+                                    color: '#0f172a',
+                                    margin: 0,
+                                    lineHeight: 1.1
+                                }}>
+                                    {weed.name}
+                                </h2>
+                                {scientificName && (
                                     <div style={{
                                         fontSize: '16px',
                                         color: '#0f766e',
@@ -746,181 +773,190 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
                                     }}>
                                         {scientificName}
                                     </div>
-                                </div>
-                                <div style={{ textAlign: 'right' }}>
-                                    <div style={{ fontSize: '12px', color: '#64748b', fontWeight: 600, textTransform: 'uppercase' }}>Overall Score</div>
-                                    <div style={{
-                                        fontSize: '48px',
-                                        fontWeight: 900,
-                                        color: getScoreColor(weed.finalScore),
-                                        lineHeight: 1
-                                    }}>
-                                        {Math.round(weed.finalScore)}
-                                    </div>
-                                </div>
+                                )}
                             </div>
 
-                            {/* Main Content Grid */}
-                            <div style={{ display: 'flex', gap: '40px', flex: 1 }}>
+                            {/* Row 1: Photo (left) + Scores (right) */}
+                            <div style={{ display: 'flex', gap: '32px', marginBottom: '28px' }}>
 
-                                {/* Left Column: Description & Control */}
-                                <div style={{ flex: '1 1 60%' }}>
-                                    {/* Description */}
-                                    <div style={{ marginBottom: '30px' }}>
-                                        <h3 style={{
-                                            fontSize: '14px',
-                                            fontWeight: 700,
-                                            color: '#334155',
-                                            borderLeft: '3px solid #0d9488',
-                                            paddingLeft: '10px',
-                                            textTransform: 'uppercase',
-                                            letterSpacing: '0.5px',
-                                            marginBottom: '12px'
-                                        }}>
-                                            Description & Impact
-                                        </h3>
-                                        <p style={{ fontSize: '14px', lineHeight: 1.7, color: '#334155' }}>
-                                            {weed.description ||
-                                                (weed.impact && Object.values(weed.impact).map(v => v.comments).join(' ')) ||
-                                                'No detailed description available.'}
-                                        </p>
-                                    </div>
-
-                                    {/* Control Methods */}
-                                    <div>
-                                        <h3 style={{
-                                            fontSize: '14px',
-                                            fontWeight: 700,
-                                            color: '#334155',
-                                            borderLeft: '3px solid #f59e0b',
-                                            paddingLeft: '10px',
-                                            textTransform: 'uppercase',
-                                            letterSpacing: '0.5px',
-                                            marginBottom: '12px'
-                                        }}>
-                                            Management Strategy
-                                        </h3>
-                                        <p style={{ fontSize: '13px', lineHeight: 1.6, color: '#475569', background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                                            {weed.controlMethods || 'No specific control methods listed. Please refer to local guidelines.'}
-                                        </p>
-                                    </div>
-
-                                    {/* Score Breakdown (Visual Bars) */}
-                                    <div style={{ marginTop: '40px' }}>
-                                        <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#334155', marginBottom: '16px' }}>Assessment Breakdown</h3>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                                            {[
-                                                { l: 'Extent', v: weed.scores.extent, c: '#94a3b8' },
-                                                { l: 'Impact', v: weed.scores.impact, c: '#ef4444' },
-                                                { l: 'Invasiveness', v: weed.scores.invasiveness, c: '#f97316' },
-                                                { l: 'Habitat', v: weed.scores.habitat, c: '#22c55e' },
-                                                { l: 'Control Difficulty', v: weed.scores.control, c: '#3b82f6' }
-                                            ].map((item, idx) => (
-                                                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '12px' }}>
-                                                    <div style={{ width: '100px', fontWeight: 600, color: '#475569' }}>{item.l}</div>
-                                                    <div style={{ flex: 1, height: '8px', background: '#e2e8f0', borderRadius: '4px', overflow: 'hidden' }}>
-                                                        <div style={{
-                                                            width: `${item.v || 0}%`,
-                                                            height: '100%',
-                                                            background: item.c,
-                                                            borderRadius: '4px'
-                                                        }} />
-                                                    </div>
-                                                    <div style={{ width: '30px', textAlign: 'right', fontWeight: 700, color: '#64748b' }}>
-                                                        {item.v ? Math.round(item.v) : '-'}
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Right Column: Photos & Quick Facts */}
-                                <div style={{ flex: '0 0 35%', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-
-                                    {/* Main Photo */}
-                                    <div style={{
-                                        aspectRatio: '4/3',
-                                        background: '#f1f5f9',
-                                        borderRadius: '8px',
-                                        overflow: 'hidden',
-                                        border: '1px solid #e2e8f0',
-                                        position: 'relative'
-                                    }}>
-                                        {mainPhoto ? (
-                                            <>
-                                                <div style={{ width: '100%', height: '100%', backgroundImage: `url(${mainPhoto.url})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-                                                <div style={{ position: 'absolute', bottom: 0, right: 0, background: 'rgba(0,0,0,0.6)', color: 'white', fontSize: '9px', padding: '2px 6px', borderTopLeftRadius: '4px' }}>
-                                                    © {mainPhoto.attribution}
-                                                </div>
-                                            </>
-                                        ) : (
-                                            /* Species Info Bar - Fallback */
-                                            <div style={{
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                height: '100%',
-                                                background: '#f8fafc',
-                                                fontSize: '12px'
-                                            }}>
-                                                {[
-                                                    { label: 'Origin', value: origin },
-                                                    { label: 'Growth Form', value: growthForm },
-                                                    { label: 'Flower Colour', value: flowerColour },
-                                                    { label: 'Common Names', value: commonNames }
-                                                ].map(({ label, value }, i) => (
-                                                    <div key={label} style={{ flex: 1, padding: '8px 16px', borderBottom: i < 3 ? '1px solid #e2e8f0' : 'none', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                                                        <div style={{ fontWeight: 700, color: '#64748b', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '2px' }}>{label}</div>
-                                                        <div style={{ color: '#334155', fontWeight: 500, fontSize: '11px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{value}</div>
-                                                    </div>
-                                                ))}
+                                {/* Photo */}
+                                <div style={{
+                                    flex: '0 0 45%',
+                                    aspectRatio: '4/3',
+                                    background: '#f1f5f9',
+                                    borderRadius: '8px',
+                                    overflow: 'hidden',
+                                    border: '1px solid #e2e8f0',
+                                    position: 'relative',
+                                    minHeight: '220px'
+                                }}>
+                                    {mainPhoto ? (
+                                        <>
+                                            <div style={{ width: '100%', height: '100%', backgroundImage: `url(${mainPhoto.url})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                                            <div style={{ position: 'absolute', bottom: 0, right: 0, background: 'rgba(0,0,0,0.6)', color: 'white', fontSize: '9px', padding: '2px 6px', borderTopLeftRadius: '4px' }}>
+                                                © {mainPhoto.attribution}
                                             </div>
-                                        )}
-                                    </div>
-
-                                    {/* Secondary Photos */}
-                                    {secondaryPhotos.length > 0 && (
-                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                                            {secondaryPhotos.map((p, idx) => (
-                                                <div key={idx} style={{
-                                                    aspectRatio: '1/1',
-                                                    background: '#f1f5f9',
-                                                    borderRadius: '6px',
-                                                    overflow: 'hidden',
-                                                    border: '1px solid #e2e8f0',
-                                                    position: 'relative'
-                                                }}>
-                                                    <div style={{ width: '100%', height: '100%', backgroundImage: `url(${p.url})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    {/* Quick Info Box */}
-                                    <div style={{ background: '#f0fdfa', padding: '20px', borderRadius: '8px', border: '1px solid #ccfbf1' }}>
-                                        <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#0f766e', textTransform: 'uppercase', marginBottom: '12px' }}>Quick Facts</h4>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                            {[
-                                                { label: 'Origin', val: origin },
-                                                { label: 'Growth Form', val: growthForm },
-                                                { label: 'Flower Colour', val: flowerColour }
-                                            ].map((fact, i) => (
-                                                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', borderBottom: i < 2 ? '1px dashed #cbd5e1' : 'none', paddingBottom: i < 2 ? '8px' : '0' }}>
-                                                    <span style={{ color: '#64748b' }}>{fact.label}</span>
-                                                    <span style={{ fontWeight: 600, color: '#334155' }}>{fact.val}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Source Link */}
-                                    {profileUrl && (
-                                        <div style={{ fontSize: '10px', color: '#94a3b8', textAlign: 'center' }}>
-                                            Source: <span style={{ textDecoration: 'underline' }}>Weeds Australia</span>
+                                        </>
+                                    ) : (
+                                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#94a3b8', fontSize: '14px', fontStyle: 'italic' }}>
+                                            No photo available
                                         </div>
                                     )}
                                 </div>
+
+                                {/* Scores */}
+                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                    {/* Overall Score */}
+                                    <div style={{
+                                        textAlign: 'center',
+                                        marginBottom: '24px',
+                                        padding: '16px',
+                                        background: '#f8fafc',
+                                        borderRadius: '12px',
+                                        border: '1px solid #e2e8f0'
+                                    }}>
+                                        <div style={{ fontSize: '11px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>Overall Priority Score</div>
+                                        <div style={{
+                                            fontSize: '52px',
+                                            fontWeight: 900,
+                                            color: getScoreColor(weed.finalScore),
+                                            lineHeight: 1
+                                        }}>
+                                            {Math.round(weed.finalScore)}
+                                        </div>
+                                        <div style={{
+                                            display: 'inline-block',
+                                            marginTop: '8px',
+                                            padding: '3px 14px',
+                                            borderRadius: '16px',
+                                            fontSize: '11px',
+                                            fontWeight: 700,
+                                            color: 'white',
+                                            background: getScoreColor(weed.finalScore)
+                                        }}>
+                                            {getScoreLabel(weed.finalScore)}
+                                        </div>
+                                    </div>
+
+                                    {/* Individual Score Bars */}
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                        {[
+                                            { l: 'Extent', v: weed.scores.extent, c: '#94a3b8' },
+                                            { l: 'Impact', v: weed.scores.impact, c: '#ef4444' },
+                                            { l: 'Invasiveness', v: weed.scores.invasiveness, c: '#f97316' },
+                                            { l: 'Habitat Value', v: weed.scores.habitat, c: '#22c55e' },
+                                            { l: 'Ease of Control', v: weed.scores.control, c: '#3b82f6' }
+                                        ].map((item, idx) => (
+                                            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '12px' }}>
+                                                <div style={{ width: '110px', fontWeight: 600, color: '#475569' }}>{item.l}</div>
+                                                <div style={{ flex: 1, height: '10px', background: '#e2e8f0', borderRadius: '5px', overflow: 'hidden' }}>
+                                                    <div style={{
+                                                        width: `${item.v || 0}%`,
+                                                        height: '100%',
+                                                        background: item.c,
+                                                        borderRadius: '5px',
+                                                        transition: 'width 0.3s ease'
+                                                    }} />
+                                                </div>
+                                                <div style={{ width: '32px', textAlign: 'right', fontWeight: 700, color: '#334155', fontSize: '13px' }}>
+                                                    {item.v !== null && item.v !== undefined ? Math.round(item.v) : '—'}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
+
+                            {/* Row 2: Quick Facts */}
+                            {quickFacts.length > 0 && (
+                                <div style={{
+                                    marginBottom: '24px',
+                                    background: '#f0fdfa',
+                                    padding: '20px 24px',
+                                    borderRadius: '8px',
+                                    border: '1px solid #ccfbf1'
+                                }}>
+                                    <h3 style={{
+                                        fontSize: '13px',
+                                        fontWeight: 700,
+                                        color: '#0f766e',
+                                        textTransform: 'uppercase',
+                                        letterSpacing: '0.5px',
+                                        marginBottom: '12px'
+                                    }}>Quick Facts</h3>
+                                    <ul style={{
+                                        margin: 0,
+                                        padding: '0 0 0 18px',
+                                        fontSize: '13px',
+                                        lineHeight: 1.7,
+                                        color: '#334155'
+                                    }}>
+                                        {quickFacts.map((fact, i) => (
+                                            <li key={i} style={{ marginBottom: i < quickFacts.length - 1 ? '4px' : 0 }}>{fact}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+
+                            {/* Row 3: Plant Description (Form, Size, Flower) */}
+                            <div style={{
+                                padding: '20px 24px',
+                                background: '#f8fafc',
+                                borderRadius: '8px',
+                                border: '1px solid #e2e8f0',
+                                marginBottom: '20px'
+                            }}>
+                                <h3 style={{
+                                    fontSize: '13px',
+                                    fontWeight: 700,
+                                    color: '#334155',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.5px',
+                                    marginBottom: '14px',
+                                    borderLeft: '3px solid #0d9488',
+                                    paddingLeft: '10px'
+                                }}>Plant Description</h3>
+                                <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', marginBottom: '14px' }}>
+                                    {[
+                                        { label: 'Growth Form', value: growthForm },
+                                        { label: 'Flower Colour', value: flowerColour }
+                                    ].map((item, i) => (
+                                        <div key={i} style={{ minWidth: '120px' }}>
+                                            <div style={{ fontSize: '10px', fontWeight: 700, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '2px' }}>{item.label}</div>
+                                            <div style={{ fontSize: '13px', fontWeight: 600, color: '#1e293b' }}>{item.value}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Row 4: Control Techniques */}
+                            <div style={{
+                                padding: '20px 24px',
+                                background: '#fffbeb',
+                                borderRadius: '8px',
+                                border: '1px solid #fde68a',
+                                marginBottom: '20px'
+                            }}>
+                                <h3 style={{
+                                    fontSize: '13px',
+                                    fontWeight: 700,
+                                    color: '#92400e',
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.5px',
+                                    marginBottom: '12px',
+                                    borderLeft: '3px solid #f59e0b',
+                                    paddingLeft: '10px'
+                                }}>Control Techniques</h3>
+                                <p style={{ fontSize: '13px', lineHeight: 1.7, color: '#78350f', margin: 0 }}>
+                                    {summarizeControl(govData.controlMethods)}
+                                </p>
+                            </div>
+                            {/* Source */}
+                            {profileUrl && (
+                                <div style={{ fontSize: '10px', color: '#94a3b8', textAlign: 'right', marginTop: 'auto' }}>
+                                    Source: <span style={{ textDecoration: 'underline' }}>Weeds Australia</span>
+                                </div>
+                            )}
                         </div>
                     );
                 })}

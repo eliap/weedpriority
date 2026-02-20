@@ -27,6 +27,25 @@ Object.values(vicWeeds).forEach(weed => {
     }
 });
 
+// 1.5 Create a secondary lookup map for weedProfiles (fallback)
+const profileWeedsMap = {};
+Object.values(weedProfiles).forEach(profile => {
+    // Map primarily by scientific name if possible, or key if it matches a name format?
+    // Actually, weedProfiles is keyed by common name (or similar), so we iterate keys
+});
+Object.keys(weedProfiles).forEach(key => {
+    const profile = weedProfiles[key];
+    const normKey = normalize(key);
+    profileWeedsMap[normKey] = { ...profile, name: key };
+
+    // Map by Aliases (stripping parens etc)
+    // beneficial for "Gazania (linearis)" -> "gazania"
+    const simpleName = key.replace(/\s*\(.*?\)\s*/g, '').trim();
+    if (simpleName && simpleName !== key) {
+        profileWeedsMap[normalize(simpleName)] = { ...profile, name: key };
+    }
+});
+
 // 2. Merge scraped data into government data
 // Uses a 3-layer lookup to find the matching Victorian entry:
 //   Layer 1: Normalized key from weed_assessments → vicWeedsMap
@@ -52,13 +71,38 @@ Object.keys(scrapedData).forEach(key => {
         }
     }
 
+    // Layer 4: Fallback to direct weedProfiles data if no Victoriam ID found
+    if (!vicItem) {
+        // Try looking up in our profile map
+        const profileMatch = profileWeedsMap[normalize(key)];
+        if (profileMatch) {
+            // Construct a pseudo-vicItem from the profile data
+            vicItem = {
+                name: profileMatch.name,
+                scientificName: profileMatch.scientificName,
+                url: profileMatch.profileUrl,
+                // Use profile content or placeholders
+                description: "Description not available in primary database.",
+                controlMethods: profileMatch.controlMethods || "Control methods not available in primary database.",
+                images: [], // Profiles might not have images in the same format
+                // Add other fields as needed
+                origin: profileMatch.origin || '',
+                growthForm: profileMatch.growthForm || '',
+                flowerColour: profileMatch.flowerColour || ''
+            };
+        }
+    }
+
     vicItem = vicItem || {};
 
     governmentData[key] = {
         ...govItem,
         ...assessmentItem,
         // Content overrides (vic > assessment > gov)
-        description: vicItem.description || assessmentItem.description || govItem.description,
+        // Content overrides (vic > assessment > gov)
+        description: vicItem.description || assessmentItem.description || govItem.description ||
+            (assessmentItem.comments ? `Assessors notes: ${assessmentItem.comments}` : null) ||
+            (assessmentItem.invasiveness ? Object.values(assessmentItem.invasiveness).map(v => v.comments).join('. ') : ''),
         controlMethods: vicItem.controlMethods || assessmentItem.controlMethods || govItem.controlMethods,
         images: vicItem.images && vicItem.images.length > 0 ? vicItem.images : (assessmentItem.images || govItem.images),
         // Score preservation
@@ -80,6 +124,21 @@ Object.keys(scrapedData).forEach(key => {
 const govDataKeyMap = {};
 Object.keys(governmentData).forEach(key => {
     govDataKeyMap[normalize(key)] = key;
+
+    // Also map by simplified alias (stripping content in parens)
+    // e.g. "Gazania (linearis)" -> "gazania"
+    const simpleName = key.replace(/\s*\(.*?\)\s*/g, '').trim();
+    if (simpleName && simpleName !== key) {
+        const simpleNorm = normalize(simpleName);
+        // Only map if not already taken, or if this key is "better" (length logic? arbitrary?)
+        // For now, first come first served, or overwrite. 
+        // If we have Gazania (linearis) and Gazania (rigens), both map to 'gazania'.
+        // We probably want the one that appears first or is more significant.
+        // Let's just map it.
+        if (!govDataKeyMap[simpleNorm]) {
+            govDataKeyMap[simpleNorm] = key;
+        }
+    }
 });
 
 const RATING_VALUES = { "L": 1, "ML": 2, "M": 3, "MH": 4, "H": 5 };
@@ -189,6 +248,26 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
                 }
             }
             govWeedData = govWeedData || { impact: {}, invasiveness: {} };
+
+            // Extract scientific name for photo fetching
+            // Prioritize existing scientificName (state) for custom weeds
+            let scientificName = weed.scientificName || govWeedData.scientificName;
+
+            // Fallback: if not in gov data (e.g. pure vicWeeds entry not in gov dataset yet), look up in vicWeedsMap
+            if (!scientificName) {
+                const normKey = normalize(weed.name);
+                const vicMatch = vicWeedsMap[normKey];
+                if (vicMatch) scientificName = vicMatch.scientificName;
+                // Fallback: if still no scientificName, try to extract from quickFacts
+                if (!scientificName && vicMatch && vicMatch.quickFacts && vicMatch.quickFacts.length > 0) {
+                    const firstFact = vicMatch.quickFacts[0];
+                    const match = firstFact.match(/\((.*?)\)/);
+                    if (match && match[1]) {
+                        scientificName = match[1];
+                    }
+                }
+            }
+
             const userReview = weed.scientificReview?.detailed || { impact: {}, invasiveness: {} };
             const allImpactItems = valueCategories.flatMap(cat => cat.items);
             const impactResult = calculateCategoryScore(allImpactItems, userReview.impact || {}, govWeedData.impact || {}, selectedValues);
@@ -210,7 +289,7 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
             const norm = activeWeight > 0 ? activeWeight / 100 : 1;
             const finalScore = active.reduce((s, c) => s + (c.score * weights[c.key] / 100), 0) / norm;
 
-            return { ...weed, finalScore, scores: { extent: extentScore, impact: impactResult.hasData ? impactResult.scaled : null, invasiveness: invasivenessResult.hasData ? invasivenessResult.scaled : null, habitat: habitatScore, control: controlScore } };
+            return { ...weed, finalScore, scientificName, scores: { extent: extentScore, impact: impactResult.hasData ? impactResult.scaled : null, invasiveness: invasivenessResult.hasData ? invasivenessResult.scaled : null, habitat: habitatScore, control: controlScore } };
         }).sort((a, b) => b.finalScore - a.finalScore);
     }, [weeds, selectedValues]);
 
@@ -223,11 +302,20 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
             setLoading(true);
             const photoMap = {};
             for (const weed of topWeeds) {
-                const profile = weedProfiles[weed.name];
-                if (profile?.scientificName) {
-                    const photo = await fetchINatPhoto(profile.scientificName);
+                // Use the resolved scientific name from the weed data
+                if (weed.scientificName) {
+                    const photo = await fetchINatPhoto(weed.scientificName);
                     if (!cancelled && photo) {
                         photoMap[weed.name] = photo;
+                    }
+                } else {
+                    // Fallback to old lookup if scientificName missing (unlikely now)
+                    const profile = weedProfiles[weed.name];
+                    if (profile?.scientificName) {
+                        const photo = await fetchINatPhoto(profile.scientificName);
+                        if (!cancelled && photo) {
+                            photoMap[weed.name] = photo;
+                        }
                     }
                 }
             }
@@ -402,92 +490,178 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
             {/* Brochure Preview */}
             <div ref={brochureRef} className="brochure-content">
                 {/* Cover Page */}
+                {/* Cover Page */}
                 <div style={{
-                    background: 'linear-gradient(135deg, #0f766e 0%, #134e4a 50%, #1e3a3a 100%)',
+                    position: 'relative',
+                    width: '210mm',
+                    height: '297mm',
+                    background: 'radial-gradient(circle at 50% 30%, #115e59 0%, #0f172a 100%)',
                     color: 'white',
-                    padding: '60px 50px',
-                    minHeight: '297mm',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
                     textAlign: 'center',
-                    pageBreakAfter: 'always'
+                    pageBreakAfter: 'always',
+                    overflow: 'hidden',
+                    fontFamily: "'Inter', sans-serif"
                 }}>
-                    <div style={{ fontSize: '18px', letterSpacing: '8px', textTransform: 'uppercase', opacity: 0.7, marginBottom: '20px' }}>
-                        {groupName || 'Project Platypus'}
+                    {/* Decorative Background Elements */}
+                    <div style={{
+                        position: 'absolute',
+                        top: 0, left: 0, right: 0, bottom: 0,
+                        backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
+                        backgroundSize: '20mm 20mm',
+                        pointerEvents: 'none'
+                    }} />
+
+                    <div style={{ position: 'relative', zIndex: 1, padding: '0 40px' }}>
+                        {/* Group Name Badge */}
+                        <div style={{
+                            display: 'inline-block',
+                            padding: '8px 16px',
+                            background: 'rgba(255,255,255,0.1)',
+                            backdropFilter: 'blur(4px)',
+                            borderRadius: '4px',
+                            border: '1px solid rgba(255,255,255,0.2)',
+                            marginBottom: '40px',
+                            fontSize: '12px',
+                            letterSpacing: '2px',
+                            textTransform: 'uppercase',
+                            fontWeight: 600
+                        }}>
+                            Prepared for {groupName || 'Project Platypus'}
+                        </div>
+
+                        <h1 style={{
+                            fontSize: '56px',
+                            fontWeight: 800,
+                            lineHeight: 1.1,
+                            marginBottom: '24px',
+                            textShadow: '0 4px 12px rgba(0,0,0,0.3)',
+                            background: 'linear-gradient(to bottom right, #ffffff, #ccfbf1)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent'
+                        }}>
+                            Weed Priority<br />Assessment
+                        </h1>
+
+                        <div style={{
+                            width: '60px',
+                            height: '6px',
+                            background: '#2dd4bf',
+                            borderRadius: '3px',
+                            margin: '32px auto'
+                        }} />
+
+                        <div style={{
+                            fontSize: '20px',
+                            fontWeight: 300,
+                            color: '#ccfbf1',
+                            maxWidth: '500px',
+                            lineHeight: 1.6,
+                            margin: '0 auto'
+                        }}>
+                            A strategic report identifying the <strong style={{ color: 'white', fontWeight: 600 }}>Top {topWeeds.length}</strong> priority weed species for targeted management action.
+                        </div>
                     </div>
-                    <h1 style={{ fontSize: '42px', fontWeight: 800, lineHeight: 1.2, marginBottom: '16px' }}>
-                        Weed Priority<br />Assessment
-                    </h1>
-                    <div style={{ width: '80px', height: '4px', background: '#2dd4bf', borderRadius: '2px', margin: '24px auto' }} />
-                    <p style={{ fontSize: '18px', opacity: 0.8, maxWidth: '500px', lineHeight: 1.6 }}>
-                        Top {topWeeds.length} priority weed species identified through community assessment and scientific review.
-                    </p>
-                    <div style={{ marginTop: '60px', fontSize: '14px', opacity: 0.5 }}>
-                        Generated {new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' })}
+
+                    {/* Footer / Date */}
+                    <div style={{
+                        position: 'absolute',
+                        bottom: '60px',
+                        left: 0,
+                        right: 0,
+                        textAlign: 'center',
+                        fontSize: '14px',
+                        color: 'rgba(255,255,255,0.4)',
+                        letterSpacing: '1px'
+                    }}>
+                        GENERATED {new Date().toLocaleDateString('en-AU', { year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase()}
                     </div>
                 </div>
 
                 {/* Summary Table Page */}
-                <div style={{ padding: '40px 40px', pageBreakAfter: 'always' }}>
-                    <h2 style={{ fontSize: '24px', fontWeight: 700, color: '#0f4c47', marginBottom: '8px' }}>Priority Rankings</h2>
-                    <p style={{ fontSize: '13px', color: '#64748b', marginBottom: '24px' }}>Species ranked by weighted assessment score across five criteria.</p>
-                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
-                        <thead>
-                            <tr style={{ background: '#f1f5f9' }}>
-                                <th style={{ padding: '10px 12px', textAlign: 'left', fontWeight: 700, borderBottom: '2px solid #cbd5e1', color: '#334155' }}>Rank</th>
-                                <th style={{ padding: '10px 12px', textAlign: 'left', fontWeight: 700, borderBottom: '2px solid #cbd5e1', color: '#334155' }}>Species</th>
-                                <th style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, borderBottom: '2px solid #cbd5e1', color: '#334155' }}>Score</th>
-                                <th style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, borderBottom: '2px solid #cbd5e1', color: '#334155' }}>Priority</th>
-                                <th style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, borderBottom: '2px solid #cbd5e1', color: '#334155' }}>Extent</th>
-                                <th style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, borderBottom: '2px solid #cbd5e1', color: '#334155' }}>Impact</th>
-                                <th style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, borderBottom: '2px solid #cbd5e1', color: '#334155' }}>Invasive</th>
-                                <th style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, borderBottom: '2px solid #cbd5e1', color: '#334155' }}>Habitat</th>
-                                <th style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, borderBottom: '2px solid #cbd5e1', color: '#334155' }}>Control</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {topWeeds.map((weed, i) => (
-                                <tr key={weed.id} style={{ borderBottom: '1px solid #e2e8f0' }}>
-                                    <td style={{ padding: '10px 12px', fontWeight: 700, color: '#0f766e' }}>{i + 1}</td>
-                                    <td style={{ padding: '10px 12px' }}>
-                                        <div style={{ fontWeight: 600, color: '#1e293b' }}>{weed.name}</div>
-                                        <div style={{ fontSize: '11px', color: '#94a3b8', fontStyle: 'italic' }}>
-                                            {weedProfiles[weed.name]?.scientificName || ''}
-                                        </div>
-                                    </td>
-                                    <td style={{ padding: '10px 12px', textAlign: 'center', fontWeight: 700, color: getScoreColor(weed.finalScore) }}>
-                                        {Math.round(weed.finalScore)}
-                                    </td>
-                                    <td style={{ padding: '10px 12px', textAlign: 'center' }}>
-                                        <span style={{
-                                            display: 'inline-block',
-                                            padding: '2px 10px',
-                                            borderRadius: '12px',
-                                            fontSize: '11px',
-                                            fontWeight: 700,
-                                            color: 'white',
-                                            background: getScoreColor(weed.finalScore)
-                                        }}>
-                                            {getScoreLabel(weed.finalScore)}
-                                        </span>
-                                    </td>
-                                    <td style={{ padding: '10px 12px', textAlign: 'center', color: '#64748b' }}>{Math.round(weed.scores.extent)}</td>
-                                    <td style={{ padding: '10px 12px', textAlign: 'center', color: '#64748b' }}>{weed.scores.impact !== null ? Math.round(weed.scores.impact) : '—'}</td>
-                                    <td style={{ padding: '10px 12px', textAlign: 'center', color: '#64748b' }}>{weed.scores.invasiveness !== null ? Math.round(weed.scores.invasiveness) : '—'}</td>
-                                    <td style={{ padding: '10px 12px', textAlign: 'center', color: '#64748b' }}>{Math.round(weed.scores.habitat)}</td>
-                                    <td style={{ padding: '10px 12px', textAlign: 'center', color: '#64748b' }}>{Math.round(weed.scores.control)}</td>
+                <div style={{ padding: '40px 50px', pageBreakAfter: 'always', fontFamily: "'Inter', sans-serif" }}>
+                    <h2 style={{
+                        fontSize: '32px',
+                        fontWeight: 800,
+                        color: '#0f172a',
+                        marginBottom: '10px',
+                        letterSpacing: '-0.5px'
+                    }}>
+                        Priority Rankings
+                    </h2>
+                    <p style={{ fontSize: '14px', color: '#64748b', marginBottom: '32px', maxWidth: '600px' }}>
+                        Species are ranked based on a weighted assessment score across five key criteria: Extent, Impact, Invasiveness, Habitat Value, and Ease of Control.
+                    </p>
+
+                    <div style={{ borderRadius: '8px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
+                        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+                            <thead>
+                                <tr style={{ background: '#f8fafc', borderBottom: '2px solid #e2e8f0' }}>
+                                    <th style={{ padding: '16px 20px', textAlign: 'left', fontWeight: 700, color: '#475569', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px' }}>Rank</th>
+                                    <th style={{ padding: '16px 20px', textAlign: 'left', fontWeight: 700, color: '#475569', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px' }}>Species</th>
+                                    <th style={{ padding: '16px 20px', textAlign: 'center', fontWeight: 700, color: '#475569', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px' }}>Score</th>
+                                    <th style={{ padding: '16px 20px', textAlign: 'center', fontWeight: 700, color: '#475569', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1px' }}>Priority</th>
+                                    <th style={{ padding: '16px 12px', textAlign: 'center', fontWeight: 600, color: '#94a3b8', fontSize: '10px', textTransform: 'uppercase' }}>Extent</th>
+                                    <th style={{ padding: '16px 12px', textAlign: 'center', fontWeight: 600, color: '#94a3b8', fontSize: '10px', textTransform: 'uppercase' }}>Impact</th>
+                                    <th style={{ padding: '16px 12px', textAlign: 'center', fontWeight: 600, color: '#94a3b8', fontSize: '10px', textTransform: 'uppercase' }}>Inv.</th>
+                                    <th style={{ padding: '16px 12px', textAlign: 'center', fontWeight: 600, color: '#94a3b8', fontSize: '10px', textTransform: 'uppercase' }}>Hab.</th>
+                                    <th style={{ padding: '16px 12px', textAlign: 'center', fontWeight: 600, color: '#94a3b8', fontSize: '10px', textTransform: 'uppercase' }}>Ctrl.</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {topWeeds.map((weed, i) => (
+                                    <tr key={weed.id} style={{ borderBottom: '1px solid #f1f5f9', background: i % 2 === 0 ? 'white' : '#fcfcfc' }}>
+                                        <td style={{ padding: '16px 20px', fontWeight: 700, color: '#0f766e', fontSize: '16px' }}>{i + 1}</td>
+                                        <td style={{ padding: '16px 20px' }}>
+                                            <div style={{ fontWeight: 700, color: '#1e293b', fontSize: '14px', marginBottom: '2px' }}>{weed.name}</div>
+                                            <div style={{ fontSize: '12px', color: '#64748b', fontStyle: 'italic' }}>
+                                                {weed.scientificName || ''}
+                                            </div>
+                                        </td>
+                                        <td style={{ padding: '16px 20px', textAlign: 'center' }}>
+                                            <div style={{
+                                                fontWeight: 800,
+                                                fontSize: '15px',
+                                                color: getScoreColor(weed.finalScore)
+                                            }}>
+                                                {Math.round(weed.finalScore)}
+                                            </div>
+                                        </td>
+                                        <td style={{ padding: '16px 20px', textAlign: 'center' }}>
+                                            <span style={{
+                                                display: 'inline-block',
+                                                padding: '4px 12px',
+                                                borderRadius: '16px',
+                                                fontSize: '11px',
+                                                fontWeight: 700,
+                                                color: 'white',
+                                                background: getScoreColor(weed.finalScore),
+                                                boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
+                                            }}>
+                                                {getScoreLabel(weed.finalScore)}
+                                            </span>
+                                        </td>
+                                        <td style={{ padding: '16px 12px', textAlign: 'center', color: '#64748b', fontFamily: 'monospace' }}>{Math.round(weed.scores.extent)}</td>
+                                        <td style={{ padding: '16px 12px', textAlign: 'center', color: '#64748b', fontFamily: 'monospace' }}>{weed.scores.impact !== null ? Math.round(weed.scores.impact) : '—'}</td>
+                                        <td style={{ padding: '16px 12px', textAlign: 'center', color: '#64748b', fontFamily: 'monospace' }}>{weed.scores.invasiveness !== null ? Math.round(weed.scores.invasiveness) : '—'}</td>
+                                        <td style={{ padding: '16px 12px', textAlign: 'center', color: '#64748b', fontFamily: 'monospace' }}>{Math.round(weed.scores.habitat)}</td>
+                                        <td style={{ padding: '16px 12px', textAlign: 'center', color: '#64748b', fontFamily: 'monospace' }}>{Math.round(weed.scores.control)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 {/* Individual Weed Cards */}
                 {topWeeds.map((weed, index) => {
                     const profile = weedProfiles[weed.name] || {};
-                    const photo = photos[weed.name];
+                    const weedPhotos = photos[weed.name] || [];
+                    const mainPhoto = weedPhotos.length > 0 ? weedPhotos[0] : null; // Use object with url/attribution
+                    const secondaryPhotos = weedPhotos.slice(1, 4); // Up to 3 secondary photos
                     const scoreColor = getScoreColor(weed.finalScore);
 
                     // Robust lookup into the merged governmentData for Quick Facts, origin, etc.
@@ -519,169 +693,233 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
                     const origin = govData.origin || profile.origin || '—';
                     const growthForm = govData.growthForm || profile.growthForm || '—';
                     const flowerColour = govData.flowerColour || profile.flowerColour || '—';
-                    const scientificName = govData.scientificName || profile.scientificName || '';
+                    const scientificName = govData.scientificName || profile.scientificName || weed.scientificName || '';
                     const commonNames = govData.commonName
                         ? govData.commonName.split(/,|;/).map(s => s.trim()).slice(0, 3).join(', ')
                         : (profile.commonNames ? profile.commonNames.slice(0, 3).join(', ') : '—');
                     const profileUrl = govData.url || profile.profileUrl || '';
 
                     return (
-                        <div key={weed.id} className="weed-card" style={{ pageBreakBefore: 'always', padding: '0', minHeight: '297mm' }}>
-                            {/* Header bar */}
+                        <div key={weed.id} style={{
+                            padding: '40px 50px',
+                            pageBreakAfter: 'always',
+                            fontFamily: "'Inter', sans-serif",
+                            minHeight: '297mm',
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}>
+                            {/* Header Section */}
                             <div style={{
-                                background: `linear-gradient(135deg, ${scoreColor}dd, ${scoreColor}99)`,
-                                color: 'white',
-                                padding: '24px 40px',
+                                borderBottom: '4px solid #0f766e',
+                                paddingBottom: '20px',
+                                marginBottom: '30px',
                                 display: 'flex',
                                 justifyContent: 'space-between',
-                                alignItems: 'center'
+                                alignItems: 'flex-end'
                             }}>
                                 <div>
-                                    <div style={{ fontSize: '12px', letterSpacing: '3px', textTransform: 'uppercase', opacity: 0.8 }}>
-                                        Priority #{index + 1}
+                                    <div style={{
+                                        fontSize: '11px',
+                                        fontWeight: 700,
+                                        textTransform: 'uppercase',
+                                        color: '#64748b',
+                                        letterSpacing: '1px',
+                                        marginBottom: '4px'
+                                    }}>
+                                        Priority Species Profile
                                     </div>
-                                    <h2 style={{ fontSize: '28px', fontWeight: 800, margin: '4px 0' }}>{weed.name}</h2>
-                                    <div style={{ fontSize: '16px', fontStyle: 'italic', opacity: 0.9 }}>
+                                    <h2 style={{
+                                        fontSize: '36px',
+                                        fontWeight: 800,
+                                        color: '#0f172a',
+                                        margin: 0,
+                                        lineHeight: 1.1
+                                    }}>
+                                        {weed.name}
+                                    </h2>
+                                    <div style={{
+                                        fontSize: '16px',
+                                        color: '#0f766e',
+                                        fontStyle: 'italic',
+                                        marginTop: '4px',
+                                        fontWeight: 500
+                                    }}>
                                         {scientificName}
                                     </div>
                                 </div>
-                                <div style={{
-                                    width: '80px',
-                                    height: '80px',
-                                    borderRadius: '50%',
-                                    background: 'rgba(255,255,255,0.25)',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    border: '3px solid rgba(255,255,255,0.5)'
-                                }}>
-                                    <div style={{ fontSize: '28px', fontWeight: 800 }}>{Math.round(weed.finalScore)}</div>
-                                    <div style={{ fontSize: '9px', textTransform: 'uppercase', letterSpacing: '1px' }}>Score</div>
+                                <div style={{ textAlign: 'right' }}>
+                                    <div style={{ fontSize: '12px', color: '#64748b', fontWeight: 600, textTransform: 'uppercase' }}>Overall Score</div>
+                                    <div style={{
+                                        fontSize: '48px',
+                                        fontWeight: 900,
+                                        color: getScoreColor(weed.finalScore),
+                                        lineHeight: 1
+                                    }}>
+                                        {Math.round(weed.finalScore)}
+                                    </div>
                                 </div>
                             </div>
 
-                            <div style={{ padding: '30px 40px' }}>
-                                {/* Photo + Scores row */}
-                                <div style={{ display: 'flex', gap: '30px', marginBottom: '30px' }}>
-                                    {/* Photo */}
-                                    <div style={{ flex: '0 0 260px' }}>
-                                        {photo ? (
-                                            <div>
-                                                <img
-                                                    src={photo.url}
-                                                    alt={weed.name}
-                                                    crossOrigin={undefined}
-                                                    style={{
-                                                        width: '260px',
-                                                        height: '200px',
-                                                        objectFit: 'cover',
-                                                        borderRadius: '8px',
-                                                        boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
-                                                    }}
-                                                />
-                                                <div style={{ fontSize: '9px', color: '#94a3b8', marginTop: '6px', lineHeight: 1.3 }}>
-                                                    📷 {photo.attribution}
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div style={{
-                                                width: '260px',
-                                                height: '200px',
-                                                borderRadius: '8px',
-                                                background: '#f1f5f9',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                color: '#94a3b8',
-                                                fontSize: '14px'
-                                            }}>
-                                                No photo available
-                                            </div>
-                                        )}
+                            {/* Main Content Grid */}
+                            <div style={{ display: 'flex', gap: '40px', flex: 1 }}>
+
+                                {/* Left Column: Description & Control */}
+                                <div style={{ flex: '1 1 60%' }}>
+                                    {/* Description */}
+                                    <div style={{ marginBottom: '30px' }}>
+                                        <h3 style={{
+                                            fontSize: '14px',
+                                            fontWeight: 700,
+                                            color: '#334155',
+                                            borderLeft: '3px solid #0d9488',
+                                            paddingLeft: '10px',
+                                            textTransform: 'uppercase',
+                                            letterSpacing: '0.5px',
+                                            marginBottom: '12px'
+                                        }}>
+                                            Description & Impact
+                                        </h3>
+                                        <p style={{ fontSize: '14px', lineHeight: 1.7, color: '#334155' }}>
+                                            {weed.description ||
+                                                (weed.impact && Object.values(weed.impact).map(v => v.comments).join(' ')) ||
+                                                'No detailed description available.'}
+                                        </p>
                                     </div>
 
-                                    {/* Score breakdown */}
-                                    <div style={{ flex: 1 }}>
-                                        <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#334155', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                                            Assessment Scores
+                                    {/* Control Methods */}
+                                    <div>
+                                        <h3 style={{
+                                            fontSize: '14px',
+                                            fontWeight: 700,
+                                            color: '#334155',
+                                            borderLeft: '3px solid #f59e0b',
+                                            paddingLeft: '10px',
+                                            textTransform: 'uppercase',
+                                            letterSpacing: '0.5px',
+                                            marginBottom: '12px'
+                                        }}>
+                                            Management Strategy
                                         </h3>
-                                        {[
-                                            { label: 'Extent', value: weed.scores.extent },
-                                            { label: 'Impact', value: weed.scores.impact },
-                                            { label: 'Invasiveness', value: weed.scores.invasiveness },
-                                            { label: 'Habitat Value', value: weed.scores.habitat },
-                                            { label: 'Ease of Control', value: weed.scores.control }
-                                        ].map(({ label, value }) => (
-                                            <div key={label} style={{ marginBottom: '10px' }}>
-                                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '4px' }}>
-                                                    <span style={{ color: '#475569', fontWeight: 600 }}>{label}</span>
-                                                    <span style={{ fontWeight: 700, color: value !== null ? '#1e293b' : '#94a3b8' }}>
-                                                        {value !== null ? `${Math.round(value)}/100` : 'N/A'}
-                                                    </span>
-                                                </div>
-                                                <div style={{ height: '8px', background: '#f1f5f9', borderRadius: '4px', overflow: 'hidden' }}>
-                                                    <div style={{
-                                                        height: '100%',
-                                                        width: value !== null ? `${value}%` : '0%',
-                                                        background: value !== null
-                                                            ? `linear-gradient(90deg, ${getScoreColor(value)}, ${getScoreColor(value)}cc)`
-                                                            : '#e2e8f0',
-                                                        borderRadius: '4px',
-                                                        transition: 'width 0.3s ease'
-                                                    }} />
-                                                </div>
-                                            </div>
-                                        ))}
+                                        <p style={{ fontSize: '13px', lineHeight: 1.6, color: '#475569', background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                                            {weed.controlMethods || 'No specific control methods listed. Please refer to local guidelines.'}
+                                        </p>
                                     </div>
-                                </div>
 
-                                {/* Quick Facts */}
-                                {quickFacts.length > 0 && (
-                                    <div style={{ marginBottom: '24px' }}>
-                                        <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#334155', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                                            Quick Facts
-                                        </h3>
-                                        <div style={{ columns: '2', columnGap: '24px', fontSize: '12px', lineHeight: 1.7, color: '#475569' }}>
-                                            {quickFacts.map((fact, fi) => (
-                                                <div key={fi} style={{ breakInside: 'avoid', marginBottom: '10px', paddingLeft: '16px', position: 'relative' }}>
-                                                    <span style={{ position: 'absolute', left: '0', color: scoreColor, fontWeight: 700 }}>•</span>
-                                                    {fact}
+                                    {/* Score Breakdown (Visual Bars) */}
+                                    <div style={{ marginTop: '40px' }}>
+                                        <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#334155', marginBottom: '16px' }}>Assessment Breakdown</h3>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                            {[
+                                                { l: 'Extent', v: weed.scores.extent, c: '#94a3b8' },
+                                                { l: 'Impact', v: weed.scores.impact, c: '#ef4444' },
+                                                { l: 'Invasiveness', v: weed.scores.invasiveness, c: '#f97316' },
+                                                { l: 'Habitat', v: weed.scores.habitat, c: '#22c55e' },
+                                                { l: 'Control Difficulty', v: weed.scores.control, c: '#3b82f6' }
+                                            ].map((item, idx) => (
+                                                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '12px' }}>
+                                                    <div style={{ width: '100px', fontWeight: 600, color: '#475569' }}>{item.l}</div>
+                                                    <div style={{ flex: 1, height: '8px', background: '#e2e8f0', borderRadius: '4px', overflow: 'hidden' }}>
+                                                        <div style={{
+                                                            width: `${item.v || 0}%`,
+                                                            height: '100%',
+                                                            background: item.c,
+                                                            borderRadius: '4px'
+                                                        }} />
+                                                    </div>
+                                                    <div style={{ width: '30px', textAlign: 'right', fontWeight: 700, color: '#64748b' }}>
+                                                        {item.v ? Math.round(item.v) : '-'}
+                                                    </div>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
-                                )}
-
-                                {/* Species Info Bar */}
-                                <div style={{
-                                    display: 'flex',
-                                    gap: '0',
-                                    background: '#f8fafc',
-                                    borderRadius: '8px',
-                                    overflow: 'hidden',
-                                    border: '1px solid #e2e8f0',
-                                    fontSize: '12px'
-                                }}>
-                                    {[
-                                        { label: 'Origin', value: origin },
-                                        { label: 'Growth Form', value: growthForm },
-                                        { label: 'Flower Colour', value: flowerColour },
-                                        { label: 'Common Names', value: commonNames }
-                                    ].map(({ label, value }, i) => (
-                                        <div key={label} style={{ flex: 1, padding: '12px 16px', borderRight: i < 3 ? '1px solid #e2e8f0' : 'none' }}>
-                                            <div style={{ fontWeight: 700, color: '#64748b', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '2px' }}>{label}</div>
-                                            <div style={{ color: '#334155', fontWeight: 500 }}>{value}</div>
-                                        </div>
-                                    ))}
                                 </div>
 
-                                {/* Source attribution */}
-                                {profileUrl && (
-                                    <div style={{ marginTop: '16px', fontSize: '10px', color: '#94a3b8' }}>
-                                        Source: Weeds Australia — <span style={{ textDecoration: 'underline' }}>{profileUrl}</span>
+                                {/* Right Column: Photos & Quick Facts */}
+                                <div style={{ flex: '0 0 35%', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+
+                                    {/* Main Photo */}
+                                    <div style={{
+                                        aspectRatio: '4/3',
+                                        background: '#f1f5f9',
+                                        borderRadius: '8px',
+                                        overflow: 'hidden',
+                                        border: '1px solid #e2e8f0',
+                                        position: 'relative'
+                                    }}>
+                                        {mainPhoto ? (
+                                            <>
+                                                <div style={{ width: '100%', height: '100%', backgroundImage: `url(${mainPhoto.url})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                                                <div style={{ position: 'absolute', bottom: 0, right: 0, background: 'rgba(0,0,0,0.6)', color: 'white', fontSize: '9px', padding: '2px 6px', borderTopLeftRadius: '4px' }}>
+                                                    © {mainPhoto.attribution}
+                                                </div>
+                                            </>
+                                        ) : (
+                                            /* Species Info Bar - Fallback */
+                                            <div style={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                height: '100%',
+                                                background: '#f8fafc',
+                                                fontSize: '12px'
+                                            }}>
+                                                {[
+                                                    { label: 'Origin', value: origin },
+                                                    { label: 'Growth Form', value: growthForm },
+                                                    { label: 'Flower Colour', value: flowerColour },
+                                                    { label: 'Common Names', value: commonNames }
+                                                ].map(({ label, value }, i) => (
+                                                    <div key={label} style={{ flex: 1, padding: '8px 16px', borderBottom: i < 3 ? '1px solid #e2e8f0' : 'none', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                                        <div style={{ fontWeight: 700, color: '#64748b', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '2px' }}>{label}</div>
+                                                        <div style={{ color: '#334155', fontWeight: 500, fontSize: '11px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{value}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
-                                )}
+
+                                    {/* Secondary Photos */}
+                                    {secondaryPhotos.length > 0 && (
+                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                                            {secondaryPhotos.map((p, idx) => (
+                                                <div key={idx} style={{
+                                                    aspectRatio: '1/1',
+                                                    background: '#f1f5f9',
+                                                    borderRadius: '6px',
+                                                    overflow: 'hidden',
+                                                    border: '1px solid #e2e8f0',
+                                                    position: 'relative'
+                                                }}>
+                                                    <div style={{ width: '100%', height: '100%', backgroundImage: `url(${p.url})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    {/* Quick Info Box */}
+                                    <div style={{ background: '#f0fdfa', padding: '20px', borderRadius: '8px', border: '1px solid #ccfbf1' }}>
+                                        <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#0f766e', textTransform: 'uppercase', marginBottom: '12px' }}>Quick Facts</h4>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                            {[
+                                                { label: 'Origin', val: origin },
+                                                { label: 'Growth Form', val: growthForm },
+                                                { label: 'Flower Colour', val: flowerColour }
+                                            ].map((fact, i) => (
+                                                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', borderBottom: i < 2 ? '1px dashed #cbd5e1' : 'none', paddingBottom: i < 2 ? '8px' : '0' }}>
+                                                    <span style={{ color: '#64748b' }}>{fact.label}</span>
+                                                    <span style={{ fontWeight: 600, color: '#334155' }}>{fact.val}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Source Link */}
+                                    {profileUrl && (
+                                        <div style={{ fontSize: '10px', color: '#94a3b8', textAlign: 'center' }}>
+                                            Source: <span style={{ textDecoration: 'underline' }}>Weeds Australia</span>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     );

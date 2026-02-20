@@ -16,6 +16,11 @@ export default function LocalExpertise({ weeds, setWeeds }) {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [useScientificNames, setUseScientificNames] = useState(false);
 
+    // Custom Weed State
+    const [showManualAdd, setShowManualAdd] = useState(false);
+    const [manualCommonName, setManualCommonName] = useState('');
+    const [manualScientificName, setManualScientificName] = useState('');
+
     // Filter suggestions based on input and current toggle state
     const getFilteredSuggestions = (inputValue) => {
         let filtered;
@@ -127,6 +132,33 @@ export default function LocalExpertise({ weeds, setWeeds }) {
         setWeeds(weeds.filter(w => w.id !== id));
     };
 
+    const handleAddCustomWeed = (e) => {
+        e.preventDefault();
+        if (!manualCommonName.trim()) return;
+
+        // Check for duplicate by name
+        if (weeds.some(w => w.name.toLowerCase() === manualCommonName.trim().toLowerCase())) {
+            alert("This weed is already in your list.");
+            return;
+        }
+
+        setWeeds([
+            ...weeds,
+            {
+                id: Date.now(),
+                name: manualCommonName.trim(),
+                scientificName: manualScientificName.trim() || null, // Store scientific name if provided
+                isCustom: true,
+                rank: weeds.length + 1,
+                extent: 1,
+                habitat: 1
+            }
+        ]);
+        setManualCommonName('');
+        setManualScientificName('');
+        setShowManualAdd(false);
+    };
+
     const updateWeed = (id, field, value) => {
         setWeeds(weeds.map(w =>
             w.id === id ? { ...w, [field]: Number(value) } : w
@@ -164,7 +196,7 @@ export default function LocalExpertise({ weeds, setWeeds }) {
             </div>
 
             {/* Add Weed Form */}
-            <form onSubmit={addWeed} className="mb-10 bg-white p-6 rounded-lg shadow-sm border border-slate-200 relative">
+            <form onSubmit={addWeed} className="mb-4 bg-white p-6 rounded-lg shadow-sm border border-slate-200 relative">
                 <label className="block text-sm font-medium text-slate-700 mb-2">
                     Search & Add Weed ({useScientificNames ? 'Scientific Name' : 'Common Name'})
                 </label>
@@ -219,6 +251,54 @@ export default function LocalExpertise({ weeds, setWeeds }) {
                     </button>
                 </div>
             </form>
+
+            <div className="text-center mb-10">
+                <button
+                    onClick={() => setShowManualAdd(!showManualAdd)}
+                    className="text-sm text-teal-600 hover:text-teal-800 underline font-medium"
+                >
+                    {showManualAdd ? "Hide manual entry" : "Can't find your weed? Add it manually"}
+                </button>
+            </div>
+
+            {/* Manual Add Form */}
+            {showManualAdd && (
+                <div className="mb-10 bg-slate-50 p-6 rounded-lg border border-teal-200 shadow-inner">
+                    <h3 className="font-bold text-teal-800 mb-4">Add Custom Weed</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Common Name *</label>
+                            <input
+                                type="text"
+                                value={manualCommonName}
+                                onChange={(e) => setManualCommonName(e.target.value)}
+                                className="w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 sm:text-sm p-2 border"
+                                placeholder="e.g. My Local Weed"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Scientific Name (Optional)</label>
+                            <input
+                                type="text"
+                                value={manualScientificName}
+                                onChange={(e) => setManualScientificName(e.target.value)}
+                                className="w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 sm:text-sm p-2 border"
+                                placeholder="e.g. Weedus localus"
+                            />
+                            <p className="text-[10px] text-slate-500 mt-1">Providing a scientific name helps us find photos automatically.</p>
+                        </div>
+                    </div>
+                    <div className="flex justify-end">
+                        <button
+                            onClick={handleAddCustomWeed}
+                            disabled={!manualCommonName.trim()}
+                            className="px-4 py-2 bg-teal-700 text-white font-bold rounded hover:bg-teal-800 transition-colors disabled:opacity-50 text-sm"
+                        >
+                            Add Custom Weed
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {/* Scoring Key Info Box */}
             <div className="mb-8 bg-teal-50 border border-teal-100 rounded-lg p-5 text-sm text-slate-700">

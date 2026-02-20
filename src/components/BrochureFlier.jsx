@@ -3,7 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { jsPDF } from 'jspdf';
 import { valueCategories } from '../data/valuesData';
 import { invasivenessCategories } from '../data/invasivenessData';
-import mergedWeeds from '../data/mergedWeeds.json';
+import governmentDataRaw from '../data/realGovernmentData.json';
+import weedProfiles from '../data/weedProfiles.json';
+import scrapedData from '../data/weed_assessments.json';
+import vicWeeds from '../data/weeds_victoria.json';
 
 // Normalization helper (matches logic in merge_data.cjs)
 const normalize = (str) => {
@@ -19,7 +22,7 @@ const RATING_VALUES = { "L": 1, "ML": 2, "M": 3, "MH": 4, "H": 5 };
 const CONFIDENCE_VALUES = { "L": 0.2, "ML": 0.4, "M": 0.6, "MH": 0.8, "H": 1.0 };
 
 const calculateCategoryScore = (items, userReviews, govReviews, selectedIds = null) => {
-    let totalScore = 0, maxPossibleScore = 0, itemsWithData = 0;
+    let totalScore = 0, totalScoreMax = 0, maxPossibleScore = 0, maxPossibleScoreMax = 0, itemsWithData = 0;
     items.forEach(item => {
         if (selectedIds && !selectedIds[item.id]) return;
         const govItem = govReviews[item.id] || {};
@@ -30,15 +33,122 @@ const calculateCategoryScore = (items, userReviews, govReviews, selectedIds = nu
             const ratingVal = RATING_VALUES[finalRatingStr] || 0;
             const confVal = CONFIDENCE_VALUES[finalConfStr] || 0.5;
             totalScore += (ratingVal * confVal);
+            totalScoreMax += ratingVal;
             maxPossibleScore += 5;
+            maxPossibleScoreMax += 5;
             itemsWithData++;
         }
     });
     return {
         scaled: maxPossibleScore > 0 ? (totalScore / maxPossibleScore) * 100 : 0,
+        unscaled: maxPossibleScoreMax > 0 ? (totalScoreMax / maxPossibleScoreMax) * 100 : 0,
         hasData: itemsWithData > 0
     };
 };
+
+// --- Data Preparation (Mirrors BrochureExport.jsx) ---
+
+// 1. Create a lookup map for Victorian weeds
+const vicWeedsMap = {};
+Object.values(vicWeeds).forEach(weed => {
+    if (weed.name) vicWeedsMap[normalize(weed.name)] = weed;
+    if (weed.id) vicWeedsMap[normalize(weed.id)] = weed;
+
+    // Map by Aliases
+    if (weed.name) {
+        const aliases = weed.name.split(/,|;|\/|\(|\)/).map(s => s.trim());
+        aliases.forEach(alias => {
+            if (alias.length > 2) vicWeedsMap[normalize(alias)] = weed;
+        });
+    }
+});
+
+// 1.5 Create a secondary lookup map for weedProfiles (fallback)
+const profileWeedsMap = {};
+Object.keys(weedProfiles).forEach(key => {
+    const profile = weedProfiles[key];
+    const normKey = normalize(key);
+    profileWeedsMap[normKey] = { ...profile, name: key };
+
+    // Map by Aliases (stripping parens etc)
+    const simpleName = key.replace(/\s*\(.*?\)\s*/g, '').trim();
+    if (simpleName && simpleName !== key) {
+        profileWeedsMap[normalize(simpleName)] = { ...profile, name: key };
+    }
+});
+
+// 2. Merge scraped data into government data
+const governmentData = { ...governmentDataRaw };
+Object.keys(scrapedData).forEach(key => {
+    const govItem = governmentData[key] || {};
+    const assessmentItem = scrapedData[key];
+
+    // Layer 1 & 2: Name-based lookup via vicWeedsMap
+    let vicItem = vicWeedsMap[normalize(key)] || vicWeedsMap[normalize(assessmentItem.name)];
+
+    // Layer 3: Use profileUrl slug from weedProfiles
+    if (!vicItem) {
+        const profile = weedProfiles[key];
+        if (profile?.profileUrl) {
+            const slug = profile.profileUrl.replace(/\/$/, '').split('/').pop();
+            if (slug && vicWeeds[slug]) {
+                vicItem = vicWeeds[slug];
+            }
+        }
+    }
+
+    // Layer 4: Fallback to direct weedProfiles data
+    if (!vicItem) {
+        const profileMatch = profileWeedsMap[normalize(key)];
+        if (profileMatch) {
+            vicItem = {
+                name: profileMatch.name,
+                scientificName: profileMatch.scientificName,
+                url: profileMatch.profileUrl,
+                description: "Description not available in primary database.",
+                controlMethods: profileMatch.controlMethods || "Control methods not available in primary database.",
+                images: [],
+                origin: profileMatch.origin || '',
+                growthForm: profileMatch.growthForm || '',
+                flowerColour: profileMatch.flowerColour || ''
+            };
+        }
+    }
+
+    vicItem = vicItem || {};
+
+    governmentData[key] = {
+        ...govItem,
+        ...assessmentItem,
+        description: vicItem.description || assessmentItem.description || govItem.description ||
+            (assessmentItem.comments ? `Assessors notes: ${assessmentItem.comments}` : null) ||
+            (assessmentItem.invasiveness ? Object.values(assessmentItem.invasiveness).map(v => v.comments).join('. ') : ''),
+        controlMethods: vicItem.controlMethods || assessmentItem.controlMethods || govItem.controlMethods,
+        images: vicItem.images && vicItem.images.length > 0 ? vicItem.images : (assessmentItem.images || govItem.images),
+        scientificName: vicItem.scientificName || assessmentItem.scientificName || govItem.scientificName,
+        origin: vicItem.origin || govItem.origin,
+        growthForm: vicItem.growthForm || govItem.growthForm,
+        flowerColour: vicItem.flowerColour || govItem.flowerColour,
+        quickFacts: vicItem.quickFacts || govItem.quickFacts,
+        impact: { ...govItem.impact || {}, ...assessmentItem.impact || {} },
+        invasiveness: { ...govItem.invasiveness || {}, ...assessmentItem.invasiveness || {} }
+    };
+});
+
+// 3. Create a Key Logic Map for Government Data
+const govDataKeyMap = {};
+Object.keys(governmentData).forEach(key => {
+    govDataKeyMap[normalize(key)] = key;
+
+    // Also map by simplified alias
+    const simpleName = key.replace(/\s*\(.*?\)\s*/g, '').trim();
+    if (simpleName && simpleName !== key) {
+        const simpleNorm = normalize(simpleName);
+        if (!govDataKeyMap[simpleNorm]) {
+            govDataKeyMap[simpleNorm] = key;
+        }
+    }
+});
 
 // Convert an image URL to a base64 data URI to avoid cross-origin html2canvas failures
 // Routes through Vite dev server proxy to bypass CORS restrictions (dev only)
@@ -149,29 +259,44 @@ export default function BrochureFlier({ weeds, selectedValues, groupName }) {
     const scoredWeeds = useMemo(() => {
         const weights = { extent: 20, impact: 20, invasiveness: 20, habitat: 20, control: 20 };
         return weeds.map(weed => {
+            // Robust lookup: Try exact match first, then normalized match
+            let govWeedData = governmentData[weed.name];
+            if (!govWeedData) {
+                const normKey = normalize(weed.name);
+                const matchedKey = govDataKeyMap[normKey];
+                if (matchedKey) {
+                    govWeedData = governmentData[matchedKey];
+                }
+            }
+            govWeedData = govWeedData || { impact: {}, invasiveness: {} };
 
-            // Simple Lookup: mergedWeeds is keyed by normalized slug/name
-            // But weeds passed in might have various name formats
-            // Try normalized name
-            const normKey = normalize(weed.name);
-            let unifiedData = mergedWeeds[normKey] || {};
+            // Extract scientific name for photo fetching
+            let scientificName = weed.scientificName || govWeedData.scientificName;
 
-            // Fallback: Check if weed.name matches an ID directly (unlikely if normalized)
-            // Or if weed.name is found via iteration (slow, but robust) if not found?
-            // mergedWeeds keys are normalized. So normKey should work.
+            // Fallback: if not in gov data, look up in vicWeedsMap/profileWeedsMap
+            if (!scientificName) {
+                const normKey = normalize(weed.name);
+                const vicMatch = vicWeedsMap[normKey] || profileWeedsMap[normKey];
+                if (vicMatch) scientificName = vicMatch.scientificName;
 
-            // Ensure impact/invasiveness are objects
-            const govImpact = unifiedData.impact || {};
-            const govInvasiveness = unifiedData.invasiveness || {};
+                // Fallback: extract from quickFacts
+                if (!scientificName && vicMatch && vicMatch.quickFacts && vicMatch.quickFacts.length > 0) {
+                    const firstFact = vicMatch.quickFacts[0];
+                    const match = firstFact.match(/\((.*?)\)/);
+                    if (match && match[1]) scientificName = match[1];
+                }
+            }
 
             const userReview = weed.scientificReview?.detailed || { impact: {}, invasiveness: {} };
             const allImpactItems = valueCategories.flatMap(cat => cat.items);
-            const impactResult = calculateCategoryScore(allImpactItems, userReview.impact || {}, govImpact, selectedValues);
+            const impactResult = calculateCategoryScore(allImpactItems, userReview.impact || {}, govWeedData.impact || {}, selectedValues);
             const allInvItems = invasivenessCategories.flatMap(cat => cat.items);
-            const invasivenessResult = calculateCategoryScore(allInvItems, userReview.invasiveness || {}, govInvasiveness); // Fixed: was govWeedData.invasiveness
+            const invasivenessResult = calculateCategoryScore(allInvItems, userReview.invasiveness || {}, govWeedData.invasiveness || {});
+
             const extentScore = (Number(weed.extent) || 1) * 20;
             const habitatScore = (Number(weed.habitat) || 1) === 2 ? 100 : 50;
             const controlScore = (weed.controlLevel || 2) * 25;
+
             const criteria = [
                 { key: 'extent', score: extentScore, hasData: true },
                 { key: 'impact', score: impactResult.scaled, hasData: impactResult.hasData },
@@ -179,16 +304,17 @@ export default function BrochureFlier({ weeds, selectedValues, groupName }) {
                 { key: 'habitat', score: habitatScore, hasData: true },
                 { key: 'control', score: controlScore, hasData: true }
             ];
+
             const active = criteria.filter(c => c.hasData);
             const activeWeight = active.reduce((s, c) => s + weights[c.key], 0);
             const norm = activeWeight > 0 ? activeWeight / 100 : 1;
             const finalScore = active.reduce((s, c) => s + (c.score * weights[c.key] / 100), 0) / norm;
 
-            // Merge unified data back into the weed object for display
             return {
                 ...weed,
-                ...unifiedData, // Gives us scientificName, profileUrl, etc.
-                name: weed.name, // Keep original user name? Or overwrite? Keep user name usually better for UI consistency
+                ...govWeedData, // Merged government data
+                scientificName, // Explicitly set resolved scientific name
+                name: weed.name,
                 finalScore,
                 scores: {
                     extent: extentScore,

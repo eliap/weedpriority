@@ -2,7 +2,22 @@ import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { valueCategories } from '../data/valuesData';
 import { invasivenessCategories } from '../data/invasivenessData';
-import governmentData from '../data/realGovernmentData.json';
+import governmentDataRaw from '../data/realGovernmentData.json';
+import scrapedData from '../data/weed_assessments.json';
+
+// Merge scraped data into government data, prioritizing scraped data
+const governmentData = { ...governmentDataRaw };
+Object.keys(scrapedData).forEach(key => {
+    if (governmentData[key]) {
+        governmentData[key] = {
+            ...governmentData[key],
+            impact: { ...governmentData[key].impact || {}, ...scrapedData[key].impact || {} },
+            invasiveness: { ...governmentData[key].invasiveness || {}, ...scrapedData[key].invasiveness || {} }
+        };
+    } else {
+        governmentData[key] = scrapedData[key];
+    }
+});
 
 // Scoring Constants
 const RATING_VALUES = { "L": 1, "ML": 2, "M": 3, "MH": 4, "H": 5 };

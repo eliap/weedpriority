@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { valueCategories } from '../data/valuesData';
 import { useNavigate } from 'react-router-dom';
 
-export default function ValuesAssessment({ selectedValues, setSelectedValues }) {
+export default function ValuesAssessment({ selectedValues, setSelectedValues, groupName, setGroupName }) {
     const navigate = useNavigate();
     // selectedValues is now passed as a prop
 
@@ -17,6 +17,24 @@ export default function ValuesAssessment({ selectedValues, setSelectedValues }) 
         <div className="max-w-4xl mx-auto p-6">
             <div className="mb-8">
                 <h2 className="font-amatic text-4xl text-teal-800 font-bold mb-4">Step 1: Define Community Values</h2>
+
+                {/* Group Name Input */}
+                <div className="mb-6 bg-teal-50 p-4 rounded-lg border border-teal-100">
+                    <label className="block text-sm font-bold text-teal-800 mb-2">
+                        Group / Organization Name
+                    </label>
+                    <input
+                        type="text"
+                        value={groupName || ''}
+                        onChange={(e) => setGroupName(e.target.value)}
+                        placeholder="e.g. Upper Wimmera Landcare"
+                        className="w-full max-w-md rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 sm:text-sm p-2 border"
+                    />
+                    <p className="text-xs text-teal-600 mt-1">
+                        This will appear on your generated reports and brochures.
+                    </p>
+                </div>
+
                 <p className="text-slate-600 mb-4">
                     Select the impact categories that are relevant to your site and community.
                     Unchecked items will be excluded from the final prioritization calculations.

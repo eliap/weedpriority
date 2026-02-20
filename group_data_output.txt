@@ -1,0 +1,303 @@
+
+
+############################################################
+PROCESSING: Weed prioritization worksheet_Jallukar 2024.xlsx
+############################################################
+
+### 1. Values (Ticked YES)
+- [x] Restrict human access?
+- [x] Damage to cultural sites?
+- [x] Impact flow?
+- [x] Impact water quality?
+- [x] Increase soil erosian?
+- [x] Reduce biomass of other species?
+- [x] Change fire regime?
+- [x] Impacts composition of high value EVC?
+- [x] Impacts structure?
+- [x] Impacts threatened flora?
+- [x] Impacts threatened fauna?
+- [x] No benefits to fauna?
+- [x] Injurious to fauna?
+- [x] Food source to pests?
+- [x] Provides harbor?
+- [x] Impacts yield?
+- [x] Impacts quality?
+- [x] Disease host/vector?
+
+### 2. Preliminary Weed List (Ranked & With Control Scores)
+| Rank | Weed Name | Gut Feel (Avg) | Extent (Rounded) | Habitat Value (Rounded) | Control Score (1-4) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | **African Weed Orchid (Disa bracteata)** | 1.0 | 3 | 2 | 4 |
+| 2 | **Sallow wattle (Acacia longifolia)** | 1.0 | 3 | 2 | 2 |
+| 3 | **Gazania r and s (Gazania rigens + splendens)** | 1.7 | 4 | 2 | 2 |
+| 4 | **Common Stork's-bill (Erodium cicutarium)** | 2.0 | 3 | 2 | Not Found |
+| 5 | **Freesia (Freesia alba x Freesia leich)** | 2.0 | 2 | 2 | 2 |
+| 6 | **Bridal creeper (Asparagus asparagoides)** | 2.3 | 4 | 2 | 2 |
+| 7 | **Purple woodsorrel (Oxalis purpurea)** | 2.7 | 3 | 2 | Not Found |
+| 8 | **Capeweed (Arctotheca calendula)** | 3.0 | 3 | 1 | Not Found |
+| 9 | **Red sorrel (Rumex acetosella)** | 3.0 | 2 | 1 | Not Found |
+| 10 | **Cootamundra wattle (Acacia baileyana)** | 3.0 | 3 | 1 | 2 |
+| 11 | **Cape tulip (one-leaf) (Moraea flaccida)** | 3.5 | 4 | 2 | 4 |
+| 12 | **Soursob (Oxalis pes-caprae)** | 3.5 | 3 | 1 | Not Found |
+| 13 | **Scotch thistle (Onopordum acanthium)** | 6.0 | 3 | 1 | 1 |
+| 14 | **Dandelions (Taraxacum spp.)** | 8.0 | 3 | 1 | Not Found |
+| - | **Belladonna lily (Amaryllis belladonna)** | not ranked | 3 | 1 | Not Found |
+| - | **Blackberry (Rubus spp.)** | not ranked | 3 | 1 | 2 |
+| - | **English ivy (Hedera helix)** | not ranked | 3 | 1 | 1 |
+| - | **Cat's ear (Hypochoeris radicata)** | not ranked | not ranked | not ranked | Not Found |
+| - | **Onion weed (Asphodelus fistulosus)** | not ranked | 1 | 1 | Not Found |
+| - | **Sweet vernal (Anthoxanthum odoratum)** | not ranked | 2 | 1 | Not Found |
+| - | **Yarra burgan (Kunzea leptospermoides)** | not ranked | 1 | 1 | 1 |
+| - | **Yorkshire fog (Holcus lanatus)** | not ranked | 3 | 2 | Not Found |
+| - | **Boneseed (Chrysanthemoides monilifera)** | not ranked | 3 | 2 | 2 |
+| - | **Arum lily (Zantedeschia aethiopica)** | not ranked | 3 | 2 | 2 |
+| - | **Wild gladiolus (Gladiolus undulatus)** | not ranked | 3 | 2 | 2 |
+
+
+############################################################
+PROCESSING: Weed prioritization worksheet_CrowlandsWarrak.xlsx
+############################################################
+
+### 1. Values (Ticked YES)
+- [x] Restrict human access?
+- [x] Injurious to people?
+- [x] Impact flow?
+- [x] Impact water quality?
+- [x] Increase soil erosian?
+- [x] Reduce biomass of other species?
+- [x] Change fire regime?
+- [x] Impacts composition of high value EVC?
+- [x] Impacts composition of medium value EVC?
+- [x] Impacts composition of low value EVC?
+- [x] Impacts structure?
+- [x] Impacts threatened flora?
+- [x] Impacts threatened fauna?
+- [x] Injurious to fauna?
+- [x] Food source to pests?
+- [x] Provides harbor?
+- [x] Impacts yield?
+- [x] Impacts quality?
+- [x] Affects land value?
+- [x] Change land use?
+- [x] Increase harvest costs?
+- [x] Disease host/vector?
+DEBUG: Ranking 11 weeds for Crowlands
+  - Spiny rush (Juncus acutus): gutFeel='3.0' parsed=3
+  - Horehound (Marrubium vulgare): gutFeel='2.5' parsed=2.5
+  - Gorse (Ulex europaeus): gutFeel='2.7' parsed=2.7
+  - Sweet briar (Rosa rubiginosa): gutFeel='4.0' parsed=4
+  - Bridal creeper (Asparagus asparagoides): gutFeel='3.5' parsed=3.5
+  - Gazania r and s (Gazania rigens + splendens): gutFeel='6.0' parsed=6
+  - Greater mulain: gutFeel='7.0' parsed=7
+  - Blackberry (Rubus spp.): gutFeel='4.0' parsed=4
+  - African weed orchid (Disa bracteata): gutFeel='1.0' parsed=1
+  - Caper spurge: gutFeel='2.0' parsed=2
+  - African boxthorn (Lycium ferocissimum): gutFeel='5.0' parsed=5
+DEBUG: After sorting:
+  - African weed orchid (Disa bracteata): 1
+  - Caper spurge: 2
+  - Horehound (Marrubium vulgare): 2.5
+  - Gorse (Ulex europaeus): 2.7
+  - Spiny rush (Juncus acutus): 3
+  - Bridal creeper (Asparagus asparagoides): 3.5
+  - Sweet briar (Rosa rubiginosa): 4
+  - Blackberry (Rubus spp.): 4
+  - African boxthorn (Lycium ferocissimum): 5
+  - Gazania r and s (Gazania rigens + splendens): 6
+  - Greater mulain: 7
+
+### 2. Preliminary Weed List (Ranked & With Control Scores)
+| Rank | Weed Name | Gut Feel (Avg) | Extent (Rounded) | Habitat Value (Rounded) | Control Score (1-4) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | **African weed orchid (Disa bracteata)** | 1.0 | 4 | not ranked | 4 |
+| 2 | **Caper spurge** | 2.0 | 4 | not ranked | Not Found |
+| 3 | **Horehound (Marrubium vulgare)** | 2.5 | 3 | 2 | 2 |
+| 4 | **Gorse (Ulex europaeus)** | 2.7 | 4 | 2 | Not Found |
+| 5 | **Spiny rush (Juncus acutus)** | 3.0 | 3 | 2 | Not Found |
+| 6 | **Bridal creeper (Asparagus asparagoides)** | 3.5 | 3 | 2 | 2 |
+| 7 | **Sweet briar (Rosa rubiginosa)** | 4.0 | 3 | 1 | 1 |
+| 8 | **Blackberry (Rubus spp.)** | 4.0 | 4 | 1 | 2 |
+| 9 | **African boxthorn (Lycium ferocissimum)** | 5.0 | 3 | not ranked | 1 |
+| 10 | **Gazania r and s (Gazania rigens + splendens)** | 6.0 | 3 | 2 | 2 |
+| 11 | **Greater mulain** | 7.0 | 3 | 1 | Not Found |
+| - | **Bathurst burr (Xanthium spinosum)** | not ranked | 5 | not ranked | Not Found |
+| - | **Paterson's curse (Echium plantagineum)** | not ranked | 5 | not ranked | Not Found |
+| - | **Cape tulip (one-leaf) (Moraea flaccida)** | not ranked | 5 | 2 | 4 |
+| - | **Wild watsonia (Watsonia meriana)** | not ranked | 5 | 2 | 2 |
+| - | **Tree of heaven (Ailanthus altissima)** | not ranked | not ranked | not ranked | Not Found |
+| - | **Hyacinth** | not ranked | 4 | not ranked | Not Found |
+
+
+############################################################
+PROCESSING: Weed prioritization worksheet_Elmhurst 2024_CURRENT.xlsx
+############################################################
+
+### 1. Values (Ticked YES)
+- [x] Restrict human access?
+- [x] Injurious to people?
+- [x] Damage to cultural sites?
+- [x] Impact flow?
+- [x] Impact water quality?
+- [x] Increase soil erosian?
+- [x] Reduce biomass of other species?
+- [x] Change fire regime?
+- [x] Impacts composition of high value EVC?
+- [x] Impacts composition of medium value EVC?
+- [x] Impacts structure?
+- [x] Impacts threatened flora?
+- [x] Impacts threatened fauna?
+- [x] Injurious to fauna?
+- [x] Provides harbor?
+- [x] Impacts yield?
+- [x] Impacts quality?
+- [x] Affects land value?
+- [x] Change land use?
+- [x] Increase harvest costs?
+- [x] Disease host/vector?
+
+### 2. Preliminary Weed List (Ranked & With Control Scores)
+| Rank | Weed Name | Gut Feel (Avg) | Extent (Rounded) | Habitat Value (Rounded) | Control Score (1-4) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | **barley grass (Hordeum leporinum )** | 1.0 | 2 | 2 | Not Found |
+| 2 | **heliotrope (Heliotropium europaeum)** | 1.0 | 4 | 2 | Not Found |
+| 3 | **Silver grass (Vulpia bromoides)** | 1.0 | 2 | 2 | Not Found |
+| 4 | **cork screw/erodium (Erodium botrys)** | 1.5 | 3 | 2 | Not Found |
+| 5 | **scotch thistle (Onopordum acanthium)** | 2.0 | 2 | 1 | 1 |
+| 6 | **shephards purse (Capsella bursa-pastoris)** | 2.0 | 4 | 1 | Not Found |
+| 7 | **gorse (Ulex europaeus)** | 2.3 | 3 | 2 | Not Found |
+| 8 | **lesser loosestrife (Lythrum hyssopifolia)** | 3.0 | 3 | 1 | Not Found |
+| 9 | **Silverleaf nightshade (Solanum elaeagnifolium)** | 3.0 | 3 | 1 | Not Found |
+| 10 | **spiny rush (Juncus acutus)** | 3.2 | 2 | 2 | Not Found |
+| 11 | **Capeweed (Arctotheca calendula)** | 3.3 | 3 | 2 | Not Found |
+| 12 | **Bathurst burr (Xanthium spinosum)** | 3.8 | 3 | 2 | Not Found |
+| 13 | **Cumbungi (Typha latifolia)** | 4.0 | 2 | 2 | Not Found |
+| 14 | **wire weed (Polygonum aviculare)** | 4.0 | 2 | 1 | Not Found |
+| 15 | **blackberry (Rubus spp.)** | 4.3 | 3 | 2 | 2 |
+| 16 | **bridal creeper (Asparagus asparagoides)** | 5.0 | 4 | 1 | 2 |
+| 17 | **saffron thistle (Carthamus lanatus)** | 5.0 | 3 | 1 | Not Found |
+| 18 | **Sweet briar (Rosa rubiginosa)** | 5.0 | 3 | 2 | 1 |
+| 19 | **horehound (Marrubium vulgare)** | 5.2 | 3 | 1 | 2 |
+| 20 | **paddy melon (Cucumis myriocarpus)** | 5.5 | 4 | 1 | Not Found |
+| 21 | **St. John's wort (Hypericum perforatum)** | 5.5 | 4 | 2 | Not Found |
+| 22 | **Paterson's curse (Echium plantagineum)** | 6.0 | 3 | 1 | Not Found |
+| 23 | **african weed orchid (Disa bracteata)** | 8.0 | 4 | 2 | 4 |
+| 24 | **Variegated thistle (Silybum marianum)** | 9.0 | 3 | 2 | Not Found |
+| 25 | **caltrop (Tribulus terrestris)** | 11.0 | 5 | 2 | Not Found |
+| 26 | **phalaris (Phalaris aquatica)** | 12.0 | 2 | 2 | Not Found |
+| 27 | **red gum (Eucalyptus camaldulensis)** | 13.0 | 2 | 2 | Not Found |
+| - | **doc (Rumex spp.)** | not ranked | not ranked | not ranked | Not Found |
+| - | **fragmaites (Phragmites australis)** | not ranked | 2 | 2 | Not Found |
+| - | **marshmallow (Malva parviflora)** | not ranked | not ranked | not ranked | Not Found |
+| - | **onion weed (Asphodelus fistulosus)** | not ranked | not ranked | not ranked | Not Found |
+| - | **prickly acacia (Acacia nilotica)** | not ranked | 1 | 2 | Not Found |
+| - | **river cone grass (unsure)** | not ranked | not ranked | not ranked | Not Found |
+| - | **soursob (Oxalis pes-caprae)** | not ranked | not ranked | not ranked | Not Found |
+| - | **wild lettuce (Lactuca serriola)** | not ranked | not ranked | not ranked | Not Found |
+| - | **Willows (other) (Salix spp.)** | not ranked | not ranked | not ranked | Not Found |
+
+
+############################################################
+PROCESSING: Weed prioritization worksheet_Stawell 2024_CURRENT.xlsx
+############################################################
+
+### 1. Values (Ticked YES)
+- [x] Restrict human access?
+- [x] Damage to cultural sites?
+- [x] Impact flow?
+- [x] Impact water quality?
+- [x] Increase soil erosian?
+- [x] Reduce biomass of other species?
+- [x] Change fire regime?
+- [x] Impacts composition of high value EVC?
+- [x] Impacts structure?
+- [x] Impacts threatened flora?
+- [x] Impacts threatened fauna?
+- [x] Injurious to fauna?
+- [x] Food source to pests?
+- [x] Provides harbor?
+- [x] Disease host/vector?
+
+### 2. Preliminary Weed List (Ranked & With Control Scores)
+| Rank | Weed Name | Gut Feel (Avg) | Extent (Rounded) | Habitat Value (Rounded) | Control Score (1-4) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | **Flax-leaved broom (Genista linifolia)** | 1.6 | not ranked | not ranked | 2 |
+| 2 | **English broom  (Cytisus scoparius)** | 1.7 | not ranked | not ranked | 2 |
+| 3 | **Cape broom (Genista monspessulana)** | 1.7 | not ranked | not ranked | 2 |
+| 4 | **Cootamundra wattle (Acacia baileyana)** | 2.0 | not ranked | not ranked | 2 |
+| 5 | **Boneseed (Chrysanthemoides monilifera)** | 2.3 | not ranked | not ranked | 2 |
+| 6 | **Gazania r and s (Gazania rigens + splendens)** | 2.6 | not ranked | not ranked | 2 |
+| 7 | **Freesia (Freesia alba x Freesia leich)** | 3.0 | not ranked | not ranked | 2 |
+| 8 | **Cape tulip (one-leaf) (Moraea flaccida)** | 3.3 | not ranked | not ranked | 4 |
+| 9 | **Ixia (Ixia spp.)** | 4.7 | not ranked | not ranked | 1 |
+| 10 | **Bluebell creeper (Billardiera heterophylla)** | 5.0 | not ranked | not ranked | 1 |
+| 11 | **Gorse (Ulex europaeus)** | 5.0 | not ranked | not ranked | Not Found |
+| 12 | **Fleabane sum (Conyza sumatrensis)** | 6.0 | not ranked | not ranked | Not Found |
+| 13 | **Blue Periwinkle (Vinca major)** | 6.0 | not ranked | not ranked | 2 |
+| 14 | **Bridal Creeper (Asparagus asparagoides)** | 7.0 | not ranked | not ranked | 2 |
+| 15 | **Velvet cotoneaster (Cotoneaster pannosus)** | 7.0 | not ranked | not ranked | Not Found |
+| 16 | **Prickly pear (Opuntia monacantha)** | 7.0 | not ranked | not ranked | Not Found |
+| 17 | **sweet pittosporum (Pittosporum undulatum)** | 8.0 | not ranked | not ranked | 1 |
+| 18 | **Desert Ash (Fraxinus angustifolia)** | 8.5 | not ranked | not ranked | 1 |
+| 19 | **Amsinckia (Amsinckia spp.)** | 9.0 | not ranked | not ranked | 1 |
+| 20 | **African weed orchid (Disa bracteata)** | 11.0 | not ranked | not ranked | 4 |
+| - | **Sallow wattle (Acacia longifolia)** | not ranked | not ranked | not ranked | 2 |
+| - | **Tagasaste var. pro (Cytisus proliferus)** | not ranked | not ranked | not ranked | 1 |
+| - | **Perennial veldt grass (Ehrharta calycina)** | not ranked | not ranked | not ranked | 2 |
+| - | **African boxthorn (Lycium ferocissimum)** | not ranked | not ranked | not ranked | 1 |
+| - | **Horehound (Marrubium vulgare)** | not ranked | not ranked | not ranked | 2 |
+| - | **Sweet briar (Rosa rubiginosa)** | not ranked | not ranked | not ranked | 1 |
+| - | **Wild watsonia (Watsonia meriana)** | not ranked | not ranked | not ranked | 2 |
+
+
+############################################################
+PROCESSING: Weed prioritization worksheet_FINAL for sharing_protected - Laharum 110225.xlsx
+############################################################
+
+### 1. Values (Ticked YES)
+- [x] Restrict human access?
+- [x] Damage to cultural sites?
+- [x] Impact flow?
+- [x] Impact water quality?
+- [x] Increase soil erosian?
+- [x] Reduce biomass of other species?
+- [x] Change fire regime?
+- [x] Impacts composition of high value EVC?
+- [x] Impacts composition of medium value EVC?
+- [x] Impacts composition of low value EVC?
+- [x] Impacts structure?
+- [x] Impacts threatened flora?
+- [x] Impacts threatened fauna?
+- [x] No benefits to fauna?
+- [x] Injurious to fauna?
+- [x] Provides harbor?
+- [x] Impacts yield?
+- [x] Impacts quality?
+- [x] Affects land value?
+- [x] Change land use?
+- [x] Disease host/vector?
+
+### 2. Preliminary Weed List (Ranked & With Control Scores)
+| Rank | Weed Name | Gut Feel (Avg) | Extent (Rounded) | Habitat Value (Rounded) | Control Score (1-4) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | **St. John's wort (Hypericum perforatum)** | 1.0 | 2 | 2 | Not Found |
+| 2 | **Horehound (Marrubium vulgare)** | 2.0 | 3 | 2 | 2 |
+| 3 | **Onion Grass (Romulea rosea)** | 3.0 | 3 | 2 | Not Found |
+| 4 | **Perennial veldt grass (Ehrharta calycina)** | 4.0 | 2 | 2 | 2 |
+| 5 | **Phalaris (Phalaris aquatica)** | 4.0 | 2 | 2 | Not Found |
+| 6 | **Sallow Wattle (Acacia longifolia)** | 5.0 | 3 | 2 | 2 |
+| 7 | **Bridal creeper (Asparagus asparagoides)** | 5.0 | 3 | 2 | 2 |
+| 8 | **Stinkwort (Dittrichia graveolens)** | 5.5 | 4 | 2 | Not Found |
+| 9 | **Paterson's curse (Echium plantagineum)** | 6.0 | 3 | 2 | Not Found |
+| 10 | **Capeweed (Arctotheca calendula)** | 7.5 | 2 | 2 | Not Found |
+| 11 | **African weed orchid (Disa bracteata)** | 8.0 | 3 | 2 | 4 |
+| 12 | **Cape tulip (one-leaf) (Moraea flaccida)** | 9.0 | 3 | 1 | 4 |
+| 13 | **African olive (Olea europaea)** | 10.0 | 4 | 1 | Not Found |
+| 14 | **Saffron thistle (Carthamus lanatus)** | 12.0 | 1 | 1 | Not Found |
+| 15 | **Scotch thistle (Onopordum acanthium)** | 14.0 | 4 | 2 | 1 |
+| 16 | **Soldier thistle (Picnomon acarna)** | 15.0 | 3 | 1 | Not Found |
+| 17 | **Soursob (Oxalis pes-caprae)** | 16.0 | 2 | 1 | Not Found |
+| 18 | **Mexican feather grass (Nassella tenuissima)** | 17.0 | 5 | 2 | Not Found |
+| - | **Fairy grass (Lachnagrostis filiformis)** | not ranked | 2 | 2 | Not Found |
+| - | **Heliotrope (Heliotropium europaeum)** | not ranked | 3 | not ranked | Not Found |
+| - | **Briar rose** | not ranked | not ranked | not ranked | Not Found |
+| - | **paddymelon** | not ranked | not ranked | not ranked | Not Found |

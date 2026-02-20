@@ -1,12 +1,87 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import html2pdf from 'html2pdf.js';
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 import { valueCategories } from '../data/valuesData';
 import { invasivenessCategories } from '../data/invasivenessData';
-import governmentData from '../data/realGovernmentData.json';
+import governmentDataRaw from '../data/realGovernmentData.json';
 import weedProfiles from '../data/weedProfiles.json';
+import scrapedData from '../data/weed_assessments.json';
+import vicWeeds from '../data/weeds_victoria.json';
+
+// Normalize helper
+const normalize = (str) => str ? str.toLowerCase().replace(/[^a-z0-9]/g, '') : '';
+
+// 1. Create a lookup map for Victorian weeds
+const vicWeedsMap = {};
+Object.values(vicWeeds).forEach(weed => {
+    if (weed.name) vicWeedsMap[normalize(weed.name)] = weed;
+    if (weed.id) vicWeedsMap[normalize(weed.id)] = weed;
+
+    // Map by Aliases
+    if (weed.name) {
+        const aliases = weed.name.split(/,|;|\/|\(|\)/).map(s => s.trim());
+        aliases.forEach(alias => {
+            if (alias.length > 2) vicWeedsMap[normalize(alias)] = weed;
+        });
+    }
+});
+
+// 2. Merge scraped data into government data
+// Uses a 3-layer lookup to find the matching Victorian entry:
+//   Layer 1: Normalized key from weed_assessments → vicWeedsMap
+//   Layer 2: Normalized assessment name → vicWeedsMap
+//   Layer 3: profileUrl slug from weedProfiles → vicWeeds[slug] (most reliable)
+const governmentData = { ...governmentDataRaw };
+Object.keys(scrapedData).forEach(key => {
+    const govItem = governmentData[key] || {};
+    const assessmentItem = scrapedData[key];
+
+    // Layer 1 & 2: Name-based lookup via vicWeedsMap
+    let vicItem = vicWeedsMap[normalize(key)] || vicWeedsMap[normalize(assessmentItem.name)];
+
+    // Layer 3: Use profileUrl slug from weedProfiles as a reliable bridge
+    // (weeds.org.au slugs match weeds_victoria.json entry IDs)
+    if (!vicItem) {
+        const profile = weedProfiles[key];
+        if (profile?.profileUrl) {
+            const slug = profile.profileUrl.replace(/\/$/, '').split('/').pop();
+            if (slug && vicWeeds[slug]) {
+                vicItem = vicWeeds[slug];
+            }
+        }
+    }
+
+    vicItem = vicItem || {};
+
+    governmentData[key] = {
+        ...govItem,
+        ...assessmentItem,
+        // Content overrides (vic > assessment > gov)
+        description: vicItem.description || assessmentItem.description || govItem.description,
+        controlMethods: vicItem.controlMethods || assessmentItem.controlMethods || govItem.controlMethods,
+        images: vicItem.images && vicItem.images.length > 0 ? vicItem.images : (assessmentItem.images || govItem.images),
+        // Score preservation
+        impact: { ...govItem.impact || {}, ...assessmentItem.impact || {} },
+        invasiveness: { ...govItem.invasiveness || {}, ...assessmentItem.invasiveness || {} },
+        // Rich fields from weeds_victoria.json
+        quickFacts: vicItem.quickFacts || [],
+        similarSpecies: vicItem.similarSpecies || '',
+        habitat: vicItem.habitat || '',
+        origin: vicItem.origin || assessmentItem.origin || govItem.origin || '',
+        growthForm: vicItem.growthForm || assessmentItem.growthForm || govItem.growthForm || '',
+        flowerColour: vicItem.flowerColour || assessmentItem.flowerColour || govItem.flowerColour || '',
+        scientificName: vicItem.scientificName || assessmentItem.scientificName || govItem.scientificName
+    };
+});
 
 // Scoring constants (duplicated from ActionPlan for standalone use)
+// Create a normalized key map for governmentData to handle case mismatches
+const govDataKeyMap = {};
+Object.keys(governmentData).forEach(key => {
+    govDataKeyMap[normalize(key)] = key;
+});
+
 const RATING_VALUES = { "L": 1, "ML": 2, "M": 3, "MH": 4, "H": 5 };
 const CONFIDENCE_VALUES = { "L": 0.2, "ML": 0.4, "M": 0.6, "MH": 0.8, "H": 1.0 };
 
@@ -35,6 +110,36 @@ const calculateCategoryScore = (items, userReviews, govReviews, selectedIds = nu
     };
 };
 
+// Convert an image URL to a base64 data URI to avoid cross-origin html2canvas failures
+// Routes through Vite dev server proxy to bypass CORS restrictions
+function proxyUrl(url) {
+    if (url.includes('inaturalist-open-data.s3.amazonaws.com')) {
+        return url.replace('https://inaturalist-open-data.s3.amazonaws.com', '/inat-photos');
+    }
+    if (url.includes('static.inaturalist.org')) {
+        return url.replace('https://static.inaturalist.org', '/inat-static');
+    }
+    return url;
+}
+
+async function toDataUrl(url) {
+    try {
+        const proxied = proxyUrl(url);
+        const response = await fetch(proxied);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const blob = await response.blob();
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+        });
+    } catch (e) {
+        console.warn('Failed to convert image to base64:', url, e);
+        return null;
+    }
+}
+
 // Fetch cover image from iNaturalist
 async function fetchINatPhoto(scientificName) {
     try {
@@ -43,10 +148,14 @@ async function fetchINatPhoto(scientificName) {
         if (data.results && data.results.length > 0) {
             const taxon = data.results[0];
             if (taxon.default_photo) {
-                return {
-                    url: taxon.default_photo.medium_url || taxon.default_photo.url,
-                    attribution: taxon.default_photo.attribution || 'iNaturalist'
-                };
+                const originalUrl = taxon.default_photo.medium_url || taxon.default_photo.url;
+                const dataUrl = await toDataUrl(originalUrl);
+                if (dataUrl) {
+                    return {
+                        url: dataUrl,
+                        attribution: taxon.default_photo.attribution || 'iNaturalist'
+                    };
+                }
             }
         }
     } catch (e) {
@@ -55,7 +164,7 @@ async function fetchINatPhoto(scientificName) {
     return null;
 }
 
-export default function BrochureExport({ weeds, selectedValues }) {
+export default function BrochureExport({ weeds, selectedValues, groupName }) {
     const navigate = useNavigate();
     const brochureRef = useRef(null);
     const [photos, setPhotos] = useState({});
@@ -67,7 +176,16 @@ export default function BrochureExport({ weeds, selectedValues }) {
     const scoredWeeds = useMemo(() => {
         const weights = { extent: 20, impact: 20, invasiveness: 20, habitat: 20, control: 20 };
         return weeds.map(weed => {
-            const govWeedData = governmentData[weed.name] || { impact: {}, invasiveness: {} };
+            // Robust lookup: Try exact match first, then normalized match
+            let govWeedData = governmentData[weed.name];
+            if (!govWeedData) {
+                const normKey = normalize(weed.name);
+                const matchedKey = govDataKeyMap[normKey];
+                if (matchedKey) {
+                    govWeedData = governmentData[matchedKey];
+                }
+            }
+            govWeedData = govWeedData || { impact: {}, invasiveness: {} };
             const userReview = weed.scientificReview?.detailed || { impact: {}, invasiveness: {} };
             const allImpactItems = valueCategories.flatMap(cat => cat.items);
             const impactResult = calculateCategoryScore(allImpactItems, userReview.impact || {}, govWeedData.impact || {}, selectedValues);
@@ -121,20 +239,88 @@ export default function BrochureExport({ weeds, selectedValues }) {
 
     const handleExportPDF = async () => {
         setGenerating(true);
+        await new Promise(r => setTimeout(r, 200));
+
         const element = brochureRef.current;
-        const opt = {
-            margin: 0,
-            filename: 'weed-priority-full-report.pdf',
-            image: { type: 'jpeg', quality: 0.95 },
-            html2canvas: { scale: 2, useCORS: true, allowTaint: true },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-            pagebreak: { mode: ['css', 'legacy'], avoid: '.weed-card' }
-        };
+
         try {
-            await html2pdf().set(opt).from(element).save();
+            // Check for data-page elements (per-page capture), otherwise capture whole element
+            const pageElements = element.querySelectorAll('[data-page]');
+            const pdfWidth = 210;
+            const pdfHeight = 297;
+            const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+
+            // Recursively strip only leaf-level CSS rules that use oklch()
+            // Preserves @layer base (box-sizing:border-box, etc.)
+            function stripOklch(ruleList) {
+                for (let j = ruleList.length - 1; j >= 0; j--) {
+                    const rule = ruleList[j];
+                    if (rule.cssRules && rule.cssRules.length > 0) {
+                        stripOklch(rule.cssRules);
+                    } else if (rule.cssText && rule.cssText.includes('oklch')) {
+                        try {
+                            const parent = rule.parentStyleSheet || rule.parentRule;
+                            if (parent && parent.deleteRule) parent.deleteRule(j);
+                        } catch (e) { /* skip */ }
+                    }
+                }
+            }
+
+            function cleanClonedDoc(clonedDoc) {
+                for (const sheet of [...clonedDoc.styleSheets]) {
+                    try {
+                        stripOklch(sheet.cssRules);
+                    } catch (e) {
+                        if (sheet.ownerNode) sheet.ownerNode.remove();
+                    }
+                }
+                const resetStyle = clonedDoc.createElement('style');
+                resetStyle.textContent = `
+                    *, *::before, *::after { box-sizing: border-box; }
+                    * { margin: 0; }
+                    img, svg, video, canvas { display: block; max-width: 100%; }
+                `;
+                clonedDoc.head.appendChild(resetStyle);
+            }
+
+            if (pageElements.length > 0) {
+                for (let i = 0; i < pageElements.length; i++) {
+                    const pageEl = pageElements[i];
+                    const canvas = await html2canvas(pageEl, {
+                        scale: 2,
+                        useCORS: false,
+                        allowTaint: false,
+                        width: pageEl.offsetWidth,
+                        height: pageEl.offsetHeight,
+                        scrollX: 0,
+                        scrollY: 0,
+                        windowWidth: pageEl.offsetWidth,
+                        onclone: cleanClonedDoc
+                    });
+                    const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                    if (i > 0) pdf.addPage();
+                    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                }
+            } else {
+                // Fallback: capture whole element as single page
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: false,
+                    allowTaint: false,
+                    scrollX: 0,
+                    scrollY: 0,
+                    onclone: cleanClonedDoc
+                });
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                const imgWidth = pdfWidth;
+                const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+                pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight);
+            }
+
+            pdf.save('weed-priority-full-report.pdf');
         } catch (e) {
             console.error('PDF generation failed:', e);
-            alert('PDF generation failed. Try using Print instead.');
+            alert('PDF generation failed: ' + (e.message || e) + '\n\nTry using Print instead.');
         }
         setGenerating(false);
     };
@@ -226,7 +412,7 @@ export default function BrochureExport({ weeds, selectedValues }) {
                     pageBreakAfter: 'always'
                 }}>
                     <div style={{ fontSize: '18px', letterSpacing: '8px', textTransform: 'uppercase', opacity: 0.7, marginBottom: '20px' }}>
-                        Project Platypus
+                        {groupName || 'Project Platypus'}
                     </div>
                     <h1 style={{ fontSize: '42px', fontWeight: 800, lineHeight: 1.2, marginBottom: '16px' }}>
                         Weed Priority<br />Assessment
@@ -301,6 +487,41 @@ export default function BrochureExport({ weeds, selectedValues }) {
                     const photo = photos[weed.name];
                     const scoreColor = getScoreColor(weed.finalScore);
 
+                    // Robust lookup into the merged governmentData for Quick Facts, origin, etc.
+                    let govData = governmentData[weed.name];
+                    if (!govData) {
+                        const normKey = normalize(weed.name);
+                        const matchedKey = govDataKeyMap[normKey];
+                        if (matchedKey) govData = governmentData[matchedKey];
+                    }
+                    // Fallback: look up vic data directly via profileUrl slug
+                    if (!govData || (!govData.quickFacts || govData.quickFacts.length === 0)) {
+                        if (profile.profileUrl) {
+                            const slug = profile.profileUrl.replace(/\/$/, '').split('/').pop();
+                            if (slug && vicWeeds[slug]) {
+                                const vicDirect = vicWeeds[slug];
+                                govData = {
+                                    ...govData, ...vicDirect,
+                                    // Preserve scores from govData
+                                    impact: govData?.impact || {},
+                                    invasiveness: govData?.invasiveness || {}
+                                };
+                            }
+                        }
+                    }
+                    govData = govData || {};
+
+                    // Prefer govData (merged from weeds_victoria.json) over weedProfiles
+                    const quickFacts = govData.quickFacts || profile.quickFacts || [];
+                    const origin = govData.origin || profile.origin || '—';
+                    const growthForm = govData.growthForm || profile.growthForm || '—';
+                    const flowerColour = govData.flowerColour || profile.flowerColour || '—';
+                    const scientificName = govData.scientificName || profile.scientificName || '';
+                    const commonNames = govData.commonName
+                        ? govData.commonName.split(/,|;/).map(s => s.trim()).slice(0, 3).join(', ')
+                        : (profile.commonNames ? profile.commonNames.slice(0, 3).join(', ') : '—');
+                    const profileUrl = govData.url || profile.profileUrl || '';
+
                     return (
                         <div key={weed.id} className="weed-card" style={{ pageBreakBefore: 'always', padding: '0', minHeight: '297mm' }}>
                             {/* Header bar */}
@@ -318,7 +539,7 @@ export default function BrochureExport({ weeds, selectedValues }) {
                                     </div>
                                     <h2 style={{ fontSize: '28px', fontWeight: 800, margin: '4px 0' }}>{weed.name}</h2>
                                     <div style={{ fontSize: '16px', fontStyle: 'italic', opacity: 0.9 }}>
-                                        {profile.scientificName || ''}
+                                        {scientificName}
                                     </div>
                                 </div>
                                 <div style={{
@@ -347,7 +568,7 @@ export default function BrochureExport({ weeds, selectedValues }) {
                                                 <img
                                                     src={photo.url}
                                                     alt={weed.name}
-                                                    crossOrigin="anonymous"
+                                                    crossOrigin={undefined}
                                                     style={{
                                                         width: '260px',
                                                         height: '200px',
@@ -413,13 +634,13 @@ export default function BrochureExport({ weeds, selectedValues }) {
                                 </div>
 
                                 {/* Quick Facts */}
-                                {profile.quickFacts && profile.quickFacts.length > 0 && (
+                                {quickFacts.length > 0 && (
                                     <div style={{ marginBottom: '24px' }}>
                                         <h3 style={{ fontSize: '14px', fontWeight: 700, color: '#334155', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>
                                             Quick Facts
                                         </h3>
                                         <div style={{ columns: '2', columnGap: '24px', fontSize: '12px', lineHeight: 1.7, color: '#475569' }}>
-                                            {profile.quickFacts.map((fact, fi) => (
+                                            {quickFacts.map((fact, fi) => (
                                                 <div key={fi} style={{ breakInside: 'avoid', marginBottom: '10px', paddingLeft: '16px', position: 'relative' }}>
                                                     <span style={{ position: 'absolute', left: '0', color: scoreColor, fontWeight: 700 }}>•</span>
                                                     {fact}
@@ -440,10 +661,10 @@ export default function BrochureExport({ weeds, selectedValues }) {
                                     fontSize: '12px'
                                 }}>
                                     {[
-                                        { label: 'Origin', value: profile.origin || '—' },
-                                        { label: 'Growth Form', value: profile.growthForm || '—' },
-                                        { label: 'Flower Colour', value: profile.flowerColour || '—' },
-                                        { label: 'Common Names', value: profile.commonNames ? profile.commonNames.slice(0, 3).join(', ') : '—' }
+                                        { label: 'Origin', value: origin },
+                                        { label: 'Growth Form', value: growthForm },
+                                        { label: 'Flower Colour', value: flowerColour },
+                                        { label: 'Common Names', value: commonNames }
                                     ].map(({ label, value }, i) => (
                                         <div key={label} style={{ flex: 1, padding: '12px 16px', borderRight: i < 3 ? '1px solid #e2e8f0' : 'none' }}>
                                             <div style={{ fontWeight: 700, color: '#64748b', fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '2px' }}>{label}</div>
@@ -453,9 +674,9 @@ export default function BrochureExport({ weeds, selectedValues }) {
                                 </div>
 
                                 {/* Source attribution */}
-                                {profile.profileUrl && (
+                                {profileUrl && (
                                     <div style={{ marginTop: '16px', fontSize: '10px', color: '#94a3b8' }}>
-                                        Source: Weeds Australia — <span style={{ textDecoration: 'underline' }}>{profile.profileUrl}</span>
+                                        Source: Weeds Australia — <span style={{ textDecoration: 'underline' }}>{profileUrl}</span>
                                     </div>
                                 )}
                             </div>

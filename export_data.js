@@ -62,7 +62,8 @@ const db = new sqlite3.Database(DB_PATH);
 
 db.all(`
     SELECT 
-        w.common_name, 
+        w.common_name,
+        w.url, 
         a.type, 
         a.question, 
         a.comments, 
@@ -81,7 +82,7 @@ db.all(`
     rows.forEach(row => {
         const name = row.common_name.trim(); // Normalize name
         if (!data[name]) {
-            data[name] = { invasiveness: {}, impact: {} };
+            data[name] = { invasiveness: {}, impact: {}, sourceUrl: row.url };
         }
 
         const questionLower = row.question.toLowerCase();

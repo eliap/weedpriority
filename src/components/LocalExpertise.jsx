@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import realWeedData from '../data/realGovernmentData.json';
 import scrapedData from '../data/weed_assessments.json';
+import weedProfiles from '../data/weedProfiles.json';
 
 const AVAILABLE_WEEDS = Array.from(new Set([
     ...Object.keys(realWeedData),
@@ -13,47 +14,106 @@ export default function LocalExpertise({ weeds, setWeeds }) {
     const [newWeedName, setNewWeedName] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
+    const [useScientificNames, setUseScientificNames] = useState(false);
 
-    // Filter suggestions based on input
-    const updateSuggestions = (value) => {
-        if (value.trim() === '') {
-            const filtered = AVAILABLE_WEEDS.filter(w => !weeds.some(existing => existing.name === w));
-            setSuggestions(filtered);
+    // Filter suggestions based on input and current toggle state
+    const getFilteredSuggestions = (inputValue) => {
+        let filtered;
+
+        if (inputValue.trim() === '') {
+            filtered = AVAILABLE_WEEDS.filter(w => !weeds.some(existing => existing.name === w));
         } else {
-            const filtered = AVAILABLE_WEEDS.filter(w =>
-                w.toLowerCase().includes(value.toLowerCase()) &&
-                !weeds.some(existing => existing.name === w)
-            );
-            setSuggestions(filtered);
+            const lowerValue = inputValue.toLowerCase();
+            filtered = AVAILABLE_WEEDS.filter(w => {
+                // Check if weed is already added
+                if (weeds.some(existing => existing.name === w)) return false;
+
+                if (useScientificNames) {
+                    // Match against scientific name
+                    const sciName = weedProfiles[w]?.scientificName || '';
+                    return sciName.toLowerCase().includes(lowerValue);
+                } else {
+                    // Match against common name
+                    return w.toLowerCase().includes(lowerValue);
+                }
+            });
         }
+
+        // Sort by Scientific Name if toggle is active
+        if (useScientificNames) {
+            filtered.sort((a, b) => {
+                const sciA = (weedProfiles[a]?.scientificName || '').toLowerCase();
+                const sciB = (weedProfiles[b]?.scientificName || '').toLowerCase();
+                return sciA.localeCompare(sciB);
+            });
+        }
+
+        return filtered;
     };
 
+    // Update suggestions when toggle changes, input changes, or list changes
+    useEffect(() => {
+        const filtered = getFilteredSuggestions(newWeedName);
+        setSuggestions(filtered);
+    }, [newWeedName, useScientificNames, weeds]);
+
     const handleInputChange = (e) => {
-        const value = e.target.value;
-        setNewWeedName(value);
-        updateSuggestions(value);
+        setNewWeedName(e.target.value);
         setShowSuggestions(true);
     };
 
-    const selectWeed = (name) => {
-        setNewWeedName(name);
-        setSuggestions([]);
+    const getDisplayName = (commonName) => {
+        if (useScientificNames) {
+            return weedProfiles[commonName]?.scientificName || commonName;
+        }
+        return commonName;
+    };
+
+    const selectWeed = (commonName) => {
+        setNewWeedName(getDisplayName(commonName));
+        // We keep suggestions empty after selection until user types again, 
+        // OR we could leave them? Usually standard to close.
         setShowSuggestions(false);
+    };
+
+    // Helper to resolve the input text back to a Common Name Key
+    const resolveCommonName = (input) => {
+        // 1. Try exact match on Common Name
+        if (AVAILABLE_WEEDS.includes(input)) return input;
+
+        // 2. Try exact match on Scientific Name
+        const found = AVAILABLE_WEEDS.find(w => {
+            const sci = weedProfiles[w]?.scientificName;
+            return sci && sci.toLowerCase() === input.toLowerCase();
+        });
+        if (found) return found;
+
+        return null;
     };
 
     const addWeed = (e) => {
         e.preventDefault();
         if (!newWeedName.trim()) return;
 
-        // Ensure exact match if possible, or just add what they typed if they insist? 
-        // User requested: "click the weed you want and enter it with the exact spelling"
-        // We'll trust their selection or input, but autocomplete guides them.
+        const resolvedCommonName = resolveCommonName(newWeedName);
+
+        if (!resolvedCommonName) {
+            alert("Please select a valid weed from the list.");
+            return;
+        }
+
+        // Check duplicates again just in case
+        if (weeds.some(w => w.name === resolvedCommonName)) {
+            alert("This weed is already in your list.");
+            setNewWeedName('');
+            return;
+        }
 
         setWeeds([
             ...weeds,
             {
                 id: Date.now(),
-                name: newWeedName,
+                name: resolvedCommonName, // ALWAYS store the common name key
                 rank: weeds.length + 1,
                 extent: 1,
                 habitat: 1
@@ -76,16 +136,38 @@ export default function LocalExpertise({ weeds, setWeeds }) {
     return (
         <div className="max-w-6xl mx-auto p-6">
             <div className="mb-8">
-                <h2 className="font-amatic text-4xl text-teal-800 font-bold mb-4">Step 2: Local Expertise</h2>
-                <p className="text-slate-600 mb-4 max-w-3xl">
-                    Search for weeds (e.g. "Gorse") to add them to your priority list.
-                    Then, assign a "Gut Feel" rank (1 = highest priority), and score the Extent and Habitat impact.
-                </p>
+                <div className="flex justify-between items-start">
+                    <div>
+                        <h2 className="font-amatic text-4xl text-teal-800 font-bold mb-4">Step 2: Local Expertise</h2>
+                        <p className="text-slate-600 mb-4 max-w-3xl">
+                            Search for weeds (e.g. "Gorse") to add them to your priority list.
+                            Then, assign a "Gut Feel" rank (1 = highest priority), and score the Extent and Habitat impact.
+                        </p>
+                    </div>
+                    {/* Toggle Switch */}
+                    <div className="flex items-center gap-3 bg-white p-2 rounded-lg border border-slate-200 shadow-sm">
+                        <span className={`text-sm font-bold ${!useScientificNames ? 'text-teal-700' : 'text-slate-400'}`}>Common Names</span>
+                        <button
+                            onClick={() => {
+                                setUseScientificNames(!useScientificNames);
+                                // No longer clearing input/suggestions here
+                            }}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 ${useScientificNames ? 'bg-teal-600' : 'bg-slate-300'}`}
+                        >
+                            <span
+                                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${useScientificNames ? 'translate-x-6' : 'translate-x-1'}`}
+                            />
+                        </button>
+                        <span className={`text-sm font-bold ${useScientificNames ? 'text-teal-700' : 'text-slate-400'}`}>Scientific Names</span>
+                    </div>
+                </div>
             </div>
 
             {/* Add Weed Form */}
             <form onSubmit={addWeed} className="mb-10 bg-white p-6 rounded-lg shadow-sm border border-slate-200 relative">
-                <label className="block text-sm font-medium text-slate-700 mb-2">Search & Add Weed</label>
+                <label className="block text-sm font-medium text-slate-700 mb-2">
+                    Search & Add Weed ({useScientificNames ? 'Scientific Name' : 'Common Name'})
+                </label>
                 <div className="flex gap-4 relative">
                     <div className="relative flex-grow">
                         <input
@@ -93,10 +175,9 @@ export default function LocalExpertise({ weeds, setWeeds }) {
                             value={newWeedName}
                             onChange={handleInputChange}
                             onFocus={() => {
-                                updateSuggestions(newWeedName);
                                 setShowSuggestions(true);
                             }}
-                            placeholder="Start typing or click to see all options..."
+                            placeholder={useScientificNames ? "e.g. Ulex europaeus..." : "e.g. Gorse..."}
                             className="w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 sm:text-sm p-3 border"
                             autoComplete="off"
                             onBlur={() => {
@@ -113,13 +194,16 @@ export default function LocalExpertise({ weeds, setWeeds }) {
                         {/* Autocomplete Dropdown */}
                         {showSuggestions && suggestions.length > 0 && (
                             <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1 max-h-60 overflow-y-auto shadow-lg">
-                                {suggestions.map((weed) => (
+                                {suggestions.map((commonNameKey) => (
                                     <li
-                                        key={weed}
-                                        onClick={() => selectWeed(weed)}
-                                        className="px-4 py-2 hover:bg-teal-50 cursor-pointer text-sm text-slate-700 hover:text-teal-800"
+                                        key={commonNameKey}
+                                        onClick={() => selectWeed(commonNameKey)}
+                                        className="px-4 py-2 hover:bg-teal-50 cursor-pointer text-sm text-slate-700 hover:text-teal-800 flex justify-between items-center"
                                     >
-                                        {weed}
+                                        <span className="font-medium">{getDisplayName(commonNameKey)}</span>
+                                        <span className="text-xs text-slate-400 italic">
+                                            {useScientificNames ? commonNameKey : (weedProfiles[commonNameKey]?.scientificName || '')}
+                                        </span>
                                     </li>
                                 ))}
                             </ul>
@@ -234,7 +318,17 @@ export default function LocalExpertise({ weeds, setWeeds }) {
                                 weeds.sort((a, b) => a.rank - b.rank).map((weed) => (
                                     <tr key={weed.id} className="hover:bg-slate-50 transition-colors">
                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
-                                            {weed.name}
+                                            {getDisplayName(weed.name)}
+                                            {useScientificNames && (
+                                                <span className="block text-xs text-slate-400 font-normal italic">
+                                                    {weed.name}
+                                                </span>
+                                            )}
+                                            {!useScientificNames && weedProfiles[weed.name]?.scientificName && (
+                                                <span className="block text-xs text-slate-400 font-normal italic">
+                                                    {weedProfiles[weed.name].scientificName}
+                                                </span>
+                                            )}
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-center">
                                             <input
@@ -247,10 +341,11 @@ export default function LocalExpertise({ weeds, setWeeds }) {
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-center">
                                             <select
-                                                value={weed.extent}
-                                                onChange={(e) => updateWeed(weed.id, 'extent', e.target.value)}
+                                                value={weed.extent || ''}
+                                                onChange={(e) => updateWeed(weed.id, 'extent', e.target.value === '' ? null : e.target.value)}
                                                 className="rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 sm:text-sm p-1 border"
                                             >
+                                                <option value="">Select...</option>
                                                 <option value="1">1 - Large pop, stable</option>
                                                 <option value="2">2 - Large pop, expanding</option>
                                                 <option value="3">3 - Small pop, slow spread</option>
@@ -260,10 +355,11 @@ export default function LocalExpertise({ weeds, setWeeds }) {
                                         </td>
                                         <td className="px-6 py-4 whitespace-nowrap text-center">
                                             <select
-                                                value={weed.habitat}
-                                                onChange={(e) => updateWeed(weed.id, 'habitat', e.target.value)}
+                                                value={weed.habitat || ''}
+                                                onChange={(e) => updateWeed(weed.id, 'habitat', e.target.value === '' ? null : e.target.value)}
                                                 className="rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 sm:text-sm p-1 border"
                                             >
+                                                <option value="">Select...</option>
                                                 <option value="1">1 - Low value habitat</option>
                                                 <option value="2">2 - High value habitat</option>
                                             </select>

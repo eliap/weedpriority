@@ -16,6 +16,7 @@ import realWeedData from './data/realGovernmentData.json';
 function App() {
   // Initialize weeds from the real data source
   const [weeds, setWeeds] = useState([]);
+  const [groupName, setGroupName] = useState('');
   const [selectedValues, setSelectedValues] = useState({});
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex flex-col">
@@ -35,7 +36,7 @@ function App() {
               <div className="flex items-center gap-2 mr-4 border-r border-slate-200 pr-6">
                 <button
                   onClick={() => {
-                    const data = JSON.stringify({ weeds, selectedValues }, null, 2);
+                    const data = JSON.stringify({ weeds, selectedValues, groupName }, null, 2);
                     const blob = new Blob([data], { type: 'application/json' });
                     const url = URL.createObjectURL(blob);
                     const link = document.createElement('a');
@@ -71,6 +72,9 @@ function App() {
                           if (json.selectedValues) {
                             setSelectedValues(json.selectedValues);
                           }
+                          if (json.groupName) {
+                            setGroupName(json.groupName);
+                          }
                           alert('Progress loaded successfully!');
                         } catch (err) {
                           console.error(err);
@@ -95,13 +99,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/step-1" element={<ValuesAssessment selectedValues={selectedValues} setSelectedValues={setSelectedValues} />} />
+          <Route path="/step-1" element={<ValuesAssessment selectedValues={selectedValues} setSelectedValues={setSelectedValues} groupName={groupName} setGroupName={setGroupName} />} />
           <Route path="/step-2" element={<LocalExpertise weeds={weeds} setWeeds={setWeeds} />} />
           <Route path="/step-3" element={<ScientificReview weeds={weeds} setWeeds={setWeeds} selectedValues={selectedValues} />} />
           <Route path="/step-4" element={<DifficultyOfControl weeds={weeds} setWeeds={setWeeds} />} />
           <Route path="/step-5" element={<ActionPlan weeds={weeds} setWeeds={setWeeds} selectedValues={selectedValues} />} />
-          <Route path="/brochure" element={<BrochureFlier weeds={weeds} selectedValues={selectedValues} />} />
-          <Route path="/full-report" element={<BrochureExport weeds={weeds} selectedValues={selectedValues} />} />
+          <Route path="/brochure" element={<BrochureFlier weeds={weeds} selectedValues={selectedValues} groupName={groupName} />} />
+          <Route path="/full-report" element={<BrochureExport weeds={weeds} selectedValues={selectedValues} groupName={groupName} />} />
         </Routes>
       </div>
 

@@ -1,10 +1,19 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import html2pdf from 'html2pdf.js';
+import { jsPDF } from 'jspdf';
 import { valueCategories } from '../data/valuesData';
 import { invasivenessCategories } from '../data/invasivenessData';
-import governmentData from '../data/realGovernmentData.json';
-import weedProfiles from '../data/weedProfiles.json';
+import mergedWeeds from '../data/mergedWeeds.json';
+
+// Normalization helper (matches logic in merge_data.cjs)
+const normalize = (str) => {
+    if (!str) return '';
+    return str.toLowerCase()
+        .replace(/['’]/g, '')
+        .replace(/\-/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+};
 
 const RATING_VALUES = { "L": 1, "ML": 2, "M": 3, "MH": 4, "H": 5 };
 const CONFIDENCE_VALUES = { "L": 0.2, "ML": 0.4, "M": 0.6, "MH": 0.8, "H": 1.0 };
@@ -31,10 +40,42 @@ const calculateCategoryScore = (items, userReviews, govReviews, selectedIds = nu
     };
 };
 
-// Fetch up to 3 photos from iNaturalist
+// Convert an image URL to a base64 data URI to avoid cross-origin html2canvas failures
+// Routes through Vite dev server proxy to bypass CORS restrictions
+function proxyUrl(url) {
+    if (url.includes('inaturalist-open-data.s3.amazonaws.com')) {
+        return url.replace('https://inaturalist-open-data.s3.amazonaws.com', '/inat-photos');
+    }
+    if (url.includes('static.inaturalist.org')) {
+        return url.replace('https://static.inaturalist.org', '/inat-static');
+    }
+    return url;
+}
+
+async function toDataUrl(url) {
+    try {
+        const proxied = proxyUrl(url);
+        const response = await fetch(proxied);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const blob = await response.blob();
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () => resolve(reader.result);
+            reader.onerror = () => resolve(null); // skip on error
+            reader.readAsDataURL(blob);
+        });
+    } catch (e) {
+        console.warn('Failed to convert image to base64:', url, e);
+        return null; // skip this image rather than using cross-origin URL
+    }
+}
+
+// Fetch up to 15 photos from iNaturalist to allow for replacements
 async function fetchINatPhotos(scientificName) {
     try {
-        const res = await fetch(`https://api.inaturalist.org/v1/taxa?q=${encodeURIComponent(scientificName)}&per_page=1`);
+        // Extract Genus species (first two words) to improve match rate
+        const simplerName = scientificName.split(' ').slice(0, 2).join(' ');
+        const res = await fetch(`https://api.inaturalist.org/v1/taxa?q=${encodeURIComponent(simplerName)}&per_page=1`);
         const data = await res.json();
         if (data.results && data.results.length > 0) {
             const taxon = data.results[0];
@@ -45,13 +86,13 @@ async function fetchINatPhotos(scientificName) {
                 photos.push({ url, attribution: taxon.default_photo.attribution || 'iNaturalist' });
                 seenUrls.add(url);
             }
-            if (taxon.id && photos.length < 3) {
+            if (taxon.id && photos.length < 15) {
                 try {
-                    const obsRes = await fetch(`https://api.inaturalist.org/v1/observations?taxon_id=${taxon.id}&photos=true&per_page=10&order_by=votes`);
+                    const obsRes = await fetch(`https://api.inaturalist.org/v1/observations?taxon_id=${taxon.id}&photos=true&per_page=30&order_by=votes`);
                     const obsData = await obsRes.json();
                     if (obsData.results) {
                         for (const obs of obsData.results) {
-                            if (photos.length >= 3) break;
+                            if (photos.length >= 15) break;
                             if (obs.photos && obs.photos.length > 0) {
                                 const p = obs.photos[0];
                                 const url = p.url?.replace('square', 'medium');
@@ -64,7 +105,14 @@ async function fetchINatPhotos(scientificName) {
                     }
                 } catch (e) { /* extra photos optional */ }
             }
-            return photos.length > 0 ? photos : null;
+            // Convert all photo URLs to base64 data URIs for PDF export compatibility
+            const photosWithDataUrls = (await Promise.all(
+                photos.map(async (p) => {
+                    const dataUrl = await toDataUrl(p.url);
+                    return dataUrl ? { ...p, url: dataUrl } : null;
+                })
+            )).filter(Boolean);
+            return photosWithDataUrls.length > 0 ? photosWithDataUrls : null;
         }
     } catch (e) {
         console.warn('Failed to fetch iNaturalist photos for', scientificName, e);
@@ -72,13 +120,22 @@ async function fetchINatPhotos(scientificName) {
     return null;
 }
 
+// Color coding: green → blue → orange → red for increasing scores
+const getScoreColor = (score) => {
+    if (score === null || score === undefined) return '#94a3b8'; // grey for N/A
+    if (score < 25) return '#22c55e';  // green
+    if (score < 50) return '#3b82f6';  // blue
+    if (score < 75) return '#f59e0b';  // orange
+    return '#ef4444';                  // red
+};
+
 // Teal palette matching the Halls Gap brochure
 const TEAL_BG = '#1a6b6a';
 const TEAL_DARK = '#145453';
 const TEAL_HEADER = '#0e4847';
 const CARD_BG = '#f8fffe';
 
-export default function BrochureFlier({ weeds, selectedValues }) {
+export default function BrochureFlier({ weeds, selectedValues, groupName }) {
     const navigate = useNavigate();
     const brochureRef = useRef(null);
     const [photos, setPhotos] = useState({});
@@ -88,12 +145,26 @@ export default function BrochureFlier({ weeds, selectedValues }) {
     const scoredWeeds = useMemo(() => {
         const weights = { extent: 20, impact: 20, invasiveness: 20, habitat: 20, control: 20 };
         return weeds.map(weed => {
-            const govWeedData = governmentData[weed.name] || { impact: {}, invasiveness: {} };
+
+            // Simple Lookup: mergedWeeds is keyed by normalized slug/name
+            // But weeds passed in might have various name formats
+            // Try normalized name
+            const normKey = normalize(weed.name);
+            let unifiedData = mergedWeeds[normKey] || {};
+
+            // Fallback: Check if weed.name matches an ID directly (unlikely if normalized)
+            // Or if weed.name is found via iteration (slow, but robust) if not found?
+            // mergedWeeds keys are normalized. So normKey should work.
+
+            // Ensure impact/invasiveness are objects
+            const govImpact = unifiedData.impact || {};
+            const govInvasiveness = unifiedData.invasiveness || {};
+
             const userReview = weed.scientificReview?.detailed || { impact: {}, invasiveness: {} };
             const allImpactItems = valueCategories.flatMap(cat => cat.items);
-            const impactResult = calculateCategoryScore(allImpactItems, userReview.impact || {}, govWeedData.impact || {}, selectedValues);
+            const impactResult = calculateCategoryScore(allImpactItems, userReview.impact || {}, govImpact, selectedValues);
             const allInvItems = invasivenessCategories.flatMap(cat => cat.items);
-            const invasivenessResult = calculateCategoryScore(allInvItems, userReview.invasiveness || {}, govWeedData.invasiveness || {});
+            const invasivenessResult = calculateCategoryScore(allInvItems, userReview.invasiveness || {}, govInvasiveness); // Fixed: was govWeedData.invasiveness
             const extentScore = (Number(weed.extent) || 1) * 20;
             const habitatScore = (Number(weed.habitat) || 1) === 2 ? 100 : 50;
             const controlScore = (weed.controlLevel || 2) * 25;
@@ -108,7 +179,21 @@ export default function BrochureFlier({ weeds, selectedValues }) {
             const activeWeight = active.reduce((s, c) => s + weights[c.key], 0);
             const norm = activeWeight > 0 ? activeWeight / 100 : 1;
             const finalScore = active.reduce((s, c) => s + (c.score * weights[c.key] / 100), 0) / norm;
-            return { ...weed, finalScore };
+
+            // Merge unified data back into the weed object for display
+            return {
+                ...weed,
+                ...unifiedData, // Gives us scientificName, profileUrl, etc.
+                name: weed.name, // Keep original user name? Or overwrite? Keep user name usually better for UI consistency
+                finalScore,
+                scores: {
+                    extent: extentScore,
+                    impact: impactResult.hasData ? impactResult.scaled : null,
+                    invasiveness: invasivenessResult.hasData ? invasivenessResult.scaled : null,
+                    habitat: habitatScore,
+                    control: controlScore
+                }
+            };
         }).sort((a, b) => b.finalScore - a.finalScore);
     }, [weeds, selectedValues]);
 
@@ -122,9 +207,9 @@ export default function BrochureFlier({ weeds, selectedValues }) {
             setLoading(true);
             const photoMap = {};
             for (const weed of topWeeds) {
-                const profile = weedProfiles[weed.name];
-                if (profile?.scientificName) {
-                    const result = await fetchINatPhotos(profile.scientificName);
+                // unifiedData is already merged into weed by now
+                if (weed.scientificName) {
+                    const result = await fetchINatPhotos(weed.scientificName);
                     if (!cancelled && result) photoMap[weed.name] = result;
                 }
             }
@@ -134,31 +219,283 @@ export default function BrochureFlier({ weeds, selectedValues }) {
         return () => { cancelled = true; };
     }, [topWeeds.map(w => w.name).join(',')]);
 
+    const handleRemovePhoto = (weedName, photoUrl) => {
+        setPhotos(prev => {
+            const weedPhotos = prev[weedName] || [];
+            return {
+                ...prev,
+                [weedName]: weedPhotos.filter(p => p.url !== photoUrl)
+            };
+        });
+    };
+
+    // ── PDF Export: Programmatic jsPDF drawing (no html2canvas) ──
     const handleExportPDF = async () => {
         setGenerating(true);
-        const opt = {
-            margin: 0,
-            filename: 'weed-priority-brochure.pdf',
-            image: { type: 'jpeg', quality: 0.95 },
-            html2canvas: { scale: 2, useCORS: true, allowTaint: true },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-            pagebreak: { mode: ['css', 'legacy'] }
-        };
         try {
-            await html2pdf().set(opt).from(brochureRef.current).save();
+            const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+            const W = 210, H = 297; // A4 mm
+            const margin = 8;
+            const gap = 6;
+            const totalPages = page2.length > 0 ? 2 : 1;
+
+            // Helper: parse hex colour to RGB array
+            const hex = (h) => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
+
+            // Helper: draw a filled rect
+            const fillRect = (x, y, w, h, color) => {
+                pdf.setFillColor(...hex(color));
+                pdf.rect(x, y, w, h, 'F');
+            };
+
+            // Helper: draw a rounded rect
+            const fillRoundRect = (x, y, w, h, r, color) => {
+                pdf.setFillColor(...hex(color));
+                pdf.roundedRect(x, y, w, h, r, r, 'F');
+            };
+
+            // Helper: load an image into an HTMLImageElement (to get dimensions)
+            const loadImg = (src) => new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = () => resolve(null);
+                img.src = src;
+            });
+
+            // Helper: add image with cover-crop behavior
+            // Pre-crops the image on an offscreen canvas, then adds it to the PDF.
+            // This avoids jsPDF clip() which breaks subsequent drawing operations.
+            const addImageCover = async (src, slotX, slotY, slotW, slotH) => {
+                if (!src) return;
+                const img = await loadImg(src);
+                if (!img) return;
+
+                // Create offscreen canvas at high resolution for the slot
+                const pxPerMm = 4; // resolution multiplier
+                const canvasW = Math.round(slotW * pxPerMm);
+                const canvasH = Math.round(slotH * pxPerMm);
+                const canvas = document.createElement('canvas');
+                canvas.width = canvasW;
+                canvas.height = canvasH;
+                const ctx = canvas.getContext('2d');
+
+                // Calculate cover-crop: fill canvas while maintaining aspect ratio
+                const imgRatio = img.naturalWidth / img.naturalHeight;
+                const slotRatio = canvasW / canvasH;
+
+                let sx, sy, sw, sh;
+                if (imgRatio > slotRatio) {
+                    // Image is wider — crop sides
+                    sh = img.naturalHeight;
+                    sw = sh * slotRatio;
+                    sx = (img.naturalWidth - sw) / 2;
+                    sy = 0;
+                } else {
+                    // Image is taller — crop top/bottom
+                    sw = img.naturalWidth;
+                    sh = sw / slotRatio;
+                    sx = 0;
+                    sy = (img.naturalHeight - sh) / 2;
+                }
+
+                ctx.drawImage(img, sx, sy, sw, sh, 0, 0, canvasW, canvasH);
+                const croppedDataUrl = canvas.toDataURL('image/jpeg', 0.92);
+                pdf.addImage(croppedDataUrl, 'JPEG', slotX, slotY, slotW, slotH);
+            };
+
+            const pages = [page1, page2].filter(p => p.length > 0);
+
+            for (let pageIdx = 0; pageIdx < pages.length; pageIdx++) {
+                const pageWeeds = pages[pageIdx];
+                if (pageIdx > 0) pdf.addPage();
+
+                // ── Page background ──
+                fillRect(0, 0, W, H, TEAL_BG);
+
+                // ── Header ──
+                let headerH;
+                if (pageIdx === 0) {
+                    // Page 1: full header
+                    headerH = 52;
+                    fillRect(0, 0, W, headerH, TEAL_DARK);
+
+                    // Group name
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setFontSize(9);
+                    pdf.setTextColor(255, 255, 255);
+                    pdf.text((groupName || 'Upper Wimmera Landcare').toUpperCase(), margin + 2, 14);
+
+                    // Title
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(22);
+                    pdf.text('Priority Weeds in Our Region', margin + 2, 28);
+
+                    // Subtitle
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setFontSize(10);
+                    pdf.setTextColor(220, 220, 220);
+                    pdf.text('We need your help to track down these invasive plants!', margin + 2, 37);
+                    pdf.text('If you spot any of these weeds, please report to your local Landcare group.', margin + 2, 43);
+
+                    // "Top N" badge
+                    const badgeW = 32, badgeH = 28;
+                    const badgeX = W - margin - badgeW;
+                    fillRoundRect(badgeX, 9, badgeW, badgeH, 4, '#1a6b6a');
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(12);
+                    pdf.setTextColor(255, 255, 255);
+                    pdf.text(`Top ${topWeeds.length}`, badgeX + badgeW / 2, 21, { align: 'center' });
+                    pdf.setFontSize(9);
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.text('Priority', badgeX + badgeW / 2, 28, { align: 'center' });
+                    pdf.text('Weeds', badgeX + badgeW / 2, 34, { align: 'center' });
+                } else {
+                    // Page 2+: compact header
+                    headerH = 28;
+                    fillRect(0, 0, W, headerH, TEAL_DARK);
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setFontSize(8);
+                    pdf.setTextColor(180, 180, 180);
+                    pdf.text('PROJECT PLATYPUS', margin + 2, 12);
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(16);
+                    pdf.setTextColor(255, 255, 255);
+                    pdf.text('Priority Weeds \u2014 continued', margin + 2, 22);
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setFontSize(9);
+                    pdf.setTextColor(180, 180, 180);
+                    pdf.text(`Page ${pageIdx + 1} of ${totalPages}`, W - margin - 2, 22, { align: 'right' });
+                }
+
+                // ── Footer ──
+                const footerH = 14;
+                const footerY = H - footerH;
+                fillRect(0, footerY, W, footerH, TEAL_DARK);
+                pdf.setFont('helvetica', 'normal');
+                pdf.setFontSize(7);
+                pdf.setTextColor(160, 160, 160);
+                const dateStr = new Date().toLocaleDateString('en-AU', { month: 'long', year: 'numeric' });
+                pdf.text(`Photos: iNaturalist \u00B7 Data: Weeds Australia \u00B7 ${dateStr}`, margin + 2, footerY + 9);
+                pdf.text('projectplatypus.org.au', W - margin - 2, footerY + 9, { align: 'right' });
+
+                // ── Card grid: 2 columns × 2 rows ──
+                const gridTop = headerH + gap;
+                const gridBottom = footerY - gap;
+                const gridH = gridBottom - gridTop;
+                const colW = (W - margin * 2 - gap) / 2;
+                const rowH = (gridH - gap) / 2;
+                const nameBarH = 18;
+                const photoGap = 1.5;
+
+                for (let ci = 0; ci < pageWeeds.length; ci++) {
+                    const weed = pageWeeds[ci];
+                    const rank = pageIdx * 4 + ci + 1;
+                    const col = ci % 2;
+                    const row = Math.floor(ci / 2);
+                    const cardX = margin + col * (colW + gap);
+                    const cardY = gridTop + row * (rowH + gap);
+
+                    // Card background
+                    fillRoundRect(cardX, cardY, colW, rowH, 3, CARD_BG);
+
+                    // ── Name bar ──
+                    fillRoundRect(cardX, cardY, colW, nameBarH, 3, TEAL_HEADER);
+                    // Square off bottom corners of name bar
+                    fillRect(cardX, cardY + nameBarH - 3, colW, 3, TEAL_HEADER);
+
+                    // Weed name text
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(10);
+                    pdf.setTextColor(255, 255, 255);
+                    const nameMaxW = colW - 24; // leave room for rank badge
+                    const displayName = pdf.splitTextToSize(weed.name, nameMaxW)[0]; // first line only
+                    pdf.text(displayName, cardX + 5, cardY + 8);
+
+                    // Scientific name
+                    if (weed.scientificName) {
+                        pdf.setFont('helvetica', 'italic');
+                        pdf.setFontSize(7);
+                        pdf.setTextColor(180, 210, 210);
+                        const sciDisplay = pdf.splitTextToSize(weed.scientificName, nameMaxW)[0];
+                        pdf.text(sciDisplay, cardX + 5, cardY + 14);
+                    }
+
+                    // Rank badge
+                    const badgeR = 5.5;
+                    const badgeCx = cardX + colW - 10;
+                    const badgeCy = cardY + nameBarH / 2;
+                    const scoreColor = getScoreColor(weed.finalScore);
+                    pdf.setFillColor(...hex(scoreColor));
+                    pdf.circle(badgeCx, badgeCy, badgeR, 'F');
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(10);
+                    pdf.setTextColor(255, 255, 255);
+                    pdf.text(String(rank), badgeCx, badgeCy + 1.2, { align: 'center' });
+
+                    // ── Photo grid: 1 large (left 58%) + 2 stacked small (right 40%) ──
+                    const photoTop = cardY + nameBarH + 1;
+                    const photoBottom = cardY + rowH - 1;
+                    const photoH = photoBottom - photoTop;
+                    const photoLeft = cardX + 1;
+                    const photoTotalW = colW - 2;
+                    const mainW = photoTotalW * 0.58;
+                    const sideW = photoTotalW - mainW - photoGap;
+                    const sideH = (photoH - photoGap) / 2;
+
+                    const weedPhotos = photos[weed.name] || [];
+
+                    // Main photo (left)
+                    if (weedPhotos[0]) {
+                        await addImageCover(weedPhotos[0].url, photoLeft, photoTop, mainW, photoH);
+                    } else {
+                        fillRect(photoLeft, photoTop, mainW, photoH, '#334155');
+                    }
+
+                    // Top-right photo
+                    const sideX = photoLeft + mainW + photoGap;
+                    if (weedPhotos[1]) {
+                        await addImageCover(weedPhotos[1].url, sideX, photoTop, sideW, sideH);
+                    } else {
+                        fillRect(sideX, photoTop, sideW, sideH, '#475569');
+                    }
+
+                    // Bottom-right photo
+                    const bottomSideY = photoTop + sideH + photoGap;
+                    if (weedPhotos[2]) {
+                        await addImageCover(weedPhotos[2].url, sideX, bottomSideY, sideW, sideH);
+                    } else {
+                        fillRect(sideX, bottomSideY, sideW, sideH, '#475569');
+                    }
+                }
+            }
+
+            pdf.save('weed-priority-brochure.pdf');
         } catch (e) {
             console.error('PDF generation failed:', e);
-            alert('PDF generation failed. Try using Print instead.');
+            alert('PDF generation failed: ' + (e.message || e) + '\n\nTry using Print instead.');
         }
         setGenerating(false);
     };
 
     /* ── Individual weed card ── */
-    const WeedCard = ({ weed }) => {
-        const profile = weedProfiles[weed.name] || {};
+    const WeedCard = ({ weed, rank, generating, onRemovePhoto }) => {
         const weedPhotos = photos[weed.name] || [];
 
+        // Data is already merged into the weed object by scoredWeeds logic
+        const scientificName = weed.scientificName || '';
+        const growthForm = weed.growthForm || '—';
+        const flowerColour = weed.flowerColour || '—';
+        const size = weed.size || '—';
 
+        const overallColor = getScoreColor(weed.finalScore);
+
+        const scoreItems = [
+            { label: 'Ext', value: weed.scores.extent },
+            { label: 'Imp', value: weed.scores.impact },
+            { label: 'Inv', value: weed.scores.invasiveness },
+            { label: 'Hab', value: weed.scores.habitat },
+            { label: 'Ctrl', value: weed.scores.control }
+        ];
 
         return (
             <div style={{
@@ -169,38 +506,69 @@ export default function BrochureFlier({ weeds, selectedValues }) {
                 flexDirection: 'column',
                 height: '100%'
             }}>
-                {/* Name header bar */}
+                {/* Name header with rank badge and overall score */}
                 <div style={{
                     background: TEAL_HEADER,
-                    padding: '8px 12px',
+                    padding: '6px 10px',
                     display: 'flex',
-                    alignItems: 'baseline',
-                    gap: '6px'
+                    alignItems: 'center',
+                    gap: '8px'
                 }}>
-                    <span style={{
-                        fontSize: '22px', fontWeight: 800, color: 'white', lineHeight: 1.2
-                    }}>{weed.name}</span>
-                    {profile.scientificName && (
-                        <span style={{
-                            fontSize: '16px', fontStyle: 'italic', color: 'rgba(255,255,255,0.7)'
-                        }}>({profile.scientificName})</span>
-                    )}
+
+                    {/* Names */}
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                        <div style={{
+                            fontSize: '15px', fontWeight: 800, color: 'white',
+                            lineHeight: 1.2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
+                        }}>{weed.name}</div>
+                        {scientificName && (
+                            <div style={{
+                                fontSize: '11px', fontStyle: 'italic', color: 'rgba(255,255,255,0.6)',
+                                lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'
+                            }}>{scientificName}</div>
+                        )}
+                    </div>
+                    {/* Overall score pill replaced with Rank */}
+                    <div style={{
+                        background: overallColor, color: 'white',
+                        borderRadius: '12px', padding: '2px 10px',
+                        fontSize: '14px', fontWeight: 800, flexShrink: 0,
+                        letterSpacing: '0.5px'
+                    }}>{rank}</div>
                 </div>
 
-                {/* Photo grid — 1 large + 2 smaller, takes 2/3 of height */}
+                {/* Photo grid — 1 large + 2 smaller */}
+                {/* Using background-image instead of <img> because html2canvas
+                    does NOT support object-fit:cover on <img> elements */}
                 <div style={{
                     display: 'flex', gap: '2px', padding: '2px',
-                    background: TEAL_HEADER, flex: 2, overflow: 'hidden'
+                    background: TEAL_HEADER, flex: '1 1 55%', overflow: 'hidden', minHeight: 0
                 }}>
                     {/* Main photo */}
-                    <div style={{ flex: '1 1 58%', position: 'relative' }}>
+                    <div className="group" style={{ flex: '1 1 58%', minHeight: 0, position: 'relative' }}>
                         {weedPhotos[0] ? (
-                            <img
-                                src={weedPhotos[0].url}
-                                alt={weed.name}
-                                crossOrigin="anonymous"
-                                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '2px' }}
-                            />
+                            <>
+                                <div
+                                    role="img"
+                                    aria-label={weed.name}
+                                    style={{
+                                        width: '100%', height: '100%',
+                                        backgroundImage: `url(${weedPhotos[0].url})`,
+                                        backgroundSize: 'cover',
+                                        backgroundPosition: 'center',
+                                        borderRadius: '2px'
+                                    }}
+                                />
+                                {!generating && (
+                                    <button
+                                        onClick={() => onRemovePhoto(weed.name, weedPhotos[0].url)}
+                                        className="absolute top-1 right-1 bg-black/50 hover:bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-xs font-bold"
+                                        title="Remove photo"
+                                    >
+                                        ✕
+                                    </button>
+                                )}
+                            </>
                         ) : (
                             <div style={{
                                 width: '100%', height: '100%', background: '#334155',
@@ -210,16 +578,33 @@ export default function BrochureFlier({ weeds, selectedValues }) {
                         )}
                     </div>
                     {/* Two stacked smaller photos */}
-                    <div style={{ flex: '0 0 40%', display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                    <div style={{ flex: '0 0 40%', display: 'flex', flexDirection: 'column', gap: '2px', minHeight: 0 }}>
                         {[1, 2].map(i => (
-                            <div key={i} style={{ flex: 1, position: 'relative' }}>
+                            <div key={i} className="group" style={{ flex: 1, minHeight: 0, position: 'relative' }}>
                                 {weedPhotos[i] ? (
-                                    <img
-                                        src={weedPhotos[i].url}
-                                        alt={`${weed.name} ${i + 1}`}
-                                        crossOrigin="anonymous"
-                                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '2px', position: 'absolute', top: 0, left: 0 }}
-                                    />
+                                    <>
+                                        <div
+                                            role="img"
+                                            aria-label={`${weed.name} ${i + 1}`}
+                                            style={{
+                                                width: '100%', height: '100%',
+                                                backgroundImage: `url(${weedPhotos[i].url})`,
+                                                backgroundSize: 'cover',
+                                                backgroundPosition: 'center',
+                                                borderRadius: '2px',
+                                                position: 'absolute', top: 0, left: 0
+                                            }}
+                                        />
+                                        {!generating && (
+                                            <button
+                                                onClick={() => onRemovePhoto(weed.name, weedPhotos[i].url)}
+                                                className="absolute top-1 right-1 bg-black/50 hover:bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-bold"
+                                                title="Remove photo"
+                                            >
+                                                ✕
+                                            </button>
+                                        )}
+                                    </>
                                 ) : (
                                     <div style={{
                                         width: '100%', height: '100%', background: '#475569',
@@ -232,162 +617,130 @@ export default function BrochureFlier({ weeds, selectedValues }) {
                     </div>
                 </div>
 
-                {/* Description text — fills remaining space */}
-                <div style={{
-                    padding: '8px 12px 6px',
-                    flex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between'
-                }}>
-                    {/* Structured details grid */}
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'max-content 1fr',
-                        columnGap: '10px',
-                        rowGap: '2px',
-                        fontSize: '13px',
-                        lineHeight: '1.35',
-                        color: '#334155'
-                    }}>
-                        {/* Row 1: Form */}
-                        <div style={{ fontWeight: 700, color: '#0f766e', textAlign: 'right' }}>Form:</div>
-                        <div>{profile.growthForm || '—'}</div>
 
-                        {/* Row 2: Size */}
-                        <div style={{ fontWeight: 700, color: '#0f766e', textAlign: 'right' }}>Size:</div>
-                        <div>{profile.size || '—'}</div>
-
-                        {/* Row 2: Origin */}
-                        <div style={{ fontWeight: 700, color: '#0f766e', textAlign: 'right' }}>Origin:</div>
-                        <div>{profile.origin || '—'}</div>
-
-                        {/* Row 3: Flowers */}
-                        <div style={{ fontWeight: 700, color: '#0f766e', textAlign: 'right' }}>Flowers:</div>
-                        <div>{profile.flowerColour || '—'}</div>
-
-                        {/* Row 4: Control */}
-                        <div style={{ fontWeight: 700, color: '#b91c1c', textAlign: 'right' }}>Control:</div>
-                        <div style={{ fontWeight: 500 }}>{profile.controlMethods || 'Contact Landcare'}</div>
-
-                        {/* Row 5: Season */}
-                        <div style={{ fontWeight: 700, color: '#b91c1c', textAlign: 'right' }}>Season:</div>
-                        <div style={{ fontWeight: 500 }}>{profile.bestControlSeason || '—'}</div>
-                    </div>
-                </div>
             </div>
         );
     };
 
     /* ── Page layout ── */
-    const PageContent = ({ weedsList, pageNum, totalPages }) => (
-        <div style={{
-            width: '210mm',
-            height: '297mm',
-            boxSizing: 'border-box',
-            background: TEAL_BG,
-            fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
-            pageBreakAfter: pageNum < totalPages ? 'always' : 'auto',
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden',
-            padding: 0
-        }}>
-            {/* ── Page header ── */}
-            {pageNum === 1 ? (
-                /* Front page: bigger header with title & call to action */
-                <div style={{
-                    padding: '20px 24px 16px',
-                    background: TEAL_DARK,
-                    flexShrink: 0
-                }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                        <div style={{ flex: 1 }}>
+    const PageContent = ({ weedsList, pageNum, totalPages }) => {
+        const startRank = (pageNum - 1) * 4;
+        return (
+            <div data-page={pageNum} style={{
+                width: '210mm',
+                height: '297mm',
+                boxSizing: 'border-box',
+                background: TEAL_BG,
+                fontFamily: "'Inter', 'Segoe UI', system-ui, sans-serif",
+                pageBreakAfter: pageNum < totalPages ? 'always' : 'auto',
+                display: 'flex',
+                flexDirection: 'column',
+                overflow: 'hidden',
+                padding: 0
+            }}>
+                {/* ── Page header ── */}
+                {pageNum === 1 ? (
+                    /* Front page: bigger header with title & call to action */
+                    <div style={{
+                        padding: '20px 24px 16px',
+                        background: TEAL_DARK,
+                        flexShrink: 0
+                    }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                            <div style={{ flex: 1 }}>
+                                <div style={{
+                                    fontSize: '14px', letterSpacing: '3px', textTransform: 'uppercase',
+                                    color: 'rgba(255,255,255,0.5)', marginBottom: '4px', fontWeight: 600
+                                }}>
+                                    Project Platypus — {groupName || 'Upper Wimmera Landcare'}
+                                </div>
+                                <h1 style={{
+                                    fontSize: '28px', fontWeight: 800, color: 'white',
+                                    margin: '0 0 6px', lineHeight: 1.15
+                                }}>
+                                    Priority Weeds in Our Region
+                                </h1>
+                                <p style={{
+                                    fontSize: '16px', color: 'rgba(255,255,255,0.8)',
+                                    margin: 0, lineHeight: 1.6, maxWidth: '480px'
+                                }}>
+                                    We need your help to track down these invasive plants!
+                                    If you spot any of these weeds, please report to your local Landcare group.
+                                </p>
+                            </div>
                             <div style={{
-                                fontSize: '14px', letterSpacing: '3px', textTransform: 'uppercase',
-                                color: 'rgba(255,255,255,0.5)', marginBottom: '4px', fontWeight: 600
+                                background: 'rgba(255,255,255,0.12)', borderRadius: '8px',
+                                padding: '8px 14px', textAlign: 'center', flexShrink: 0,
+                                border: '1px solid rgba(255,255,255,0.15)'
                             }}>
-                                Project Platypus — Upper Wimmera Landcare
-                            </div>
-                            <h1 style={{
-                                fontSize: '28px', fontWeight: 800, color: 'white',
-                                margin: '0 0 6px', lineHeight: 1.15
-                            }}>
-                                Priority Weeds in Our Region
-                            </h1>
-                            <p style={{
-                                fontSize: '16px', color: 'rgba(255,255,255,0.8)',
-                                margin: 0, lineHeight: 1.6, maxWidth: '480px'
-                            }}>
-                                We need your help to track down these invasive plants!
-                                If you spot any of these weeds, please report to your local Landcare group.
-                            </p>
-                        </div>
-                        <div style={{
-                            background: 'rgba(255,255,255,0.12)', borderRadius: '8px',
-                            padding: '8px 14px', textAlign: 'center', flexShrink: 0,
-                            border: '1px solid rgba(255,255,255,0.15)'
-                        }}>
-                            <div style={{ fontSize: '16px', color: 'rgba(255,255,255,0.6)', fontWeight: 600, marginBottom: '2px' }}>
-                                Top {topWeeds.length}
-                            </div>
-                            <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.5)' }}>
-                                Priority<br />Weeds
+                                <div style={{ fontSize: '16px', color: 'rgba(255,255,255,0.6)', fontWeight: 600, marginBottom: '2px' }}>
+                                    Top {topWeeds.length}
+                                </div>
+                                <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.5)' }}>
+                                    Priority<br />Weeds
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            ) : (
-                /* Back page: compact header */
+                ) : (
+                    /* Back page: compact header */
+                    <div style={{
+                        padding: '12px 24px',
+                        background: TEAL_DARK,
+                        flexShrink: 0,
+                        display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                    }}>
+                        <div>
+                            <div style={{ fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>
+                                Project Platypus
+                            </div>
+                            <div style={{ fontSize: '20px', fontWeight: 800, color: 'white' }}>
+                                Priority Weeds — continued
+                            </div>
+                        </div>
+                        <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.4)' }}>
+                            Page {pageNum} of {totalPages}
+                        </div>
+                    </div>
+                )
+                }
+
+                {/* ── 2×2 card grid ── */}
                 <div style={{
-                    padding: '12px 24px',
-                    background: TEAL_DARK,
-                    flexShrink: 0,
-                    display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                    flex: 1,
+                    padding: '12px 16px',
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gridTemplateRows: '1fr 1fr',
+                    gap: '10px'
+                }}>
+                    {weedsList.map((weed, i) => (
+                        <WeedCard
+                            key={weed.id}
+                            weed={weed}
+                            rank={startRank + i + 1}
+                            generating={generating}
+                            onRemovePhoto={handleRemovePhoto}
+                        />
+                    ))}
+                </div>
+
+                {/* ── Footer ── */}
+                <div style={{
+                    padding: '8px 20px 10px',
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                    fontSize: '12px', color: 'rgba(255,255,255,0.45)',
+                    background: TEAL_DARK, flexShrink: 0
                 }}>
                     <div>
-                        <div style={{ fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', fontWeight: 600 }}>
-                            Project Platypus
-                        </div>
-                        <div style={{ fontSize: '20px', fontWeight: 800, color: 'white' }}>
-                            Priority Weeds — continued
-                        </div>
+                        Photos: iNaturalist · Data: Weeds Australia
+                        {pageNum === 1 && ` · ${new Date().toLocaleDateString('en-AU', { month: 'long', year: 'numeric' })}`}
                     </div>
-                    <div style={{ fontSize: '14px', color: 'rgba(255,255,255,0.4)' }}>
-                        Page {pageNum} of {totalPages}
-                    </div>
+                    <div>projectplatypus.org.au</div>
                 </div>
-            )}
-
-            {/* ── 2×2 card grid ── */}
-            <div style={{
-                flex: 1,
-                padding: '12px 16px',
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gridTemplateRows: '1fr 1fr',
-                gap: '10px'
-            }}>
-                {weedsList.map(weed => (
-                    <WeedCard key={weed.id} weed={weed} />
-                ))}
-            </div>
-
-            {/* ── Footer ── */}
-            <div style={{
-                padding: '8px 20px 10px',
-                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                fontSize: '12px', color: 'rgba(255,255,255,0.45)',
-                background: TEAL_DARK, flexShrink: 0
-            }}>
-                <div>
-                    Photos: iNaturalist · Data: Weeds Australia
-                    {pageNum === 1 && ` · ${new Date().toLocaleDateString('en-AU', { month: 'long', year: 'numeric' })}`}
-                </div>
-                <div>projectplatypus.org.au</div>
-            </div>
-        </div>
-    );
+            </div >
+        );
+    };
 
     const totalPages = page2.length > 0 ? 2 : 1;
 

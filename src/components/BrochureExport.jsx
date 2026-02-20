@@ -111,8 +111,12 @@ const calculateCategoryScore = (items, userReviews, govReviews, selectedIds = nu
 };
 
 // Convert an image URL to a base64 data URI to avoid cross-origin html2canvas failures
-// Routes through Vite dev server proxy to bypass CORS restrictions
+// Routes through Vite dev server proxy to bypass CORS restrictions (dev only)
+const isDev = import.meta.env.DEV;
+
 function proxyUrl(url) {
+    // Proxy only works with Vite dev server; in production (GitHub Pages) use original URLs
+    if (!isDev) return url;
     if (url.includes('inaturalist-open-data.s3.amazonaws.com')) {
         return url.replace('https://inaturalist-open-data.s3.amazonaws.com', '/inat-photos');
     }
@@ -149,13 +153,12 @@ async function fetchINatPhoto(scientificName) {
             const taxon = data.results[0];
             if (taxon.default_photo) {
                 const originalUrl = taxon.default_photo.medium_url || taxon.default_photo.url;
+                // Try base64 conversion (works in dev via proxy); fall back to direct URL for display
                 const dataUrl = await toDataUrl(originalUrl);
-                if (dataUrl) {
-                    return {
-                        url: dataUrl,
-                        attribution: taxon.default_photo.attribution || 'iNaturalist'
-                    };
-                }
+                return {
+                    url: dataUrl || originalUrl,
+                    attribution: taxon.default_photo.attribution || 'iNaturalist'
+                };
             }
         }
     } catch (e) {

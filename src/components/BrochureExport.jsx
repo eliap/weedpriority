@@ -411,16 +411,17 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
                         scale: 2,
                         useCORS: false,
                         allowTaint: false,
-                        width: pageEl.offsetWidth,
-                        height: pageEl.offsetHeight,
+                        width: pageEl.scrollWidth,
+                        height: pageEl.scrollHeight,
                         scrollX: 0,
                         scrollY: 0,
-                        windowWidth: pageEl.offsetWidth,
+                        windowWidth: pageEl.scrollWidth,
                         onclone: cleanClonedDoc
                     });
                     const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                    const imgHeight = (canvas.height * pdfWidth) / canvas.width;
                     if (i > 0) pdf.addPage();
-                    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                    pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, Math.min(imgHeight, pdfHeight));
                 }
             } else {
                 // Fallback: capture whole element as single page
@@ -521,7 +522,7 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
             <div ref={brochureRef} className="brochure-content">
                 {/* Cover Page */}
                 {/* Cover Page */}
-                <div style={{
+                <div data-page="cover" style={{
                     position: 'relative',
                     width: '210mm',
                     height: '297mm',
@@ -569,9 +570,7 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
                             lineHeight: 1.1,
                             marginBottom: '24px',
                             textShadow: '0 4px 12px rgba(0,0,0,0.3)',
-                            background: 'linear-gradient(to bottom right, #ffffff, #ccfbf1)',
-                            WebkitBackgroundClip: 'text',
-                            WebkitTextFillColor: 'transparent'
+                            color: '#ffffff'
                         }}>
                             Weed Priority<br />Assessment
                         </h1>
@@ -612,7 +611,7 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
                 </div>
 
                 {/* Summary Table Page */}
-                <div style={{ padding: '40px 50px', pageBreakAfter: 'always', fontFamily: "'Inter', sans-serif" }}>
+                <div data-page="rankings" style={{ padding: '40px 50px', pageBreakAfter: 'always', fontFamily: "'Inter', sans-serif", width: '210mm', minHeight: '297mm', boxSizing: 'border-box', overflow: 'hidden' }}>
                     <h2 style={{
                         fontSize: '32px',
                         fontWeight: 800,
@@ -730,11 +729,14 @@ export default function BrochureExport({ weeds, selectedValues, groupName }) {
                     const profileUrl = govData.url || profile.profileUrl || '';
 
                     return (
-                        <div key={weed.id} style={{
+                        <div key={weed.id} data-page={`species-${index}`} style={{
                             padding: '40px 50px',
                             pageBreakAfter: 'always',
                             fontFamily: "'Inter', sans-serif",
+                            width: '210mm',
                             minHeight: '297mm',
+                            boxSizing: 'border-box',
+                            overflow: 'hidden',
                             display: 'flex',
                             flexDirection: 'column'
                         }}>
